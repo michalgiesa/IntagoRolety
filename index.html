@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roleta dopasowana do Twojego mebla. | INTAGO</title>
+<meta name="description" content="Zobacz, jak działa roleta meblowa INTAGO. Dobierz kierunek, montaż i wykończenie, zmierz szafkę i przygotuj zapytanie o wycenę.">
+<meta name="theme-color" content="#32373c">
+<link rel="icon" type="image/webp" href="assets/intago-favicon.webp">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+
+</head>
+<body>
+<a href="#wizard-title" class="skip-link">Przejdź do wyboru rolety</a>
+<header class="site-header">
+ <a class="brand" href="#top" aria-label="INTAGO — początek"><img class="brand-logo" src="assets/intago-logo.png" alt="INTAGO"></a>
+ <nav aria-label="Nawigacja"><button data-action="demo">Jak działa</button><button data-action="measure">Pomóż mi zmierzyć</button><a href="tel:+48503320230" class="phone">503 320 230</a></nav>
+ <button class="expert-toggle" data-action="expert" aria-pressed="false">Dla profesjonalisty <span aria-hidden="true">↗</span></button>
+</header>
+<main id="top">
+ <div class="page-intro"><div><p class="eyebrow">SYSTEMY ROLET MEBLOWYCH / INTAGO</p><h1>Roleta dopasowana<br class="mobile-break"> do Twojego mebla<span>.</span></h1></div><p class="intro-note">Otwórz. Zobacz. Dopasuj.<br>Od pomysłu do zapytania o wycenę.</p></div>
+ <section class="workspace" aria-label="Konfigurator rolety">
+  <div class="decision-panel">
+   <div id="step-nav" class="step-nav" aria-label="Etapy konfiguracji"></div>
+   <div id="wizard"></div>
+  </div>
+  <aside class="visual-panel" aria-label="Podgląd Twojej rolety">
+   <div class="visual-heading"><div><span class="eyebrow">TWÓJ MEBEL</span><h2 id="model-title">Sprawdź, jak to działa.</h2></div><span class="model-marker">PODGLĄD NA ŻYWO</span></div>
+   <div class="scene-tabs" role="group" aria-label="Widok mebla">
+    <button data-scene="front" aria-pressed="true">Front</button><button data-scene="interior" aria-pressed="false">Wnętrze</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Elementy</button>
+   </div>
+   <div class="model-stage"><div id="model"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
+   <div class="open-control"><button data-action="close" aria-label="Zamknij roletę">Zamknięta</button><input id="open-range" type="range" min="0" max="100" value="35" aria-label="Otwarcie rolety"><button data-action="open" aria-label="Otwórz roletę">Otwarta</button><output id="open-value" for="open-range">35%</output></div>
+   <div id="model-context" class="model-context"></div>
+   <div class="visual-foot"><span id="dimensions-caption">Przykładowy mebel • podaj własne wymiary</span><span>Wizualizacja poglądowa</span></div>
+  </aside>
+ </section>
+ <section class="bottom-strip"><div><span class="strip-number">01—07</span><p>Jedna decyzja na krok.<br><strong>Cały mebel w zasięgu wzroku.</strong></p></div><button data-action="measure"><span class="line-icon" aria-hidden="true">↔</span><span>Masz już szafkę?<strong>Zmierz ją z nami</strong></span><span aria-hidden="true">↗</span></button><div class="contact-strip"><span>DOPRACUJMY SZCZEGÓŁY</span><a href="mailto:sklep@intago.pl">sklep@intago.pl <span aria-hidden="true">↗</span></a></div></section>
+</main>
+<footer><span>INTAGO / Akcesoria do Twoich mebli</span><span>Projekt i dobór na wymiar</span><a href="https://www.intago.com.pl/zaluzje-meblowe-na-wymiar,c130.html" target="_blank" rel="noopener">Oferta INTAGO ↗</a></footer>
+<dialog id="measure-dialog" aria-labelledby="measure-title"><button class="dialog-close" data-action="close-measure" aria-label="Zamknij pomiar">×</button><div id="measure-content"></div></dialog>
+<dialog id="quote-dialog" aria-labelledby="quote-title"><button class="dialog-close" data-action="close-quote" aria-label="Zamknij zapytanie">×</button><span class="eyebrow">INTAGO / ZAPYTANIE</span><h2 id="quote-title">Porozmawiajmy o Twojej rolecie.</h2><p>Przygotujemy wiadomość z całą konfiguracją. Sprawdzisz ją i wyślesz w swoim programie pocztowym.</p><label for="quote-note">Co jeszcze powinniśmy wiedzieć? <span class="muted">(opcjonalnie)</span></label><textarea id="quote-note" rows="3" maxlength="1500" placeholder="Np. szafka już jest gotowa, na plecach jest gniazdko…"></textarea><details><summary>Zobacz treść konfiguracji</summary><pre id="quote-preview"></pre></details><a id="quote-mail" class="btn primary" href="mailto:sklep@intago.pl">Otwórz wiadomość e-mail ↗</a><button class="btn subtle" data-action="download-text">Pobierz zapytanie jako plik</button><p class="micro">Konfigurator nie wysyła danych automatycznie.</p></dialog>
+<dialog id="copy-dialog" aria-labelledby="copy-title"><button class="dialog-close" data-action="close-copy" aria-label="Zamknij kopiowanie">×</button><h2 id="copy-title">Skopiuj konfigurację</h2><p>Zaznacz tekst i skopiuj go do swojej wiadomości.</p><textarea id="copy-text" rows="14" readonly aria-label="Treść konfiguracji"></textarea></dialog>
+<div id="status" role="status" aria-live="polite" class="toast"></div>
+<noscript><p class="noscript">Włącz JavaScript, aby skorzystać z konfiguratora. Możesz też napisać do sklep@intago.pl.</p></noscript>
+</body>
+</html>

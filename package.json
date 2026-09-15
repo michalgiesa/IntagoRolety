@@ -1,0 +1,13 @@
+{
+  "name": "intago-rolety-v3",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build.mjs",
+    "package:client": "node scripts/package-client.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
