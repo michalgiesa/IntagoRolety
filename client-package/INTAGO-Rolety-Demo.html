@@ -166,7 +166,11 @@ const mechanisms={
  c6:{name:'C6',path:'rear',location:'Na tylnej ścianie',description:'Płaszcz przechodzi pod górą na tył szafki. C6 wspomaga ruch.',evidence:fact('rear','rehau')},
  rear:{name:'Prowadzenie na tył',path:'rear',location:'Wzdłuż boku i tylnej ściany',description:'Szczeble skręcają po prowadnicy i chowają się w głębi mebla.',evidence:fact('rear','horizontal')}
 };
-const profiles={e23:{name:'E23',evidence:fact('E23','c3')},e9:{name:'E9',evidence:fact('E9','nobleIn')},ml25:{name:'Metallic Line 25',evidence:fact('Metallic Line 25','frame')}};
+const profiles={
+ e23:{name:'E23',evidence:fact('E23','c3'),pitch:fact(15,'business','verified','3 szczeble = 45 mm; jeden szczebel = 15 mm.'),thickness:fact(8,'business')},
+ e9:{name:'E9',evidence:fact('E9','nobleIn'),pitch:fact(26.5,'business','verified','Jeden szczebel = 26,5 mm.'),thickness:fact(8,'business')},
+ ml25:{name:'Metallic Line 25',evidence:fact('Metallic Line 25','frame')}
+};
 const finishes={
  white:{id:'white',name:'Biały',code:'RAL 9010',color:'#e5e4df',edge:'#afafa9',material:'solid'},
  silver:{id:'silver',name:'Aluminium decor',code:null,color:'#b7bbbd',edge:'#767f84',material:'metal'},
@@ -668,13 +672,26 @@ function mailto(draft){return 'mailto:'+draft.to+'?subject='+encodeURIComponent(
 // Occupied track depth: 35 mm, confirmed by the client; separate from visible face width.
 // bendHeight 48.5 mm is the client example, needsVerification for each system.
 const guideProfiles={
+ // E9: 1 szczebel = 26,5 mm; grubość profilu = 8 mm.
  nobleMatt:{pitch:26.5,slatThickness:8,handle:75,handleDepth:8,face:29,guideThickness:35,bendHeight:48.5,fascia:73.2,fasciaDepth:17,profileStatus:'verified',status:'needsVerification'},
- standard:{pitch:25,slatThickness:8,handle:46,handleDepth:28,face:13,guideThickness:35,channel:9.5,lip:4,bendHeight:48.5,fascia:46,fasciaDepth:28,profileStatus:'needsVerification',status:'needsVerification'}
+ // E23: 3 szczeble = 45 mm, czyli podziałka jednego szczebla = 15 mm; grubość profilu = 8 mm.
+ standard:{pitch:15,slatThickness:8,handle:46,handleDepth:28,face:13,guideThickness:35,channel:9.5,lip:4,bendHeight:48.5,fascia:46,fasciaDepth:28,profileStatus:'verified',status:'needsVerification'}
 };
-// TODO: wymiar niepotwierdzony — podziałka pojedynczego elementu E23; 45 mm dotyczy zespołu trzech elementów, zachowano dotychczasowe 25 mm.
-// TODO: wymiar niepotwierdzony — przekrój TOP dla NOBLE WEW i jego listwa maskująca; zachowano wcześniejsze wartości.
+// TOP BASIC ma w wizualizacji ten sam przekrój prowadnic wewnętrznych co NOBLE WEW.
+// Zachowujemy jednak właściwy dla E23 płaszcz, listwę uchwytową i maskownicę TOP BASIC.
+const topBasicProfile=()=>({
+ ...guideProfiles.standard,
+ face:guideProfiles.nobleMatt.face,
+ guideThickness:guideProfiles.nobleMatt.guideThickness,
+ channel:null
+});
 // TODO: wymiar niepotwierdzony — promień osi narożnika; 48.5 mm jest obrysem, nie promieniem osi toru.
-const technicalProfile=state=>state.selectedProduct==='noble-zewn'?{...guideProfiles.nobleMatt,guideThickness:29,projection:16,guideDepth:19}:String(state.selectedProduct).includes('noble')?guideProfiles.nobleMatt:guideProfiles.standard;
+const technicalProfile=state=>{
+ if(state.selectedProduct==='noble-zewn')return {...guideProfiles.nobleMatt,guideThickness:29,projection:16,guideDepth:19};
+ if(String(state.selectedProduct).includes('noble'))return guideProfiles.nobleMatt;
+ if(state.selectedProduct==='top-basic'||state.selectedProduct==='top-basic-c3')return topBasicProfile();
+ return guideProfiles.standard;
+};
 function visualDimensions(state){
  const variant=getVariant(getProduct(state.selectedProduct),state.orientation),profile=variant?.rangeProfile;
  let width=Number(state.dimensions.width)||700,height=Number(state.dimensions.height)||1050,depth=Number(state.dimensions.depth)||400;
