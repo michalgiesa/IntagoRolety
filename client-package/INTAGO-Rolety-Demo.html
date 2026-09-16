@@ -94,6 +94,37 @@
 #intago-configurator .scene-tabs button[hidden]{display:none!important}#intago-configurator .range-option{padding:12px 14px;margin:8px 0;border:1px solid #dce0e2;border-radius:6px;font-size:13px}#intago-configurator .range-option p{margin:5px 0;line-height:1.5}#intago-configurator .range-outside{border-color:#d2071d;background:#fff4f5}#intago-configurator .range-error{color:#b00018;font-weight:600}#intago-configurator .model-stage:has([data-scene-unused]){position:relative}
 #intago-configurator .stage-label{max-width:calc(100% - 180px);line-height:1.4}
 #intago-configurator .internal-dimensions-note{margin:12px 0 16px;padding:11px 13px;border-left:3px solid var(--accent);background:#fafafa;font-size:13px;line-height:1.5;color:#555b5f}#intago-configurator .internal-dimensions-note strong{color:var(--ink)}
+/* Galeria realizacji: dobór po wyglądzie (kierunek + montaż + widoczny zestaw), kolor jako preferencja. */
+#intago-configurator .gallery-overlay{position:absolute;z-index:8;inset:0;background:#f2f3f3;display:flex;flex-direction:column;min-height:0}
+#intago-configurator .gallery-overlay[hidden]{display:none}
+#intago-configurator .model-stage.gallery-mode{grid-template-rows:minmax(0,1fr);background:#f2f3f3}
+#intago-configurator .model-stage.gallery-mode #model,#intago-configurator .model-stage.gallery-mode #build-overlay,#intago-configurator .model-stage.gallery-mode .stage-label,#intago-configurator .model-stage.gallery-mode .animate-button,#intago-configurator .model-stage.gallery-mode .envelope-button{display:none!important}
+#intago-configurator .model-stage.gallery-mode + .open-control{display:none!important}
+#intago-configurator .gallery-main{position:relative;flex:1;min-height:0;display:flex;align-items:stretch;justify-content:center;background:#e8e9ea;overflow:hidden}
+#intago-configurator .gallery-photo-wrap{position:relative;width:100%;height:100%;min-height:300px;background:linear-gradient(135deg,#eceeef,#f8f8f8);overflow:hidden}
+#intago-configurator .gallery-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+#intago-configurator .gallery-photo-wrap.is-error .gallery-photo{display:none}
+#intago-configurator .gallery-photo-fallback{position:absolute;inset:0;display:none;place-items:center;padding:30px;text-align:center;color:#707579;font-size:13px}
+#intago-configurator .gallery-photo-wrap.is-error .gallery-photo-fallback{display:grid}
+#intago-configurator .gallery-badge{position:absolute;left:14px;top:14px;z-index:2;display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border-radius:4px;background:rgba(255,255,255,.92);border:1px solid rgba(50,55,60,.12);font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#32373c;backdrop-filter:blur(5px)}
+#intago-configurator .gallery-badge.exact{background:#f5f8ea;border-color:#bdc99a;color:#34411e}
+#intago-configurator .gallery-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none;padding:0 10px}
+#intago-configurator .gallery-nav button{pointer-events:auto;width:42px;height:42px;min-height:42px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid rgba(50,55,60,.16);box-shadow:0 4px 18px rgba(32,37,40,.12);font-size:22px;line-height:1}
+#intago-configurator .gallery-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px 11px;background:#fff;border-top:1px solid #e1e2e3}
+#intago-configurator .gallery-meta strong{display:block;font-size:13px;margin-bottom:2px}
+#intago-configurator .gallery-meta p{margin:0;font-size:10.5px;line-height:1.35;color:#74797d}
+#intago-configurator .gallery-meta a{font-size:10.5px;color:#5f6468;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+#intago-configurator .gallery-thumbs{display:flex;gap:6px;padding:7px 10px;background:#f7f7f7;border-top:1px solid #e4e5e6;overflow-x:auto;scrollbar-width:thin}
+#intago-configurator .gallery-thumb{flex:0 0 58px;width:58px;height:42px;min-height:42px;padding:0;border:2px solid transparent;border-radius:4px;overflow:hidden;background:#e6e7e8}
+#intago-configurator .gallery-thumb[aria-pressed=true]{border-color:var(--accent)}
+#intago-configurator .gallery-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+#intago-configurator .gallery-empty{margin:auto;max-width:430px;padding:28px;text-align:center}
+#intago-configurator .gallery-empty strong{display:block;font-size:18px;margin-bottom:8px}
+#intago-configurator .gallery-empty p{font-size:13px;color:#74797d;margin:0}
+#intago-configurator .gallery-hint{align-items:center}
+#intago-configurator .gallery-hint .text-button{margin-left:auto;white-space:nowrap;color:var(--accent-dark)}
+@media(max-width:760px){#intago-configurator .gallery-photo-wrap{min-height:160px}#intago-configurator .gallery-meta{grid-template-columns:1fr;padding:8px 10px}#intago-configurator .gallery-meta a{white-space:normal}#intago-configurator .gallery-badge{left:9px;top:9px;font-size:9px}#intago-configurator .gallery-nav{padding:0 6px}#intago-configurator .gallery-nav button{width:38px;height:38px;min-height:38px}#intago-configurator .gallery-hint{align-items:flex-start;flex-wrap:wrap}#intago-configurator .gallery-hint .text-button{margin-left:30px}}
+@media print{#intago-configurator .gallery-overlay{display:none!important}}
 @media print{#intago-configurator .internal-dimensions-note{display:block!important;margin:8px 0 12px;padding:9px 11px;border:1px solid #999;border-left:4px solid #32373c;background:#fff;font-size:11px}#intago-configurator .internal-dimensions-note strong{font-size:12px}}
 
 #intago-configurator{width:100%;max-width:none;margin:0;padding:0}
@@ -114,9 +145,9 @@
   <aside class="visual-panel" aria-label="Podgląd Twojej rolety">
    <div class="visual-heading"><div><span class="eyebrow">TWÓJ MEBEL</span><h2 id="model-title">Sprawdź, jak to działa.</h2></div><div class="visual-meta"><span class="model-marker">PODGLĄD NA ŻYWO</span><strong id="live-price" class="live-price" aria-live="polite"></strong></div></div>
    <div class="scene-tabs" role="group" aria-label="Widok mebla">
-    <button data-scene="front" aria-pressed="true">Wygląd</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Budowa</button>
+    <button data-scene="front" aria-pressed="true">Wygląd</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Budowa</button><button data-scene="gallery" aria-pressed="false" hidden>Galeria</button>
    </div>
-   <div class="model-stage"><div id="model"></div><div id="build-overlay" class="build-overlay" hidden aria-label="Elementy aktualnej konfiguracji"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
+   <div class="model-stage"><div id="model"></div><div id="build-overlay" class="build-overlay" hidden aria-label="Elementy aktualnej konfiguracji"></div><div id="gallery-overlay" class="gallery-overlay" hidden aria-label="Galeria realizacji"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
    <div class="open-control"><button data-action="close" aria-label="Zamknij roletę">Zamknięta</button><input id="open-range" type="range" min="0" max="100" value="35" aria-label="Otwarcie rolety"><button data-action="open" aria-label="Otwórz roletę">Otwarta</button><output id="open-value" for="open-range">35%</output></div>
    <div id="model-context" class="model-context"></div>
    <div class="visual-foot"><span id="dimensions-caption">Przykładowy mebel • podaj własne wymiary wewnętrzne</span><span>Wizualizacja poglądowa</span></div>
@@ -729,6 +760,7 @@ function mechanismEnvelope(state,renderer){
 function createState(){return {version:3,step:1,orientation:null,mounting:null,furniture:null,dimensions:{width:null,height:null,depth:null},selectedProduct:null,finish:null,scene:'front',open:35,mode:'guided'};}
 function reconcile(state){
  if(state.step<=3)state.scene='front';else if(state.step===4&&!['front','dimensions'].includes(state.scene))state.scene='dimensions';
+ if(state.scene==='gallery'&&(state.step<6||!state.selectedProduct||!state.finish))state.scene='front';
  if(state.orientation==='horizontal'){state.mounting='inside';state.furniture='with-bottom';}
  const p=getProduct(state.selectedProduct);
  const wrongOrientation=p&&state.orientation&&state.orientation!=='unknown'&&!p.orientations.value.includes(state.orientation);
@@ -759,7 +791,7 @@ function deserialize(raw){
   for(const k of ['width','height','depth']){const n=x.dimensions?.[k];s.dimensions[k]=typeof n==='number'&&!validateDimension(n)?n:null;}
   s.selectedProduct=getProduct(x.selectedProduct)?.id||null;s.finish=Object.hasOwn(finishes,x.finish)?x.finish:null;
   s.open=typeof x.open==='number'&&Number.isFinite(x.open)?Math.max(0,Math.min(100,x.open)):35;
-  s.scene=x.scene==='interior'?'front':['front','mechanism','dimensions','section','exploded'].includes(x.scene)?x.scene:'front';
+  s.scene=x.scene==='interior'?'front':['front','mechanism','dimensions','section','exploded','gallery'].includes(x.scene)?x.scene:'front';
   s.mode=x.mode==='expert'?'expert':'guided';s.step=Number.isInteger(x.step)?Math.max(1,Math.min(7,x.step)):1;
   reconcile(s);
   if(!s.orientation)s.step=1;else if(!s.mounting)s.step=Math.min(s.step,2);else if(!s.furniture)s.step=Math.min(s.step,3);
@@ -1233,7 +1265,7 @@ if(s.step===2)content=s.orientation==='horizontal'?'<div class="stack">'+choice(
 if(s.step===3)content=s.orientation==='horizontal'?'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Wymagane dla rolety poziomej')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma wymaga dna szafki.</strong><br>Ta opcja jest ustawiana automatycznie.</p></div>':'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Dolna płyta zamyka korpus')+choice(s,'furniture','without-bottom','Bez dna w szafce','Przestrzeń pozostaje otwarta od dołu')+'</div>';
 if(s.step===4)content='<button class="btn subtle measure-start" data-action="measure"><span>Pomóż mi zmierzyć</span><span aria-hidden="true">↗</span></button><div class="internal-dimensions-note"><strong>Podaj wymiary wewnętrzne szafki.</strong><br>S × W × G oznaczają wolną przestrzeń wewnątrz korpusu, nie wymiary zewnętrzne mebla. Grubość płyt korpusu dobierasz niezależnie.</div>'+dimensionFields(s)+'<div id="range-feedback" aria-live="polite"><p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s)+'</div>'+help('To wymiary wnętrza potrzebne do przygotowania zapytania, a nie wymiary cięcia rolety. Prowadnice i mechanizm zajmą część przestrzeni. Ich odsadzenia ustalimy dla wybranego zestawu.');
 if(s.step===5)content=recommendations(s);
-if(s.step===6)content=finishPanel(s)+'<div class="hint"><span class="hint-marker">↗</span><p><strong>Zajrzyj do mechanizmu.</strong><br>Przełącz widok nad modelem, aby zobaczyć, gdzie chowa się płaszcz rolety.</p></div>';
+if(s.step===6)content=finishPanel(s)+(s.finish?'<div class="hint gallery-hint"><span class="hint-marker">▣</span><p><strong>Zobacz ten zestaw w realizacjach.</strong><br>Galeria dobiera zdjęcia po kierunku, montażu i widocznych elementach. Gdy brakuje wybranego koloru, pokazuje inny kolor tego samego zestawu.</p><button class="text-button" data-scene="gallery">Otwórz galerię ↗</button></div>':'<div class="hint"><span class="hint-marker">↗</span><p><strong>Wybierz kolor.</strong><br>Po wyborze pojawi się zakładka Galeria z realizacjami pasującymi do wyglądu systemu.</p></div>');
 if(s.step===7)content=summary(s);
 const next=['Dobierz roletę','Dalej','Dalej','Sprawdź rozwiązania','Wybierz wykończenie','Zobacz konfigurację'];
 return '<div class="step-meta"><span class="eyebrow">'+stepNames[s.step-1].toUpperCase()+'</span><span>0'+s.step+' / 07</span></div><section class="question"><h2 id="wizard-title" tabindex="-1">'+titles[s.step-1]+'</h2><p class="intro">'+intros[s.step-1]+'</p>'+content+'</section><div class="actions">'+(s.step>1?'<button class="prev" data-action="prev">← '+(s.step===7?'Zmień konfigurację':'Wstecz')+'</button>':'<span class="micro muted">Zacznij od kierunku</span>')+(s.step<7?'<button class="btn primary" data-action="next" '+(canNext(s)?'':'disabled')+'>'+next[s.step-1]+' <span aria-hidden="true">→</span></button>':'<button class="text-button" data-action="edit-start">Zmień od początku</button>')+'</div><div class="saved-note" id="save-note">Twoje wybory zostają na tym urządzeniu</div>';
@@ -1247,6 +1279,53 @@ return '<div class="step-meta"><span class="eyebrow">'+stepNames[s.step-1].toUpp
 
 
 
+
+/* Galeria realizacji.
+   Klucz wizualny NIE zawiera mechanizmu zwijania. O dopasowaniu zdjęcia decydują:
+   kierunek + montaż + widoczny zestaw (prowadnica/maskownica/szczeble/uchwyt).
+   Kolor jest preferencją: najpierw pokazujemy dokładny kolor, a potem inne kolory tego samego zestawu. */
+const GALLERY_SOURCE_NOBLE='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-noble-matt';
+const GALLERY_SOURCE_COLOR='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-color-decor-line';
+const GALLERY_ITEMS=[
+ {id:'noble-out-dark-01',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1498542/7x5/1200/857/76f9accf21c9858e2828414e63df4e08/B4F10CFEBDE677245C5145E22F4FA8D7/b41-d010-1080234.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+ {id:'noble-out-dark-02',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1726346/7x5/800/571/1aa17ab78f4b4d14217a33f91d3e7654/D352043A3854F3DED71FD33DEF4EDF64/o95-d020-cl-01-1094430.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+ {id:'noble-out-dark-03',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1494330/7x5/1200/857/79c22768591dcc7fac1a203f148bdb7d/04B2A0AD4E96E74C602F30F8EFAB19A2/animation-kitchen-midnight-03-1106319.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'}
+];
+function galleryVisualKey(s){
+ const p=getProduct(s.selectedProduct);if(!p||!s.orientation)return null;
+ if(p.id==='top-basic'||p.id==='top-basic-c3')return {visualSet:'top-basic-e23-inside',orientation:s.orientation,label:'TOP BASIC / E23 / wewnątrz'};
+ if(p.id==='noble-wew')return {visualSet:'noble-e9-inside',orientation:s.orientation,label:'NOBLE / E9 / wewnątrz'};
+ if(p.id==='noble-zewn')return {visualSet:'noble-e9-outside',orientation:s.orientation,label:'NOBLE / E9 / na korpusie'};
+ return null;
+}
+function galleryItemsFor(s){
+ const key=galleryVisualKey(s);if(!key)return [];
+ const same=GALLERY_ITEMS.filter(item=>item.visualSet===key.visualSet&&item.orientation===key.orientation);
+ return same.slice().sort((a,b)=>(b.finish===s.finish)-(a.finish===s.finish));
+}
+function galleryContext(s){
+ const key=galleryVisualKey(s),items=galleryItemsFor(s);if(!key)return ['Galeria realizacji','Wybierz konkretny system, aby dobrać zdjęcia.'];
+ if(!items.length)return ['Brak zdjęć tego zestawu',key.label+'. Galeria nie podmienia innego montażu ani innego zestawu tylko po to, żeby coś pokazać.'];
+ const exact=items.some(item=>item.finish===s.finish),f=finishes[s.finish];
+ return [exact?'Realizacje w wybranym kolorze':'Realizacje tego samego zestawu',exact?'Zdjęcia są zgodne z zestawem wizualnym i wybranym kolorem '+(f?.name||'')+'.':'Nie mamy jeszcze zdjęcia w kolorze '+(f?.name||'wybranym')+'. Pokazujemy inny kolor, ale ten sam kierunek, montaż i zestaw widocznych elementów.'];
+}
+let galleryIndex=0,gallerySignature='';
+function renderGallery(s){
+ const overlay=$('#gallery-overlay'),stage=$('.model-stage');if(!overlay||!stage)return;
+ const isGallery=s.scene==='gallery';stage.classList.toggle('gallery-mode',isGallery);
+ if(!isGallery){overlay.hidden=true;overlay.innerHTML='';return;}
+ const key=galleryVisualKey(s),items=galleryItemsFor(s),signature=JSON.stringify([key?.visualSet,key?.orientation,s.finish,items.map(x=>x.id)]);
+ if(signature!==gallerySignature){gallerySignature=signature;galleryIndex=0;}
+ overlay.hidden=false;
+ if(!items.length){overlay.innerHTML='<div class="gallery-empty"><strong>Nie mamy jeszcze zdjęć tego zestawu.</strong><p>'+escape(key?.label||'Ta konfiguracja')+'. Nie pokazujemy zdjęcia innego kierunku lub innego montażu. Po dodaniu materiałów do GALLERY_ITEMS galeria zacznie je wyświetlać automatycznie.</p></div>';return;}
+ galleryIndex=Math.max(0,Math.min(items.length-1,galleryIndex));
+ const item=items[galleryIndex],exact=item.finish===s.finish,badge=exact?'Wybrany kolor':'Inny kolor · ten sam zestaw',finishName=item.finishLabel||finishes[item.finish]?.name||'kolor referencyjny';
+ overlay.innerHTML='<div class="gallery-main"><div class="gallery-photo-wrap"><img class="gallery-photo" src="'+escape(item.image)+'" alt="'+escape(item.title+' — '+finishName)+'" referrerpolicy="no-referrer"><div class="gallery-photo-fallback"><span>Zdjęcie REHAU jest chwilowo niedostępne.<br>Spróbuj ponownie później.</span></div><span class="gallery-badge '+(exact?'exact':'')+'">'+escape(badge)+'</span>'+(items.length>1?'<div class="gallery-nav"><button type="button" data-action="gallery-prev" aria-label="Poprzednie zdjęcie">‹</button><button type="button" data-action="gallery-next" aria-label="Następne zdjęcie">›</button></div>':'')+'</div></div><div class="gallery-meta"><div><strong>'+escape(item.title+' · '+finishName)+'</strong><p>'+escape(key?.label||'')+(exact?' · kolor zgodny z wyborem':' · kolor zdjęcia różni się od wybranego')+'</p></div><a href="'+escape(item.source)+'" target="_blank" rel="noopener">Źródło: REHAU ↗</a></div>'+(items.length>1?'<div class="gallery-thumbs">'+items.map((x,i)=>'<button type="button" class="gallery-thumb" data-gallery-index="'+i+'" aria-label="Zdjęcie '+(i+1)+'" aria-pressed="'+(i===galleryIndex)+'"><img src="'+escape(x.image)+'" alt="" referrerpolicy="no-referrer"></button>').join('')+'</div>':'');
+}
+function setGalleryIndex(index){
+ const s=store.get(),items=galleryItemsFor(s);if(!items.length)return;
+ galleryIndex=(Number(index)+items.length)%items.length;renderGallery(s);
+}
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let storage;try{storage=window.localStorage;}catch{}
@@ -1312,10 +1391,10 @@ function render(s){
   previousKey=key;previousStep=s.step;
  }
  $('.expert-toggle').setAttribute('aria-pressed',s.mode==='expert');
- $$('[data-scene]').forEach(n=>{n.hidden=s.step<=3?n.dataset.scene!=='front':s.step===4?!['front','dimensions'].includes(n.dataset.scene):false;n.setAttribute('aria-pressed',n.dataset.scene===s.scene);});
+ $$('[data-scene]').forEach(n=>{let hidden=s.step<=3?n.dataset.scene!=='front':s.step===4?!['front','dimensions'].includes(n.dataset.scene):false;if(n.dataset.scene==='gallery')hidden=!(s.step>=6&&s.selectedProduct&&s.finish);n.hidden=hidden;n.setAttribute('aria-pressed',n.dataset.scene===s.scene);});
  if(!animation&&!model.drag)liveOpen=s.open;
  openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';
- const modelState=modelPreviewState(s);
+ const modelState=modelPreviewState(s.scene==='gallery'?{...s,scene:'front'}:s);
  const shape=JSON.stringify({...modelState,open:0,step:0,mode:''})+compare;
  if(model.shape!==shape){model.shape=shape;model.update({...modelState,open:liveOpen},{compare,showEnvelope});}else model.setOpen(liveOpen);
  const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),spec=visualSpec(modelState),mechanism=mechanisms[v?.mechanism.value];
@@ -1331,9 +1410,11 @@ function render(s){
  mechanism:[mechanism&&v.mechanism.status==='verified'?mechanism.location:'Przykładowa droga prowadzenia',(mechanism?.description||'Dokładny mechanizm dobierzemy po potwierdzeniu wariantu.')+' Geometria oraz zajęta przestrzeń są poglądowe.'],
  dimensions:['Mierz wewnątrz korpusu.','Szerokość, wysokość i głębokość między wewnętrznymi powierzchniami. To wymiary do zapytania, nie do cięcia.'],
  section:[mountings[spec.mounting],s.orientation==='horizontal'?'Przekrój z góry. Widzisz płaszcz przechodzący z frontu w głąb mebla.':'Przekrój boczny. Pokazujemy strefę mechanizmu i odległości jej krawędzi od wewnętrznych ścianek korpusu.'],
- exploded:['Budowa tej konfiguracji','Najedź na nazwę elementu, aby zobaczyć miniaturę i podświetlić odpowiadający mu zespół na makiecie. Kliknij miniaturę lub link, aby przejść do INTAGO.']
+ exploded:['Budowa tej konfiguracji','Najedź na nazwę elementu, aby zobaczyć miniaturę i podświetlić odpowiadający mu zespół na makiecie. Kliknij miniaturę lub link, aby przejść do INTAGO.'],
+ gallery:galleryContext(s)
  };
  renderBuildOverlay(s);
+ renderGallery(s);
  const components=s.scene==='exploded'?activeBuildComponents:[],info=s.scene==='exploded'?[components.length?components.length+' elementów tej konfiguracji':'Budowa tej konfiguracji',sceneInfo.exploded[1]]:sceneInfo[s.scene],sectionEnvelope=s.scene==='section'?mechanismEnvelope(s,model):null;
  const envelopeHtml=sectionEnvelope?'<div class="envelope-details '+(showEnvelope?'':'is-hidden')+'" aria-hidden="'+(!showEnvelope)+'"><div class="context-specs" aria-label="Wymiary strefy mechanizmu">'+sectionEnvelope.items.map(item=>'<div><span>'+escape(item.label)+'</span><strong>'+escape(item.value)+'</strong></div>').join('')+'</div><p class="context-note">'+escape(sectionEnvelope.note)+'</p></div>':'',envelopeToggle=$('#envelope-toggle');
  if(envelopeToggle){
@@ -1343,11 +1424,11 @@ function render(s){
   envelopeToggle.textContent=showEnvelope?'Ukryj zajęte miejsce':'Pokaż zajęte miejsce';
  }
  const buildSummary=s.scene==='exploded'&&components.length?'<div class="build-summary"><span class="build-legend-dot"></span><b>Hover = podświetlenie</b><span>•</span><span>miniatura prowadzi do INTAGO</span></div>':'';
- $('#model-context').innerHTML='<span class="context-icon" aria-hidden="true">'+(s.scene==='mechanism'||s.scene==='exploded'?'↳':'↗')+'</span><div><strong>'+escape(info[0])+'</strong><p>'+escape(info[1])+'</p>'+buildSummary+envelopeHtml+'</div>';
+ $('#model-context').innerHTML='<span class="context-icon" aria-hidden="true">'+(s.scene==='gallery'?'▣':s.scene==='mechanism'||s.scene==='exploded'?'↳':'↗')+'</span><div><strong>'+escape(info[0])+'</strong><p>'+escape(info[1])+'</p>'+buildSummary+envelopeHtml+'</div>';
  $('#stage-label').textContent=s.scene==='dimensions'?'Wymiary wewnętrzne — nie uwzględniają grubości płyt.':compare?'LINIA PRZERYWANA: DRUGI SPOSÓB MONTAŻU':s.scene==='section'?'SCHEMAT POGLĄDOWY / NIE DO CIĘCIA':s.orientation==='unknown'?'PRZYKŁADOWY RUCH PIONOWY':spec.split?'OTWIERANIE NA OBIE STRONY':'PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ';
- stageHint.hidden=s.scene==='dimensions'?false:s.scene==='exploded'||(hasInteracted&&!compare&&s.scene!=='section');
+ stageHint.hidden=s.scene==='dimensions'?false:s.scene==='exploded'||s.scene==='gallery'||(hasInteracted&&!compare&&s.scene!=='section');
  const dims=['width','height','depth'].map(k=>s.dimensions[k]??'?');
- $('#dimensions-caption').textContent=(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary wewnętrzne':dims.join(' × ')+' mm / S × W × G • wymiary wewnętrzne'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • bez grubości płyt':'');
+ $('#dimensions-caption').textContent=s.scene==='gallery'?'Galeria realizacji REHAU • kolor zdjęcia może różnić się od wybranego':(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary wewnętrzne':dims.join(' × ')+' mm / S × W × G • wymiary wewnętrzne'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • bez grubości płyt':'');
  if(!save(s,storage)&&$('#save-note'))$('#save-note').textContent='Zapis na urządzeniu niedostępny — pobierz kartę na końcu.';
  if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML='<p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s);
  if(editing){const k=oldFocus.dataset.dimension,error=validateDimension(s.dimensions[k]);$('#error-'+k).textContent=error||'';oldFocus.setAttribute('aria-invalid',Boolean(error));const next=$('[data-action="next"]');if(next)next.disabled=Object.values(s.dimensions).some(v=>validateDimension(v));}
@@ -1363,6 +1444,7 @@ function go(step){
  if(patch.step===1&&fromStep!==1)requestAnimationFrame(()=>playIntroMotion());
 }
 function download(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+document.addEventListener('error',e=>{if(e.target?.classList?.contains('gallery-photo'))e.target.closest('.gallery-photo-wrap')?.classList.add('is-error');},true);
 document.addEventListener('mouseover',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHighlight(item);});
 document.addEventListener('mouseout',e=>{const item=e.target.closest?.('[data-build-item]');if(item&&!item.contains(e.relatedTarget))setBuildHighlight(null);});
 document.addEventListener('focusin',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHighlight(item);});
@@ -1382,6 +1464,7 @@ document.addEventListener('click',async e=>{
  if(b.dataset.choice){const field=b.dataset.choice;compare=false;const patch={[field]:b.dataset.value};if(field==='orientation'&&b.dataset.value==='horizontal'){patch.mounting='inside';patch.furniture='with-bottom';}if(field==='orientation'||field==='mounting')patch.scene='front';store.update(patch);return;}
  if(b.dataset.product){store.update({selectedProduct:b.dataset.product,finish:null});return;}
  if(b.dataset.finish){store.update({finish:b.dataset.finish});return;}
+ if(b.hasAttribute('data-gallery-index')){setGalleryIndex(Number(b.dataset.galleryIndex));return;}
  if(b.dataset.scene){compare=false;store.update({scene:b.dataset.scene});return;}
  if(b.dataset.step){go(Number(b.dataset.step));return;}
  if(b.dataset.clearDim){previousKey='';document.activeElement?.blur();store.update({dimensions:{[b.dataset.clearDim]:null}});return;}
@@ -1391,6 +1474,8 @@ document.addEventListener('click',async e=>{
   if(!store.get().selectedProduct)announce('Twoje wymiary wykraczają poza ofertę wybranego systemu. Możesz je poprawić.');return;
  }
  switch(b.dataset.action){
+ case 'gallery-prev':setGalleryIndex(galleryIndex-1);break;
+ case 'gallery-next':setGalleryIndex(galleryIndex+1);break;
  case 'next':go(s.step+1);break;
  case 'prev':go(s.step===7?6:s.step-1);break;
  case 'edit-start':go(1);break;
