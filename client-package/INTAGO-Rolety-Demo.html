@@ -223,6 +223,124 @@
 #intago-configurator .selly-expert-row{max-width:1640px;margin:0 auto;padding:12px 4.2% 0;display:flex;justify-content:flex-end}
 @media(max-width:760px){#intago-configurator .selly-expert-row{padding:8px 15px 0}}
 
+
+
+/* Premium: animacja montażu rolety od pustego korpusu do pełnego ruchu. */
+#intago-configurator .model-stage .assembly-button{position:static;grid-row:2;grid-column:1;align-self:center;justify-self:center;z-index:5;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:4px 12px;border:1px solid rgba(210,7,29,.28);border-radius:5px;background:#fff;color:#8e0013;font-size:11.5px;font-weight:650;box-shadow:0 4px 15px rgba(32,37,40,.06)}
+#intago-configurator .model-stage .assembly-button[hidden]{display:none!important}
+#intago-configurator .model-stage .assembly-button span{font-size:13px;color:var(--accent);transition:transform .25s ease}
+#intago-configurator .model-stage .assembly-button:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft);filter:none}
+#intago-configurator .model-stage .assembly-button:hover:not(:disabled) span{transform:rotate(18deg) scale(1.08)}
+#intago-configurator .visual-panel.is-assembling .assembly-button{background:var(--accent);border-color:var(--accent);color:#fff;cursor:default}
+#intago-configurator .visual-panel.is-assembling .assembly-button span{color:#fff;animation:intago-assembly-star 1s linear infinite}
+#intago-configurator .visual-panel.is-assembling .scene-tabs,#intago-configurator .visual-panel.is-assembling .open-control{pointer-events:none}
+#intago-configurator .assembly-status{position:absolute;z-index:12;left:50%;top:13px;transform:translateX(-50%);min-width:210px;max-width:calc(100% - 36px);padding:8px 11px 7px;border:1px solid rgba(50,55,60,.13);border-radius:7px;background:rgba(255,255,255,.94);box-shadow:0 8px 28px rgba(32,37,40,.12);backdrop-filter:blur(8px);text-align:center;pointer-events:none;opacity:0;transition:opacity .18s ease,transform .18s ease}
+#intago-configurator .assembly-status.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+#intago-configurator .assembly-status strong{display:block;font-size:11px;line-height:1.25;font-weight:700;color:#32373c}
+#intago-configurator .assembly-status span{display:block;margin-top:2px;font-size:9px;line-height:1.3;color:#74797d}
+#intago-configurator .assembly-progress{display:grid!important;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:6px!important}
+#intago-configurator .assembly-progress i{display:block;height:2px;border-radius:2px;background:#e4e5e6;overflow:hidden}
+#intago-configurator .assembly-progress i.is-done{background:var(--accent)}
+#intago-configurator .assembly-effects{position:absolute;z-index:11;inset:0 0 48px;overflow:hidden;pointer-events:none}
+#intago-configurator .assembly-flight{position:absolute;width:54px;height:54px;padding:4px;border:1px solid rgba(50,55,60,.13);border-radius:8px;background:rgba(255,255,255,.96);box-shadow:0 8px 24px rgba(32,37,40,.14);object-fit:contain;transform:translate(-50%,-50%);will-change:transform,opacity}
+#intago-configurator .assembly-flight-label{position:absolute;transform:translate(-50%,-50%);padding:5px 8px;border-radius:4px;background:#fff;border:1px solid rgba(50,55,60,.12);box-shadow:0 5px 18px rgba(32,37,40,.12);font-size:9px;font-weight:700;color:#32373c;white-space:nowrap;will-change:transform,opacity}
+#intago-configurator .visual-panel.is-assembling .cabinet-svg{filter:drop-shadow(0 12px 18px rgba(32,37,40,.10))}
+@keyframes intago-assembly-star{to{transform:rotate(360deg)}}
+@media(max-width:1150px){#intago-configurator .model-stage .assembly-button{font-size:10.5px;padding-inline:9px}.assembly-status{min-width:190px}}
+@media(max-width:760px){#intago-configurator .model-stage .assembly-button{justify-self:start;margin-left:12px;font-size:9.5px;padding:3px 8px;max-width:165px}#intago-configurator .model-stage:has(.assembly-button:not([hidden])) .stage-label{display:none}#intago-configurator .assembly-status{top:8px;min-width:180px;padding:7px 9px}#intago-configurator .assembly-effects{bottom:44px}#intago-configurator .assembly-flight{width:46px;height:46px}}
+@media(prefers-reduced-motion:reduce){#intago-configurator .visual-panel.is-assembling .assembly-button span{animation:none}}
+@media print{#intago-configurator .assembly-button,#intago-configurator .assembly-status,#intago-configurator .assembly-effects{display:none!important}}
+
+/* Moment finalizacji konfiguracji — premium reveal po wejściu w krok 7. */
+#intago-configurator .completion-card{
+  position:relative;overflow:hidden;margin:0 0 17px;padding:16px 17px 15px;
+  border:1px solid #e3c3c7;border-radius:9px;
+  background:linear-gradient(135deg,#fff 0%,#fff7f8 100%);
+  box-shadow:0 10px 30px rgba(50,55,60,.06);
+}
+#intago-configurator .completion-card:after{
+  content:"";position:absolute;right:-48px;top:-70px;width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(210,7,29,.10),rgba(210,7,29,0) 68%);pointer-events:none;
+}
+#intago-configurator .completion-head{display:flex;align-items:center;gap:11px;position:relative;z-index:1}
+#intago-configurator .completion-check{
+  width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:17px;font-weight:800;
+  box-shadow:0 0 0 5px rgba(210,7,29,.08);
+}
+#intago-configurator .completion-card .eyebrow{font-size:9px;color:#8a8f93}
+#intago-configurator .completion-card h3{margin:2px 0 0;font-size:21px;letter-spacing:-.035em}
+#intago-configurator .completion-config{
+  position:relative;z-index:1;margin:12px 0 0;padding-top:11px;border-top:1px solid #eadfe0;
+  display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center;font-size:11px;color:#666b6f;
+}
+#intago-configurator .completion-config b{color:#32373c;font-weight:700}
+#intago-configurator .completion-config .completion-price{
+  margin-left:auto;font-size:17px;letter-spacing:-.025em;color:#32373c;white-space:nowrap;
+}
+#intago-configurator .completion-note{position:relative;z-index:1;margin:7px 0 0;font-size:10px;color:#7a7f83}
+
+/* Scena finału na modelu. */
+#intago-configurator .finale-overlay{
+  position:absolute;z-index:24;inset:0 0 48px;display:grid;place-items:center;padding:22px;
+  pointer-events:none;opacity:0;transition:opacity .34s ease;
+  background:radial-gradient(circle at 50% 44%,rgba(255,255,255,.02) 25%,rgba(255,255,255,.28) 78%,rgba(255,255,255,.55) 100%);
+}
+#intago-configurator .finale-overlay.is-visible{opacity:1}
+#intago-configurator .finale-reveal{
+  width:min(430px,calc(100% - 24px));padding:16px 18px 15px;
+  border:1px solid rgba(50,55,60,.13);border-radius:10px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(9px);
+  box-shadow:0 18px 55px rgba(32,37,40,.16);
+  text-align:center;transform:translateY(10px) scale(.985);opacity:0;
+  transition:transform .45s cubic-bezier(.18,.82,.22,1),opacity .34s ease;
+}
+#intago-configurator .finale-overlay.is-revealed .finale-reveal{transform:none;opacity:1}
+#intago-configurator .finale-icon{
+  width:38px;height:38px;margin:0 auto 8px;display:grid;place-items:center;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:19px;font-weight:800;
+  box-shadow:0 0 0 7px rgba(210,7,29,.08);
+}
+#intago-configurator .finale-reveal .eyebrow{font-size:9px;color:#8b9094}
+#intago-configurator .finale-reveal strong{display:block;margin-top:3px;font-size:23px;letter-spacing:-.035em;color:#32373c}
+#intago-configurator .finale-reveal p{margin:8px 0 0;font-size:11px;line-height:1.45;color:#676c70}
+#intago-configurator .finale-reveal b{color:#32373c}
+#intago-configurator .finale-price{display:block;margin-top:9px;font-size:18px!important;color:#32373c!important}
+
+/* Na czas sekwencji wyciszamy UI bez zmiany layoutu. */
+#intago-configurator .visual-panel .scene-tabs,
+#intago-configurator .visual-panel .open-control,
+#intago-configurator .visual-panel .model-context,
+#intago-configurator .visual-panel .visual-foot{transition:opacity .28s ease,filter .28s ease}
+#intago-configurator .visual-panel.is-finalizing .scene-tabs,
+#intago-configurator .visual-panel.is-finalizing .open-control,
+#intago-configurator .visual-panel.is-finalizing .model-context,
+#intago-configurator .visual-panel.is-finalizing .visual-foot{opacity:.16;filter:blur(.3px);pointer-events:none}
+#intago-configurator .visual-panel.is-finalizing .assembly-button,
+#intago-configurator .visual-panel.is-finalizing .animate-button,
+#intago-configurator .visual-panel.is-finalizing .envelope-button{opacity:0!important;pointer-events:none!important}
+
+@keyframes intago-completion-in{
+  0%{opacity:0;transform:translateY(10px)}
+  100%{opacity:1;transform:none}
+}
+#intago-configurator .completion-card{animation:intago-completion-in .52s cubic-bezier(.18,.82,.22,1) both}
+@media(max-width:760px){
+  #intago-configurator .completion-card{padding:14px}
+  #intago-configurator .completion-card h3{font-size:19px}
+  #intago-configurator .completion-config .completion-price{width:100%;margin-left:0;margin-top:3px}
+  #intago-configurator .finale-overlay{inset:0 0 44px;padding:12px}
+  #intago-configurator .finale-reveal{padding:14px}
+  #intago-configurator .finale-reveal strong{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  #intago-configurator .completion-card{animation:none}
+  #intago-configurator .finale-reveal{transition:none}
+}
+@media print{
+  #intago-configurator .finale-overlay{display:none!important}
+  #intago-configurator .completion-card{box-shadow:none;animation:none}
+}
 </style>
 
 <div id="intago-configurator">
@@ -239,7 +357,7 @@
    <div class="scene-tabs" role="group" aria-label="Widok mebla">
     <button data-scene="front" aria-pressed="true">Wygląd</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Budowa</button><button data-scene="gallery" aria-pressed="false" hidden>Galeria</button>
    </div>
-   <div class="model-stage"><div id="model"></div><div id="build-overlay" class="build-overlay" hidden aria-label="Elementy aktualnej konfiguracji"></div><div id="gallery-overlay" class="gallery-overlay" hidden aria-label="Galeria realizacji"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
+   <div class="model-stage"><div id="model"></div><div id="build-overlay" class="build-overlay" hidden aria-label="Elementy aktualnej konfiguracji"></div><div id="gallery-overlay" class="gallery-overlay" hidden aria-label="Galeria realizacji"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button id="assembly-button" class="assembly-button" data-action="assemble" aria-label="Zobacz animację montażu rolety" hidden><span aria-hidden="true">✦</span> Zobacz jak powstaje</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
    <div class="open-control"><button data-action="close" aria-label="Zamknij roletę">Zamknięta</button><input id="open-range" type="range" min="0" max="100" value="35" aria-label="Otwarcie rolety"><button data-action="open" aria-label="Otwórz roletę">Otwarta</button><output id="open-value" for="open-range">35%</output></div>
    <div id="model-context" class="model-context"></div>
    <div class="visual-foot"><span id="dimensions-caption">Przykładowy mebel • podaj własne wymiary wewnętrzne</span><span>Wizualizacja poglądowa</span></div>
@@ -726,7 +844,9 @@ const INTAGO_PRODUCT_IMAGES={
  nobleDark:'https://www.intago.com.pl/img/Noble%20Matt/noble_matt_After_Dark_V3555.png',
  nobleSetCasa:'https://www.intago.com.pl/img/products/92/91/3.jpg?v=1782207383',
  nobleSetBlonde:'https://www.intago.com.pl/img/products/92/91/2.jpg?v=1782207383',
- nobleSetDark:'https://www.intago.com.pl/img/products/92/91/1.jpg?v=1782207382'
+ nobleSetDark:'https://www.intago.com.pl/img/products/92/91/1.jpg?v=1782207382',
+ nobleE9Blonde:'https://www.intago.com.pl/img/products/10/23/8/1.jpg?v=1788339243',
+ nobleHandleBlonde:'https://www.intago.com.pl/img/products/10/23/9/1.jpg?v=1788339245'
 };
 const NOBLE_SET_URLS={
  'noble-zewn':'https://www.intago.com.pl/roleta-meblowa-noble-matt-pionowa-na-wymiar-zawijana-na-gorze-szafki-z-systemem-c3-docinamy-na-wymiar,id9290.html',
@@ -734,7 +854,7 @@ const NOBLE_SET_URLS={
 };
 const componentLibrary={
  e23:{name:'Szczeble E23',desc:'Płaszcz rolety z profilu E23.',thumb:componentImages.e23,thumbsByFinish:{white:INTAGO_PRODUCT_IMAGES.e23White,silver:INTAGO_PRODUCT_IMAGES.e23Silver},url:'https://www.intago.com.pl/rehau-profil-zaluzjowy-e23-bialy,id4906.html',urlsByFinish:{white:'https://www.intago.com.pl/rehau-profil-zaluzjowy-e23-bialy,id4906.html',silver:'https://www.intago.com.pl/rehau-rauvolet-szczebel-e23,id1869.html'},layers:['SHUTTER']},
- e9:{name:'Szczeble E9 NOBLE MATT',desc:'Matowy płaszcz rolety NOBLE MATT.',thumb:INTAGO_PRODUCT_IMAGES.nobleBlonde,thumbsByFinish:{casa:INTAGO_PRODUCT_IMAGES.nobleCasa,blonde:INTAGO_PRODUCT_IMAGES.nobleBlonde,dark:INTAGO_PRODUCT_IMAGES.nobleDark},url:'https://www.intago.com.pl/szczebelek-profil-zaluzji-rehau-e9-boxcar-blonde-v3610-1-25m,id10238.html',urlsByFinish:{blonde:'https://www.intago.com.pl/szczebelek-profil-zaluzji-rehau-e9-boxcar-blonde-v3610-1-25m,id10238.html'},layers:['SHUTTER']},
+ e9:{name:'Szczeble E9 NOBLE MATT',desc:'Szczebelek rolety REHAU E9 NOBLE MATT, Boxcar Blonde V3610.',thumb:INTAGO_PRODUCT_IMAGES.nobleE9Blonde,url:'https://www.intago.com.pl/szczebelek-profil-zaluzji-rehau-e9-boxcar-blonde-v3610-1-25m,id10238.html',layers:['SHUTTER']},
  e23Start:{name:'Szczeble E23 startowe',desc:'Startowe szczeble ukryte po złożeniu systemu NOBLE C3.',thumb:INTAGO_PRODUCT_IMAGES.e23White,url:'https://www.intago.com.pl/rehau-profil-zaluzjowy-e23-bialy,id4906.html',layers:['SHUTTER']},
  topBasicGuide:{name:'Prowadnice TOP BASIC',desc:'Prowadnice montowane wewnątrz korpusu.',thumb:componentImages.top_basic_guide,thumbsByFinish:{white:INTAGO_PRODUCT_IMAGES.guideWhite,silver:INTAGO_PRODUCT_IMAGES.guideSilver},url:'https://www.intago.com.pl/rehau-prowadnica-top-basic-biala,id2080.html',urlsByFinish:{white:'https://www.intago.com.pl/rehau-prowadnica-top-basic-biala,id2080.html',silver:'https://www.intago.com.pl/rehau-rauvolet-prowadnica-top-basic,id1870.html'},layers:['GUIDES']},
  topBasicCorner:{name:'Narożniki TOP BASIC 90°',desc:'Łączą prowadnice i kierują płaszcz w głąb mebla.',thumb:componentImages.top_basic_corner,thumbsByFinish:{white:INTAGO_PRODUCT_IMAGES.cornerWhite,silver:INTAGO_PRODUCT_IMAGES.cornerSilver},url:'https://www.intago.com.pl/rehau-rauvolet-naroznik-prowadnicy-top-basic-szary,id4900.html',urlsByFinish:{white:'https://www.intago.com.pl/rehau-rauvolet-naroznik-prowadnicy-top-basic-szary,id4900.html',silver:'https://www.intago.com.pl/rehau-rauvolet-naroznik-prowadnicy,id1871.html'},layers:['GUIDES','MECHANISM']},
@@ -753,7 +873,7 @@ const componentLibrary={
  topGuide:{name:'Prowadnice TOP aluminiowe',desc:'Wewnętrzne prowadnice systemu NOBLE MATT TOP.',thumb:INTAGO_PRODUCT_IMAGES.topGuide,url:'https://www.intago.com.pl/rehau-prowadnica-top-aluminium,id2089.html',layers:['GUIDES']},
  topCover:{name:'Pokrywa prowadnicy TOP w kolorze szczebelków',desc:'Pokrywa prowadnicy TOP dopasowana do koloru płaszcza.',thumb:INTAGO_PRODUCT_IMAGES.topCover,url:'https://www.intago.com.pl/rehau-listwa-maskujaca-top,id2090.html',layers:['GUIDES']},
  nobleMaskTongue:{name:'Listwa maskująca z piórem',desc:'Górna maskownica systemu NOBLE MATT TOP.',thumb:componentImages.noble_mask,url:null,layers:['FASCIA']},
- nobleLockRail:{name:'Listwa zamkowa',desc:'Listwa zamkowa systemu NOBLE MATT TOP.',thumb:null,url:null,layers:['HANDLE']},
+ nobleLockRail:{name:'Listwa zamkowa',desc:'Listwa uchwytowa do rolety REHAU NOBLE MATT Boxcar Blonde 1,25 m.',thumb:INTAGO_PRODUCT_IMAGES.nobleHandleBlonde,url:'https://www.intago.com.pl/listwa-uchwytowa-do-rolety-rehau-noble-matt-boxcar-blonde-1-25m,id10239.html',layers:['HANDLE']},
  corner90:{name:'Narożniki 90°',desc:'Zmieniają kierunek ruchu płaszcza w systemie TOP.',thumb:componentImages.top_basic_corner,url:'https://www.intago.com.pl/rehau-rauvolet-naroznik-prowadnicy-top-basic-szary,id4900.html',layers:['GUIDES','MECHANISM']},
  nobleLockSlider:{name:'Ślizgacze listwy zamkowej',desc:'Ślizgacze listwy zamkowej systemu NOBLE MATT TOP.',thumb:INTAGO_PRODUCT_IMAGES.sliderSilver,url:'https://www.intago.com.pl/rehau-rauvolet-slizgacz-listwy-zamkowej-szary,id1874.html',layers:['HANDLE','GUIDES']},
  c6Noble:{name:'System wspomagający C6',desc:'System wspomagający C6 zamontowany u góry korpusu, przy górnym prowadzeniu rolety NOBLE MATT TOP.',thumb:INTAGO_PRODUCT_IMAGES.c6,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-wspomagajacy-c6,id1875.html',layers:['C6_ASSIST']}
@@ -1489,8 +1609,10 @@ return list.length?priceBox+'<div class="finish-grid">'+list.map(f=>'<button cla
 priceBox+'<div class="hint"><span class="hint-marker">i</span><p><strong>Brak potwierdzonej palety wykończeń.</strong><br>Skontaktuj się z INTAGO, aby dobrać kolor dla tego wariantu.</p></div>';}
 function summary(s){
 const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),f=finishes[s.finish],r=p?evaluate(p,s):null,price=priceFor(s);
-const rows=[['Wariant',p?.name||'Dobór indywidualny'],['Kierunek',orientations[s.orientation]||'Do ustalenia'],['Montaż',mountings[s.mounting]||'Do ustalenia'],['Dno szafki',furniture[s.furniture]||'Do ustalenia'],['Wymiary wewnętrzne S × W × G',['width','height','depth'].map(k=>s.dimensions[k]??'?').join(' × ')+' mm'],['Wykończenie',f?f.name+(f.code?' / '+f.code:''):'Do ustalenia'],['Mechanizm',v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do potwierdzenia'],['Cena brutto',price?.label||'Do wyceny']];
-return '<div class="internal-dimensions-note"><strong>WAŻNE — wszystkie wymiary szafki w tej karcie są wymiarami wewnętrznymi.</strong><br>S × W × G odnoszą się do wolnej przestrzeni wewnątrz korpusu. Nie doliczaj grubości płyt i nie traktuj tych wartości jako wymiarów zewnętrznych mebla.</div><dl class="summary-list">'+rows.map(([k,val])=>'<div><dt>'+k+'</dt><dd>'+escape(val)+'</dd></div>').join('')+'</dl>'+selectedPriceHtml(s)+
+const dimsFinal=['width','height','depth'].map(k=>s.dimensions[k]??'?').join(' × ')+' mm';
+const completion='<div class="completion-card"><div class="completion-head"><span class="completion-check" aria-hidden="true">✓</span><div><span class="eyebrow">KONFIGURACJA GOTOWA</span><h3>Twoja roleta jest gotowa.</h3></div></div><div class="completion-config"><b>'+escape(p?.name||'Dobór indywidualny')+'</b><span>•</span><span>'+escape(f?.name||'kolor do ustalenia')+'</span><span>•</span><span>'+escape(dimsFinal)+'</span><b class="completion-price">'+escape(price?.label||'Do wyceny')+'</b></div><p class="completion-note">Poniżej masz pełne podsumowanie, materiały i przejście do koszyka.</p></div>';
+const rows=[['Wariant',p?.name||'Dobór indywidualny'],['Kierunek',orientations[s.orientation]||'Do ustalenia'],['Montaż',mountings[s.mounting]||'Do ustalenia'],['Dno szafki',furniture[s.furniture]||'Do ustalenia'],['Wymiary wewnętrzne S × W × G',dimsFinal],['Wykończenie',f?f.name+(f.code?' / '+f.code:''):'Do ustalenia'],['Mechanizm',v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do potwierdzenia'],['Cena brutto',price?.label||'Do wyceny']];
+return completion+'<div class="internal-dimensions-note"><strong>WAŻNE — wszystkie wymiary szafki w tej karcie są wymiarami wewnętrznymi.</strong><br>S × W × G odnoszą się do wolnej przestrzeni wewnątrz korpusu. Nie doliczaj grubości płyt i nie traktuj tych wartości jako wymiarów zewnętrznych mebla.</div><dl class="summary-list">'+rows.map(([k,val])=>'<div><dt>'+k+'</dt><dd>'+escape(val)+'</dd></div>').join('')+'</dl>'+selectedPriceHtml(s)+
 '<div class="summary-buttons">'+cartButtonHtml(s)+'</div>'+materialsPanel(s)+
 '<div class="summary-buttons"><button class="btn subtle" data-action="copy">Kopiuj konfigurację</button></div>';}
 const rangeLabel=r=>r.min===undefined?'do '+r.max:r.max===undefined?'od '+r.min:r.min+'–'+r.max;
@@ -1682,6 +1804,243 @@ function playIntroMotion(){
  requestAnimationFrame(()=>animateTo(75,{markInteraction:false}));
 }
 let activeBuildComponents=[],activeBuildId=null,hoverBuildId=null;
+
+
+// Premium assembly sequence — transient only; it never changes the chosen configuration.
+let assemblyRunning=false,assemblyToken=0,assemblyFrame=0,assemblyOriginalOpen=null;
+const assemblyLayerNames=['GUIDES','FASCIA','HANDLE','SHUTTER','MECHANISM','C6_ASSIST','INTERACTION'];
+function assemblyLayer(name){return model?.svg?.querySelector?.('[data-layer="'+name+'"]')||null;}
+function assemblyStatusNode(){
+ const stage=$('.model-stage');if(!stage)return null;
+ let node=$('#assembly-status');
+ if(!node){node=document.createElement('div');node.id='assembly-status';node.className='assembly-status';node.setAttribute('role','status');node.setAttribute('aria-live','polite');stage.append(node);}
+ return node;
+}
+function assemblyEffectsNode(){
+ const stage=$('.model-stage');if(!stage)return null;
+ let node=$('#assembly-effects');
+ if(!node){node=document.createElement('div');node.id='assembly-effects';node.className='assembly-effects';node.setAttribute('aria-hidden','true');stage.append(node);}
+ return node;
+}
+function setAssemblyStatus(title,detail,step){
+ const node=assemblyStatusNode();if(!node)return;
+ const bars=Array.from({length:6},(_,i)=>'<i class="'+(i<step?'is-done':'')+'"></i>').join('');
+ node.innerHTML='<strong>'+escape(title)+'</strong><span>'+escape(detail)+'</span><span class="assembly-progress">'+bars+'</span>';
+ node.classList.add('is-visible');
+}
+function clearAssemblyDecor(){
+ const status=$('#assembly-status');if(status){status.classList.remove('is-visible');status.innerHTML='';}
+ const fx=$('#assembly-effects');if(fx)fx.innerHTML='';
+}
+function resetAssemblyLayerStyles(){
+ for(const name of assemblyLayerNames){const n=assemblyLayer(name);if(!n)continue;n.getAnimations?.().forEach(a=>a.cancel());n.style.removeProperty('opacity');n.style.removeProperty('visibility');n.style.removeProperty('transform');n.style.removeProperty('transform-box');n.style.removeProperty('transform-origin');n.style.removeProperty('display');}
+}
+function prepareAssemblyLayers(){
+ for(const name of assemblyLayerNames){const n=assemblyLayer(name);if(!n)continue;n.getAnimations?.().forEach(a=>a.cancel());n.style.transformBox='fill-box';n.style.transformOrigin='center';n.style.visibility='hidden';n.style.opacity='0';}
+ // The cabinet itself remains untouched: animation starts from an empty carcass.
+ const interaction=assemblyLayer('INTERACTION');if(interaction)interaction.style.display='none';
+}
+function assemblyWait(ms,token){return new Promise(resolve=>setTimeout(()=>resolve(token===assemblyToken),ms));}
+async function revealAssemblyLayer(name,fromTransform,duration,token){
+ if(token!==assemblyToken)return false;
+ const node=assemblyLayer(name);if(!node)return true;
+ node.style.display='inline';node.style.visibility='visible';node.style.opacity='1';node.style.transformBox='fill-box';node.style.transformOrigin='center';
+ if(reduced()){node.style.transform='none';return true;}
+ const anim=node.animate([{opacity:0,transform:fromTransform},{opacity:1,transform:'translate(0,0) scale(1)'}],{duration,easing:'cubic-bezier(.18,.82,.22,1)',fill:'forwards'});
+ try{await anim.finished;}catch{}
+ if(token!==assemblyToken)return false;
+ node.style.opacity='1';node.style.transform='none';
+ return true;
+}
+async function flyAssemblyComponent(component,s,token){
+ if(!component||token!==assemblyToken)return;
+ const fx=assemblyEffectsNode(),stage=$('.model-stage');if(!fx||!stage)return;
+ const stageRect=stage.getBoundingClientRect();
+ let points=componentAnchorPoints(component,s).slice(0,2);
+ if(!points.length)points=[{x:stageRect.left+stageRect.width*.5,y:stageRect.top+stageRect.height*.22}];
+ const nodes=[];
+ points.forEach((p,i)=>{
+  const n=component.thumb?document.createElement('img'):document.createElement('span');
+  n.className=component.thumb?'assembly-flight':'assembly-flight-label';
+  if(component.thumb){n.src=component.thumb;n.alt='';n.referrerPolicy='no-referrer';}else n.textContent=component.name;
+  const x=p.x-stageRect.left,y=p.y-stageRect.top;
+  n.style.left=x+'px';n.style.top=y+'px';fx.append(n);nodes.push(n);
+  if(!reduced())n.animate([
+   {opacity:0,transform:'translate(-50%,-50%) translateY(-78px) scale(.72) rotate('+(i?'-7':'7')+'deg)'},
+   {opacity:1,offset:.72,transform:'translate(-50%,-50%) translateY(0) scale(1) rotate(0deg)'},
+   {opacity:0,transform:'translate(-50%,-50%) translateY(0) scale(.86)'}
+  ],{duration:620,easing:'cubic-bezier(.18,.82,.22,1)',fill:'forwards'});
+ });
+ await assemblyWait(reduced()?80:610,token);nodes.forEach(n=>n.remove());
+}
+function assemblyMotionTo(target,duration,token){
+ return new Promise(resolve=>{
+  cancelAnimationFrame(assemblyFrame);
+  const start=liveOpen,startTime=performance.now();
+  const tick=now=>{
+   if(token!==assemblyToken){resolve(false);return;}
+   const t=Math.min(1,(now-startTime)/duration),e=premiumEase(t);previewOpen(start+(target-start)*e);
+   if(t<1)assemblyFrame=requestAnimationFrame(tick);else{assemblyFrame=0;resolve(true);}
+  };
+  assemblyFrame=requestAnimationFrame(tick);
+ });
+}
+function stopAssembly(restore=true){
+ if(!assemblyRunning&&!$('#assembly-status')&&!$('#assembly-effects'))return;
+ assemblyToken++;assemblyRunning=false;cancelAnimationFrame(assemblyFrame);assemblyFrame=0;
+ resetAssemblyLayerStyles();clearAssemblyDecor();
+ const panel=$('.visual-panel');panel?.classList.remove('is-assembling');
+ const button=$('#assembly-button');if(button){button.disabled=false;button.innerHTML='<span aria-hidden="true">✦</span> Zobacz jak powstaje';}
+ if(openRange)openRange.disabled=false;
+ if(restore&&assemblyOriginalOpen!==null)previewOpen(assemblyOriginalOpen);
+ assemblyOriginalOpen=null;
+}
+async function playAssemblyAnimation(){
+ if(assemblyRunning){stopAssembly(true);return;}
+ const s=store.get();if(!s.selectedProduct||s.scene!=='front')return;
+ stopMotion();
+ assemblyRunning=true;const token=++assemblyToken;assemblyOriginalOpen=liveOpen;
+ const panel=$('.visual-panel'),button=$('#assembly-button');panel?.classList.add('is-assembling');
+ if(button){button.disabled=true;button.innerHTML='<span aria-hidden="true">✦</span> Montuję…';}
+ if(openRange)openRange.disabled=true;
+ previewOpen(0);prepareAssemblyLayers();clearAssemblyDecor();
+ const components=buildComponents(s),corner=components.find(c=>/Corner|corner90/i.test(c.id)),mechanismComponent=components.find(c=>c.id==='c3'||/c6/i.test(c.id));
+ const hasC6=Boolean(assemblyLayer('C6_ASSIST')),mechanismLayer=hasC6?'C6_ASSIST':'MECHANISM';
+ try{
+  setAssemblyStatus('Pusty korpus','Zaczynamy od samej szafki.',0);if(!await assemblyWait(360,token))return;
+  setAssemblyStatus('Prowadnice','Osadzamy tor ruchu rolety.',1);if(!await revealAssemblyLayer('GUIDES','translateY(-52px) scale(.96)',520,token))return;
+  if(!await assemblyWait(80,token))return;
+  setAssemblyStatus(corner?'Narożniki 90°':'Tor prowadzenia',corner?'Narożniki trafiają w górne punkty prowadzenia.':'Domykamy geometrię toru rolety.',2);
+  if(corner)await flyAssemblyComponent(corner,s,token);else if(!await assemblyWait(360,token))return;
+  if(token!==assemblyToken)return;
+  setAssemblyStatus('Listwy','Montujemy maskownicę i listwę uchwytową.',3);
+  await Promise.all([revealAssemblyLayer('FASCIA','translateY(-38px) scale(.97)',460,token),revealAssemblyLayer('HANDLE','translateY(34px) scale(.96)',460,token)]);
+  if(token!==assemblyToken)return;
+  setAssemblyStatus('Mechanizm',hasC6?'Instalujemy system wspomagający C6.':'Osadzamy mechanizm zwijający / tor powrotny.',4);
+  await Promise.all([revealAssemblyLayer(mechanismLayer,'translateY(-42px) scale(.82)',520,token),flyAssemblyComponent(mechanismComponent,s,token)]);
+  if(token!==assemblyToken)return;
+  setAssemblyStatus('Szczeble','Płaszcz rolety trafia do prowadnic.',5);
+  if(!await revealAssemblyLayer('SHUTTER','translateY(-54px) scaleY(.72)',620,token))return;
+  if(!await assemblyWait(120,token))return;
+  // Restore the normal product rendering before the movement demo.
+  resetAssemblyLayerStyles();const interaction=assemblyLayer('INTERACTION');if(interaction)interaction.style.display='none';
+  setAssemblyStatus('Gotowe','Pełne otwarcie i powrót do Twojej pozycji.',6);
+  previewOpen(0);if(!await assemblyMotionTo(100,820,token))return;if(!await assemblyWait(110,token))return;
+  if(!await assemblyMotionTo(assemblyOriginalOpen,760,token))return;
+  if(!await assemblyWait(220,token))return;
+ }finally{
+  if(token===assemblyToken){
+   resetAssemblyLayerStyles();clearAssemblyDecor();panel?.classList.remove('is-assembling');
+   if(button){button.disabled=false;button.innerHTML='<span aria-hidden="true">✦</span> Zobacz jak powstaje';}
+   if(openRange)openRange.disabled=false;
+   if(assemblyOriginalOpen!==null)previewOpen(assemblyOriginalOpen);
+   assemblyOriginalOpen=null;assemblyRunning=false;
+  }
+ }
+}
+
+
+// Finalizacja konfiguracji — uruchamia się raz przy wejściu w krok 7.
+let finaleRunning=false,finaleToken=0,finaleFrame=0,finaleOriginalOpen=null;
+
+function finaleOverlayNode(){
+ const stage=$('.model-stage');if(!stage)return null;
+ let node=$('#finale-overlay');
+ if(!node){
+  node=document.createElement('div');
+  node.id='finale-overlay';
+  node.className='finale-overlay';
+  node.setAttribute('aria-hidden','true');
+  stage.append(node);
+ }
+ return node;
+}
+function finaleData(s){
+ const p=getProduct(s.selectedProduct),f=finishes[s.finish],price=priceFor(s);
+ const dims=['width','height','depth'].map(k=>s.dimensions[k]??'?').join(' × ')+' mm';
+ return {
+  product:p?.name||'Twoja roleta',
+  finish:f?.name||'wykończenie do ustalenia',
+  dimensions:dims,
+  price:price?.label||'Cena po wycenie'
+ };
+}
+function setFinaleOverlay(s,{reveal=false}={}){
+ const node=finaleOverlayNode();if(!node)return;
+ const d=finaleData(s);
+ node.innerHTML='<div class="finale-reveal"><span class="finale-icon" aria-hidden="true">✓</span><span class="eyebrow">INTAGO / GOTOWE</span><strong>Twoja roleta jest gotowa.</strong><p><b>'+escape(d.product)+'</b> · '+escape(d.finish)+'<br>'+escape(d.dimensions)+'</p><b class="finale-price">'+escape(d.price)+'</b></div>';
+ node.classList.add('is-visible');
+ node.classList.toggle('is-revealed',reveal);
+}
+function clearFinaleOverlay(){
+ const node=$('#finale-overlay');
+ if(node){node.classList.remove('is-visible','is-revealed');node.innerHTML='';}
+}
+function finaleWait(ms,token){return new Promise(resolve=>setTimeout(()=>resolve(token===finaleToken),ms));}
+function finaleMotionTo(target,duration,token){
+ return new Promise(resolve=>{
+  cancelAnimationFrame(finaleFrame);
+  const start=liveOpen,startTime=performance.now();
+  if(reduced()){previewOpen(target);resolve(token===finaleToken);return;}
+  const tick=now=>{
+   if(token!==finaleToken){resolve(false);return;}
+   const t=Math.min(1,(now-startTime)/duration),e=premiumEase(t);
+   previewOpen(start+(target-start)*e);
+   if(t<1)finaleFrame=requestAnimationFrame(tick);
+   else{finaleFrame=0;resolve(true);}
+  };
+  finaleFrame=requestAnimationFrame(tick);
+ });
+}
+function stopFinalization(restore=true){
+ if(!finaleRunning&&!$('#finale-overlay'))return;
+ finaleToken++;finaleRunning=false;cancelAnimationFrame(finaleFrame);finaleFrame=0;
+ $('.visual-panel')?.classList.remove('is-finalizing');
+ clearFinaleOverlay();
+ if(openRange)openRange.disabled=false;
+ if(restore&&finaleOriginalOpen!==null)previewOpen(finaleOriginalOpen);
+ finaleOriginalOpen=null;
+}
+async function playFinalizationMoment(s=store.get()){
+ if(finaleRunning||s.step!==7||!s.selectedProduct||!s.finish||s.scene!=='front')return;
+ stopMotion();
+ if(assemblyRunning)stopAssembly(false);
+ finaleRunning=true;
+ const token=++finaleToken;
+ finaleOriginalOpen=liveOpen;
+ const panel=$('.visual-panel');
+ panel?.classList.add('is-finalizing');
+ if(openRange)openRange.disabled=true;
+
+ // Początek: model zostaje sam, bez dominującego interfejsu.
+ setFinaleOverlay(s,{reveal:false});
+ try{
+  // Pełne otwarcie.
+  if(!await finaleMotionTo(100,reduced()?0:980,token))return;
+  if(!await finaleWait(reduced()?80:210,token))return;
+
+  // Pełne zamknięcie.
+  if(!await finaleMotionTo(0,reduced()?0:1050,token))return;
+  if(!await finaleWait(reduced()?80:220,token))return;
+
+  // Reveal konfiguracji.
+  setFinaleOverlay(s,{reveal:true});
+  if(!await finaleWait(reduced()?450:1450,token))return;
+
+  // Delikatny powrót do pozycji użytkownika.
+  if(!await finaleMotionTo(finaleOriginalOpen,reduced()?0:650,token))return;
+  if(!await finaleWait(reduced()?80:260,token))return;
+ }finally{
+  if(token===finaleToken){
+   panel?.classList.remove('is-finalizing');
+   clearFinaleOverlay();
+   if(openRange)openRange.disabled=false;
+   if(finaleOriginalOpen!==null)previewOpen(finaleOriginalOpen);
+   finaleOriginalOpen=null;
+   finaleRunning=false;
+  }
+ }
+}
 
 function componentPlacement(c,s){
  const horizontal=s.orientation==='horizontal';
@@ -1887,6 +2246,7 @@ function setBuildHighlight(target,{persist=false}={}){
 
 function render(s){
  const oldFocus=document.activeElement,focusChoice=oldFocus?.dataset?.choice,focusValue=oldFocus?.dataset?.value;
+ const enteredFinalStep=s.step===7&&previousStep!==7;
  const key=JSON.stringify({...s,open:0,scene:''});
  const editing=Boolean(oldFocus?.dataset?.dimension);
  if(key!==previousKey&&!editing){
@@ -1930,6 +2290,8 @@ function render(s){
   envelopeToggle.setAttribute('aria-pressed',String(showEnvelope));
   envelopeToggle.textContent=showEnvelope?'Ukryj zajęte miejsce':'Pokaż zajęte miejsce';
  }
+ const assemblyButton=$('#assembly-button');
+ if(assemblyButton)assemblyButton.hidden=!(s.step>=5&&s.selectedProduct&&s.scene==='front');
  const buildSummary='';
  $('#model-context').innerHTML='<span class="context-icon" aria-hidden="true">'+(s.scene==='gallery'?'▣':s.scene==='mechanism'||s.scene==='exploded'?'↳':'↗')+'</span><div><strong>'+escape(info[0])+'</strong><p>'+escape(info[1])+'</p>'+buildSummary+envelopeHtml+'</div>';
  $('#stage-label').textContent=s.scene==='dimensions'?'Wymiary wewnętrzne — nie uwzględniają grubości płyt.':compare?'LINIA PRZERYWANA: DRUGI SPOSÓB MONTAŻU':s.scene==='section'?'SCHEMAT POGLĄDOWY / NIE DO CIĘCIA':s.orientation==='unknown'?'PRZYKŁADOWY RUCH PIONOWY':spec.split?'OTWIERANIE NA OBIE STRONY':'PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ';
@@ -1939,6 +2301,7 @@ function render(s){
  if(!save(s,storage)&&$('#save-note'))$('#save-note').textContent='Zapis na urządzeniu niedostępny — pobierz kartę na końcu.';
  if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML='<p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s);
  if(editing){const k=oldFocus.dataset.dimension,error=validateDimension(s.dimensions[k]);$('#error-'+k).textContent=error||'';oldFocus.setAttribute('aria-invalid',Boolean(error));const next=$('[data-action="next"]');if(next)next.disabled=Object.values(s.dimensions).some(v=>validateDimension(v));}
+ if(enteredFinalStep&&s.selectedProduct&&s.finish)requestAnimationFrame(()=>setTimeout(()=>playFinalizationMoment(store.get()),140));
 }
 store.subscribe(s=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>render(s));});render(store.get());
 requestAnimationFrame(()=>playIntroMotion());
@@ -1967,6 +2330,8 @@ document.addEventListener('input',e=>{
 openRange.addEventListener('change',()=>commitOpen());
 document.addEventListener('click',async e=>{
  const b=e.target.closest('button,a[data-action]');if(!b)return;
+ if(finaleRunning)stopFinalization(true);
+ if(assemblyRunning&&b.dataset.action!=='assemble')stopAssembly(true);
  if(animation||store.get().open!==liveOpen){stopMotion();commitOpen();}
  const s=store.get();
  if(b.dataset.action==='close-component'){
@@ -1999,6 +2364,7 @@ document.addEventListener('click',async e=>{
  case 'unknown-finish':store.update({finish:null});break;
  case 'expert':store.update({mode:s.mode==='expert'?'guided':'expert'});break;
  case 'demo':store.update({scene:'mechanism'});animateTo(s.open>50?15:85);$('.visual-panel').scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});break;
+ case 'assemble':playAssemblyAnimation();break;
  case 'animate':animateTo(s.open>50?0:100);break;
  case 'open':animateTo(100);break;
  case 'close':animateTo(0);break;
