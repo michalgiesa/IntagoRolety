@@ -100,9 +100,81 @@
 #intago-configurator .envelope-details.is-hidden{visibility:hidden;pointer-events:none}
 
 /* Budowa: interaktywna mapa elementów aktualnej konfiguracji. */
-#intago-configurator .build-overlay{position:absolute;z-index:6;inset:12px 10px 52px;display:grid;grid-template-columns:minmax(138px,178px) 1fr minmax(138px,178px);gap:10px;pointer-events:none}#intago-configurator .build-overlay[hidden]{display:none}#intago-configurator .build-list{display:grid;gap:5px;align-content:start;pointer-events:auto;max-height:100%;overflow:visible}#intago-configurator .build-list.right{grid-column:3}#intago-configurator .build-item{position:relative}#intago-configurator .build-item>button{width:100%;min-height:34px;padding:6px 8px;border:1px solid rgba(50,55,60,.14);border-radius:5px;background:rgba(255,255,255,.92);backdrop-filter:blur(5px);font-size:11px;line-height:1.22;text-align:left;color:#44494d;box-shadow:0 2px 8px rgba(50,55,60,.04)}#intago-configurator .build-item>button:hover,#intago-configurator .build-item>button:focus-visible,#intago-configurator .build-item.is-active>button{border-color:var(--accent);background:#fff3f4;color:#8e0013;filter:none}#intago-configurator .component-popover{display:none;position:absolute;top:0;left:calc(100% + 7px);width:186px;padding:8px;border:1px solid #dadcdd;border-radius:7px;background:#fff;box-shadow:0 13px 35px rgba(32,37,40,.16);z-index:20;color:#32373c}#intago-configurator .build-list.right .component-popover{left:auto;right:calc(100% + 7px)}#intago-configurator .build-item:hover .component-popover,#intago-configurator .build-item:focus-within .component-popover{display:block}#intago-configurator .component-popover img{display:block;width:100%;height:92px;object-fit:contain;background:#f7f7f7;border-radius:4px;margin-bottom:7px}#intago-configurator .component-popover strong{font-size:12px;line-height:1.25;display:block;margin-bottom:4px}#intago-configurator .component-popover p{font-size:10.5px;line-height:1.35;color:#707579;margin:0 0 7px}#intago-configurator .component-popover a{display:flex;align-items:center;justify-content:space-between;min-height:32px;padding:5px 7px;border-radius:4px;background:#f2f3f3;text-decoration:none;font-size:10.5px;color:#2e3437}#intago-configurator .component-popover a:hover{background:#eceeef}#intago-configurator .component-source{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#94989b;margin-bottom:5px}#intago-configurator .build-empty{grid-column:1/-1;justify-self:center;align-self:center;max-width:330px;padding:18px;border:1px solid #dadcdd;border-radius:8px;background:rgba(255,255,255,.94);text-align:center;pointer-events:auto}#intago-configurator .build-empty strong{display:block;font-size:14px;margin-bottom:5px}#intago-configurator .build-empty span{font-size:12px;color:#74797d}#intago-configurator .model-stage.build-mode .stage-label,#intago-configurator .model-stage.build-mode .animate-button,#intago-configurator .model-stage.build-mode .envelope-button{display:none}#intago-configurator .model-stage.build-mode{grid-template-rows:minmax(0,1fr)}#intago-configurator .model-stage.build-mode #model{grid-row:1/-1}#intago-configurator .cabinet-svg [data-layer]{transition:opacity .16s,filter .16s}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-dim{opacity:.08!important}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-structure{opacity:.2!important}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-target{opacity:1!important;filter:drop-shadow(0 0 5px rgba(210,7,29,.72))}#intago-configurator .build-summary{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:11px;color:#74797d}#intago-configurator .build-summary b{font-size:12px;color:#32373c}#intago-configurator .build-legend-dot{width:7px;height:7px;border-radius:50%;background:#d2071d;display:inline-block}#intago-configurator .model-stage.build-mode+ .open-control{border-top:1px solid #e3e6e3}
+#intago-configurator .build-overlay{position:absolute;z-index:6;inset:12px 10px 52px;display:grid;grid-template-columns:minmax(138px,178px) 1fr minmax(138px,178px);gap:10px;pointer-events:none}#intago-configurator .build-overlay[hidden]{display:none}#intago-configurator .build-list{display:grid;gap:5px;align-content:start;pointer-events:auto;max-height:100%;overflow:visible}#intago-configurator .build-list.right{grid-column:3}#intago-configurator .build-item{position:relative}#intago-configurator .build-item>button{width:100%;min-height:34px;padding:6px 8px;border:1px solid rgba(50,55,60,.14);border-radius:5px;background:rgba(255,255,255,.92);backdrop-filter:blur(5px);font-size:11px;line-height:1.22;text-align:left;color:#44494d;box-shadow:0 2px 8px rgba(50,55,60,.04)}#intago-configurator .build-item>button:hover,#intago-configurator .build-item>button:focus-visible,#intago-configurator .build-item.is-active>button{border-color:var(--accent);background:#fff3f4;color:#8e0013;filter:none}#intago-configurator .component-popover{display:none;position:absolute;top:0;left:calc(100% + 7px);width:186px;padding:8px;border:1px solid #dadcdd;border-radius:7px;background:#fff;box-shadow:0 13px 35px rgba(32,37,40,.16);z-index:20;color:#32373c}#intago-configurator .build-list.right .component-popover{left:auto;right:calc(100% + 7px)}#intago-configurator .build-item.is-active .component-popover{display:block}#intago-configurator .component-popover img{display:block;width:100%;height:92px;object-fit:contain;background:#f7f7f7;border-radius:4px;margin-bottom:7px}#intago-configurator .component-popover strong{font-size:12px;line-height:1.25;display:block;margin-bottom:4px}#intago-configurator .component-popover p{font-size:10.5px;line-height:1.35;color:#707579;margin:0 0 7px}#intago-configurator .component-popover a{display:flex;align-items:center;justify-content:space-between;min-height:32px;padding:5px 7px;border-radius:4px;background:#f2f3f3;text-decoration:none;font-size:10.5px;color:#2e3437}#intago-configurator .component-popover a:hover{background:#eceeef}#intago-configurator .component-source{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#94989b;margin-bottom:5px}#intago-configurator .build-empty{grid-column:1/-1;justify-self:center;align-self:center;max-width:330px;padding:18px;border:1px solid #dadcdd;border-radius:8px;background:rgba(255,255,255,.94);text-align:center;pointer-events:auto}#intago-configurator .build-empty strong{display:block;font-size:14px;margin-bottom:5px}#intago-configurator .build-empty span{font-size:12px;color:#74797d}#intago-configurator .model-stage.build-mode .stage-label,#intago-configurator .model-stage.build-mode .animate-button,#intago-configurator .model-stage.build-mode .envelope-button{display:none}#intago-configurator .model-stage.build-mode{grid-template-rows:minmax(0,1fr)}#intago-configurator .model-stage.build-mode #model{grid-row:1/-1}#intago-configurator .cabinet-svg [data-layer]{transition:opacity .16s,filter .16s}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-dim{opacity:.08!important}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-structure{opacity:.2!important}#intago-configurator .cabinet-svg.build-highlight [data-layer].build-target{opacity:1!important;filter:drop-shadow(0 0 5px rgba(210,7,29,.72))}#intago-configurator .build-summary{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:11px;color:#74797d}#intago-configurator .build-summary b{font-size:12px;color:#32373c}#intago-configurator .build-legend-dot{width:7px;height:7px;border-radius:50%;background:#d2071d;display:inline-block}#intago-configurator .model-stage.build-mode+ .open-control{border-top:1px solid #e3e6e3}
+
+#intago-configurator .component-popover{
+  top:50%;
+  transform:translateY(-50%);
+  width:205px;
+  padding:11px;
+  border-color:#d7d9da;
+  box-shadow:0 14px 38px rgba(32,37,40,.18);
+}
+#intago-configurator .component-popover:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:-7px;
+  width:12px;
+  height:12px;
+  background:#fff;
+  border-left:1px solid #d7d9da;
+  border-bottom:1px solid #d7d9da;
+  transform:translateY(-50%) rotate(45deg);
+}
+#intago-configurator .build-list.right .component-popover:before{
+  left:auto;
+  right:-7px;
+  border-left:0;
+  border-bottom:0;
+  border-right:1px solid #d7d9da;
+  border-top:1px solid #d7d9da;
+}
+#intago-configurator .component-popover-close{
+  position:absolute;
+  right:5px;
+  top:4px;
+  width:28px;
+  height:28px;
+  min-height:28px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:4px;
+  color:#74797d;
+  font-size:20px;
+  line-height:1;
+}
+#intago-configurator .component-popover-close:hover{
+  background:#f0f1f1;
+  color:#32373c;
+  filter:none;
+}
+#intago-configurator .component-source{
+  padding-right:28px;
+}
+
+#intago-configurator .component-popover .build-placement{margin:7px 0;padding:7px 8px;border-left:2px solid var(--accent);background:#fafafa;font-size:10px;line-height:1.35;color:#5f6468}
+#intago-configurator .component-popover .build-placement strong{display:block;margin:0 0 2px;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8a8f93}
+#intago-configurator .build-marker-layer{position:absolute;inset:0;z-index:9;pointer-events:none}
+#intago-configurator .build-marker{position:absolute;transform:translate(-50%,-50%);width:14px;height:14px;min-height:14px;border:2px solid #fff;border-radius:50%;background:var(--accent);color:#fff;box-shadow:0 0 0 2px rgba(210,7,29,.18);display:grid;place-items:center;padding:0;font-size:10px;font-weight:700;line-height:1;pointer-events:auto;z-index:2}
+#intago-configurator .build-marker:before{content:"";position:absolute;inset:-8px;border:1px solid rgba(210,7,29,.28);border-radius:50%;animation:intago-build-pulse 1.9s ease-out infinite}
+#intago-configurator .build-marker:hover,#intago-configurator .build-marker:focus-visible{filter:none;transform:translate(-50%,-50%)}
+#intago-configurator .build-marker-label{position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);min-width:max-content;max-width:170px;padding:4px 7px;border:1px solid rgba(50,55,60,.13);border-radius:4px;background:rgba(255,255,255,.96);box-shadow:0 4px 14px rgba(50,55,60,.1);font-size:9px;font-weight:600;line-height:1.2;color:#32373c;white-space:nowrap;pointer-events:none}
+#intago-configurator .build-marker-count{position:absolute;right:-7px;top:-7px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#32373c;color:#fff;border:1px solid #fff;font-size:8px;line-height:14px;text-align:center}
+#intago-configurator .build-detail-hint{position:absolute;z-index:8;left:50%;bottom:7px;transform:translateX(-50%);max-width:360px;padding:6px 10px;border:1px solid rgba(50,55,60,.12);border-radius:5px;background:rgba(255,255,255,.93);box-shadow:0 4px 16px rgba(50,55,60,.08);font-size:9.5px;line-height:1.35;color:#646a6e;text-align:center;pointer-events:none}
+#intago-configurator .build-detail-hint strong{color:#32373c}
+@keyframes intago-build-pulse{0%{opacity:.55;transform:scale(.75)}70%,100%{opacity:0;transform:scale(1.35)}}
+@media(max-width:1150px){#intago-configurator .build-marker-label{display:none}}
+@media(max-width:760px){
+ #intago-configurator .build-marker{width:13px;height:13px;min-height:13px;font-size:0}
+ #intago-configurator .build-detail-hint{left:10px;right:10px;bottom:4px;transform:none;max-width:none}
+}
+@media(prefers-reduced-motion:reduce){#intago-configurator .build-marker:before{animation:none}}
+@media print{#intago-configurator .build-marker-layer,#intago-configurator .build-detail-hint{display:none!important}}
+
 @media(max-width:1150px){#intago-configurator .build-overlay{grid-template-columns:145px 1fr 145px;gap:6px}#intago-configurator .build-item>button{font-size:10px;padding:5px 6px}#intago-configurator .component-popover{width:164px}#intago-configurator .component-popover img{height:78px}}
-@media(max-width:760px){#intago-configurator .build-overlay{inset:8px 6px 8px;grid-template-columns:1fr 1fr;gap:6px}#intago-configurator .build-list{max-height:250px;overflow-y:auto;overflow-x:visible}#intago-configurator .build-list.right{grid-column:2}#intago-configurator .build-item>button{font-size:9.5px;min-height:30px}#intago-configurator .component-popover{position:fixed;left:16px!important;right:16px!important;top:auto;bottom:12px;width:auto;z-index:100}#intago-configurator .component-popover img{height:80px}#intago-configurator .model-stage.build-mode{height:380px}}
+@media(max-width:760px){#intago-configurator .build-overlay{inset:8px 6px 8px;grid-template-columns:1fr 1fr;gap:6px}#intago-configurator .build-list{max-height:250px;overflow-y:auto;overflow-x:visible}#intago-configurator .build-list.right{grid-column:2}#intago-configurator .build-item>button{font-size:9.5px;min-height:30px}#intago-configurator .component-popover{position:absolute;left:8px!important;right:8px!important;top:auto;bottom:8px;width:auto;transform:none;z-index:100}#intago-configurator .component-popover:before{display:none}#intago-configurator .component-popover img{height:80px}#intago-configurator .model-stage.build-mode{height:380px}}
 
 
 /* Cennik INTAGO: ceny brutto z kart produktów + dokładne ceny opublikowanych gotowych setów. */
@@ -644,7 +716,7 @@ const componentLibrary={
  handleSliderC3:{name:'Ślizgacze listwy zamkowej',desc:'Prowadzą końce listwy zamkowej w prowadnicach TOP BASIC.',thumb:componentImages.e23_slider,url:'https://www.intago.com.pl/rehau-slizgacz-do-listwy-uchwytowej-bialy,id2076.html',urlsByFinish:{white:'https://www.intago.com.pl/rehau-slizgacz-do-listwy-uchwytowej-bialy,id2076.html',silver:'https://www.intago.com.pl/rehau-rauvolet-slizgacz-listwy-zamkowej-szary,id1874.html'},layers:['HANDLE','GUIDES']},
  c3Extension:{name:'Przedłużka (wg tabelki C3)',desc:'Przedłużenie systemu C3 dobierane zgodnie z tabelą C3 do szerokości rolety.',thumb:componentImages.c3,url:'https://www.intago.com.pl/rehau-przedluzenie-mechanizmu-c3,id2110.html',layers:['MECHANISM']},
  c3:{name:'System zwijający C3',desc:'Zespół zwijający płaszcz pod górną ścianką szafki.',thumb:componentImages.c3,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-zwijajacy-c3-800mm,id1878.html',layers:['MECHANISM']},
- c6TopBasic:{name:'Mechanizm C6',desc:'Mechanizm C6 współpracujący z pionowym systemem TOP BASIC.',thumb:componentImages.c6,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-wspomagajacy-c6,id1875.html',layers:['MECHANISM']},
+ c6TopBasic:{name:'Mechanizm C6',desc:'Mechanizm wspomagający C6 zamontowany w górnej części korpusu, przy górnym prowadzeniu rolety.',thumb:componentImages.c6,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-wspomagajacy-c6,id1875.html',layers:['C6_ASSIST']},
  nobleGuide:{name:'Prowadnice nakładane NOBLE MATT',desc:'Nakładane prowadnice dopasowane kolorystycznie do NOBLE MATT.',thumb:componentImages.noble_guide,url:'https://www.intago.com.pl/prowadnica-rehau-noble-matt-do-rolety-meblowej-c3-boxcar-blonde-1-25m,id10241.html',urlsByFinish:{blonde:'https://www.intago.com.pl/prowadnica-rehau-noble-matt-do-rolety-meblowej-c3-boxcar-blonde-1-25m,id10241.html'},layers:['GUIDES']},
  nobleCaps:{name:'Zaślepki prowadnicy NOBLE MATT',desc:'Wykończenia końców prowadnic systemu NOBLE.',thumb:componentImages.noble_caps,url:'https://www.intago.com.pl/zaslepki-prowadnicy-rehau-noble-matt-boxcar-blonde,id10237.html',urlsByFinish:{blonde:'https://www.intago.com.pl/zaslepki-prowadnicy-rehau-noble-matt-boxcar-blonde,id10237.html'},layers:['GUIDES']},
  nobleMask:{name:'3-elementowa listwa maskująca C3 NOBLE MATT',desc:'Maskownica systemu C3 dla NOBLE MATT.',thumb:componentImages.noble_mask,url:'https://www.intago.com.pl/listwa-maskujaca-do-rolety-rehau-noble-matt-c3-boxcar-blonde-1-25m,id10240.html',urlsByFinish:{blonde:'https://www.intago.com.pl/listwa-maskujaca-do-rolety-rehau-noble-matt-c3-boxcar-blonde-1-25m,id10240.html'},layers:['FASCIA']},
@@ -656,7 +728,7 @@ const componentLibrary={
  nobleLockRail:{name:'Listwa zamkowa',desc:'Listwa zamkowa systemu NOBLE MATT TOP.',thumb:componentImages.handle_standard,url:'https://www.intago.com.pl/rehau-rauvolet-listwa-zamkowa-biala,id1873.html',layers:['HANDLE']},
  corner90:{name:'Narożniki 90°',desc:'Zmieniają kierunek ruchu płaszcza w systemie TOP.',thumb:componentImages.c6_corner,url:null,layers:['GUIDES','MECHANISM']},
  nobleLockSlider:{name:'Ślizgacze listwy zamkowej',desc:'Ślizgacze listwy zamkowej systemu NOBLE MATT TOP.',thumb:componentImages.e23_slider,url:'https://www.intago.com.pl/rehau-slizgacz-do-listwy-uchwytowej-bialy,id2076.html',layers:['HANDLE','GUIDES']},
- c6Noble:{name:'System wspomagający C6',desc:'System wspomagający C6 dla pionowego wariantu NOBLE MATT TOP.',thumb:componentImages.c6,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-wspomagajacy-c6,id1875.html',layers:['MECHANISM']}
+ c6Noble:{name:'System wspomagający C6',desc:'System wspomagający C6 zamontowany u góry korpusu, przy górnym prowadzeniu rolety NOBLE MATT TOP.',thumb:componentImages.c6,url:'https://www.intago.com.pl/rehau-rauvolet-mechanizm-wspomagajacy-c6,id1875.html',layers:['C6_ASSIST']}
 };
 const componentSets={
  'top-basic:vertical':['e23','topBasicGuide','topBasicCorner','maskStandard','handleStandard','handleSlider','c6TopBasic'],
@@ -682,7 +754,7 @@ function componentUrl(component,state){
 function buildComponents(state){
  const key=(state.selectedProduct||'')+':'+(state.orientation||'');
  const ids=componentSets[key]||[];
- return ids.map(id=>{const component={id,...componentLibrary[id]};return {...component,url:componentUrl(component,state)};}).filter(component=>Boolean(component.url));
+ return ids.map(id=>{const component={id,...componentLibrary[id]};return {...component,url:componentUrl(component,state)};});
 }
 
 
@@ -1134,6 +1206,28 @@ class CabinetRenderer{
   const shellBottom=c.hasBottom?h+t:h;
   shell.innerHTML=pg([[w+t,-t,0],[w+t,-t,d+t],[w+t,shellBottom,d+t],[w+t,shellBottom,0]],fill('side'))+pg([[-t,-t,0],[w+t,-t,0],[w+t,-t,d+t],[-t,-t,d+t]],fill('top'))+rect(-t,-t,w+2*t,t,0,'#59615a')+rect(-t,0,t,shellBottom,0,'#5c665e')+rect(w,0,t,shellBottom,0,'#464f48')+(c.hasBottom?rect(0,h,w,t,0,'#454e45'):'');
   shell.append(el('polyline',{points:poly([p([-t,-t,0]),p([w+t,-t,0])]),stroke:'#c7cbc3','stroke-opacity':'.5','stroke-width':'.8',fill:'none'}));
+
+  // C6: osobna warstwa lokalizacyjna u góry korpusu.
+  // Nie używamy do niej całej ścieżki MECHANISM, bo C6 jest fizycznie
+  // zamontowany przy górnym prowadzeniu rolety.
+  const currentVariant=getVariant(getProduct(state.selectedProduct),state.orientation);
+  if(currentVariant?.mechanism?.value==='c6'&&!this.horizontal){
+   const c6Layer=layer('C6_ASSIST',{opacity:'0'});
+   const zFront=Math.max(8,Math.min(d*.18,45));
+   const zBack=Math.max(zFront+28,Math.min(d*.62,c.backOuter||d*.62));
+   const xL=w*.28,xR=w*.72,yTop=-t*.38;
+   const line=(a,b,width=3)=>c6Layer.append(el('line',{
+    x1:p(a)[0],y1:p(a)[1],x2:p(b)[0],y2:p(b)[1],
+    stroke:'#d2071d','stroke-width':width,'stroke-linecap':'round'
+   }));
+   // Dwie strony systemu + łącznik przy górnym prowadzeniu.
+   line([xL,yTop,zBack],[xL,yTop,zFront],2.4);
+   line([xR,yTop,zBack],[xR,yTop,zFront],2.4);
+   line([xL,yTop,zFront],[xR,yTop,zFront],3.2);
+   c6Layer.append(el('circle',{cx:p([xL,yTop,zFront])[0],cy:p([xL,yTop,zFront])[1],r:4,fill:'#d2071d'}));
+   c6Layer.append(el('circle',{cx:p([xR,yTop,zFront])[0],cy:p([xR,yTop,zFront])[1],r:4,fill:'#d2071d'}));
+  }
+
   const rails=layer('GUIDES');
   const guideRect=(x,y,ww,hh,z,color)=>pg([[x,y,z],[x+ww,y,z],[x+ww,y+hh,z],[x,y+hh,z]],color);
   const makeGuides=(inset,z,color,top=g.top,bottom=g.bottom)=>{const l=inset,r=w-inset,face=g.face,channel=g.channel||face*.26,height=bottom-top;
@@ -1512,7 +1606,7 @@ function announce(text){$('#status').textContent=text;$('#status').classList.add
 function stopMotion(){cancelAnimationFrame(animation);animation=0;$('.visual-panel')?.classList.remove('is-moving');}
 function beginInteraction(){stopMotion();hasInteracted=true;stageHint.hidden=store.get().scene!=='dimensions';}
 // Transient visual state: no wizard render, reconciliation or storage in a frame.
-function previewOpen(value){liveOpen=Math.max(0,Math.min(100,Number(value)));model.setOpen(liveOpen);openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';}
+function previewOpen(value){liveOpen=Math.max(0,Math.min(100,Number(value)));model.setOpen(liveOpen);openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';if(store.get().scene==='exploded'&&activeBuildId)requestAnimationFrame(()=>renderBuildMarkers(store.get()));}
 function commitOpen(value=liveOpen){store.update({open:value});}
 // Continuous acceleration and deceleration, with a gentle mechanical stop.
 function premiumEase(t){return t*t*t*(t*(t*6-15)+10);}
@@ -1530,26 +1624,180 @@ function playIntroMotion(){
  previewOpen(0);
  requestAnimationFrame(()=>animateTo(75,{markInteraction:false}));
 }
-let activeBuildComponents=[];
-function componentItem(c,side){
- if(!c.url)return '<div class="build-item" data-build-item="'+escape(c.id)+'"><button type="button" data-build-component="'+escape(c.id)+'" data-layers="'+escape(c.layers.join(','))+'">'+escape(c.name)+'</button><div class="component-popover" role="group"><img src="'+c.thumb+'" alt="'+escape(c.name)+'"><strong>'+escape(c.name)+'</strong><p>'+escape(c.desc)+'</p><p>Link do tego elementu wymaga potwierdzenia INTAGO.</p></div></div>';
- const source='Karta elementu INTAGO · kolor referencyjny';
- return '<div class="build-item" data-build-item="'+escape(c.id)+'"><button type="button" data-build-component="'+escape(c.id)+'" data-layers="'+escape(c.layers.join(','))+'">'+escape(c.name)+'</button><div class="component-popover" role="group"><div class="component-source">'+source+'</div><a href="'+escape(c.url)+'" target="_blank" rel="noopener" aria-label="Zobacz '+escape(c.name)+' w INTAGO"><img src="'+c.thumb+'" alt="'+escape(c.name)+'"></a><strong>'+escape(c.name)+'</strong><p>'+escape(c.desc)+'</p><a href="'+escape(c.url)+'" target="_blank" rel="noopener">Zobacz w INTAGO <span aria-hidden="true">↗</span></a></div></div>';
+let activeBuildComponents=[],activeBuildId=null,hoverBuildId=null;
+
+function componentPlacement(c,s){
+ const horizontal=s.orientation==='horizontal';
+ const id=c.id;
+ if(/Slider/i.test(id))return horizontal
+  ?'Ślizgacze znajdują się na obu końcach pionowej listwy zamkowej, w miejscach wejścia listwy w prowadnice.'
+  :'2 szt. — po lewej i prawej stronie listwy zamkowej / uchwytowej, dokładnie w miejscach wejścia listwy w prowadnice.';
+ if(/Guide|topCover/i.test(id))return horizontal
+  ?'Prowadnice biegną wzdłuż krawędzi toru ruchu rolety.'
+  :'Dwie prowadnice biegną pionowo po lewej i prawej stronie otworu rolety.';
+ if(/Caps/i.test(id))return 'Zaślepki znajdują się na końcach prowadnic i zamykają ich widoczne zakończenia.';
+ if(/Corner|corner90/i.test(id))return horizontal
+  ?'Narożniki znajdują się w punktach, w których prowadzenie zmienia kierunek z frontu w głąb mebla.'
+  :'Narożniki znajdują się w górnych punktach toru, gdzie płaszcz zmienia kierunek.';
+ if(/Mask|Fascia/i.test(id))return 'Listwa maskująca znajduje się w górnej części otworu i zasłania strefę prowadzenia / mechanizmu.';
+ if(/Handle|LockRail/i.test(id))return horizontal
+  ?'Listwa zamkowa znajduje się na ruchomej krawędzi płaszcza rolety.'
+  :'Listwa zamkowa / uchwytowa znajduje się na dolnej ruchomej krawędzi płaszcza rolety.';
+ if(id==='e9'||id==='e23'||id==='e23Start')return 'Szczeble tworzą płaszcz rolety. Marker wskazuje widoczną powierzchnię płaszcza.';
+ if(/c6/i.test(id))return 'System wspomagający C6 znajduje się u góry korpusu, nad płaszczem rolety — przy górnym odcinku prowadzenia, tak jak na schemacie REHAU.';
+ if(/^c3$|c3Extension/i.test(id))return 'Element należy do strefy mechanizmu zwijającego ukrytej pod górną częścią korpusu.';
+ return 'Marker wskazuje położenie tego elementu w aktualnym modelu.';
+}
+function componentItem(c,side,s){
+ const placement=componentPlacement(c,s);
+ const source=c.url?'Karta elementu INTAGO · kolor referencyjny':'Element zestawu · bez osobnej karty produktu';
+ const image=c.thumb?'<img src="'+c.thumb+'" alt="'+escape(c.name)+'">':'';
+ const link=c.url
+  ?'<a href="'+escape(c.url)+'" target="_blank" rel="noopener">Zobacz w INTAGO <span aria-hidden="true">↗</span></a>'
+  :'<p class="micro muted">Ten element nie ma jeszcze osobnej karty produktowej.</p>';
+ return '<div class="build-item" data-build-item="'+escape(c.id)+'">'+
+  '<button type="button" data-build-component="'+escape(c.id)+'" data-layers="'+escape(c.layers.join(','))+'" aria-pressed="'+(activeBuildId===c.id)+'" aria-expanded="'+(activeBuildId===c.id)+'">'+escape(c.name)+'</button>'+
+  '<div class="component-popover" role="dialog" aria-label="'+escape(c.name)+'">'+
+   '<button type="button" class="component-popover-close" data-action="close-component" aria-label="Zamknij szczegóły elementu">×</button>'+
+   '<div class="component-source">'+source+'</div>'+
+   (c.url?'<a href="'+escape(c.url)+'" target="_blank" rel="noopener" aria-label="Zobacz '+escape(c.name)+' w INTAGO">'+image+'</a>':image)+
+   '<strong>'+escape(c.name)+'</strong><p>'+escape(c.desc)+'</p>'+
+   '<div class="build-placement"><strong>Gdzie jest w rolecie?</strong>'+escape(placement)+'</div>'+
+   link+
+  '</div></div>';
+}
+function buildLayerRect(layerName){
+ const node=model?.svg?.querySelector?.('[data-layer="'+layerName+'"]');
+ if(!node)return null;
+ const r=node.getBoundingClientRect();
+ if(!r||r.width<1||r.height<1)return null;
+ return r;
+}
+function buildRectPoint(rect,fx=.5,fy=.5){
+ return {x:rect.left+rect.width*fx,y:rect.top+rect.height*fy};
+}
+function componentAnchorPoints(c,s){
+ const horizontal=s.orientation==='horizontal';
+ const byLayer=name=>buildLayerRect(name);
+ const handle=byLayer('HANDLE'),guides=byLayer('GUIDES'),shutter=byLayer('SHUTTER'),
+       fascia=byLayer('FASCIA'),mechanism=byLayer('MECHANISM'),c6Assist=byLayer('C6_ASSIST');
+
+ // Małe elementy: pozycje wyliczamy z rzeczywistego położenia listwy / prowadnic w aktualnym SVG.
+ if(/Slider/i.test(c.id)&&handle){
+  if(horizontal)return [buildRectPoint(handle,.5,.08),buildRectPoint(handle,.5,.92)];
+  return [buildRectPoint(handle,.03,.5),buildRectPoint(handle,.97,.5)];
+ }
+ if(/Caps/i.test(c.id)&&guides){
+  if(horizontal)return [buildRectPoint(guides,.92,.08),buildRectPoint(guides,.92,.92)];
+  return [buildRectPoint(guides,.04,.94),buildRectPoint(guides,.96,.94)];
+ }
+ if(/Corner|corner90/i.test(c.id)&&guides){
+  if(horizontal)return [buildRectPoint(guides,.88,.08),buildRectPoint(guides,.88,.92)];
+  return [buildRectPoint(guides,.06,.08),buildRectPoint(guides,.94,.08)];
+ }
+ if(/Guide|topCover/i.test(c.id)&&guides){
+  if(horizontal)return [buildRectPoint(guides,.28,.08),buildRectPoint(guides,.72,.92)];
+  return [buildRectPoint(guides,.05,.5),buildRectPoint(guides,.95,.5)];
+ }
+ if(/Mask/i.test(c.id)&&fascia)return [buildRectPoint(fascia,.5,.5)];
+ if(/Handle|LockRail/i.test(c.id)&&handle)return [buildRectPoint(handle,.5,.5)];
+ if((c.id==='e9'||c.id==='e23'||c.id==='e23Start')&&shutter)return [buildRectPoint(shutter,.5,.46)];
+ if(/c6/i.test(c.id)&&c6Assist)return [buildRectPoint(c6Assist,.5,.5)];
+ if((/^c3$|c3Extension/i.test(c.id))&&mechanism)return [buildRectPoint(mechanism,.5,.5)];
+
+ // Fallback: środek pierwszej widocznej warstwy elementu.
+ for(const layer of c.layers||[]){
+  const rect=byLayer(layer);
+  if(rect)return [buildRectPoint(rect,.5,.5)];
+ }
+ return [];
+}
+function renderBuildMarkers(s){
+ const overlay=$('#build-overlay');
+ if(!overlay||s.scene!=='exploded')return;
+ let layer=overlay.querySelector('.build-marker-layer');
+ if(!layer)return;
+ layer.innerHTML='';
+ const markerId=hoverBuildId||activeBuildId;
+ const c=activeBuildComponents.find(x=>x.id===markerId);
+ if(!c)return;
+ const overlayRect=overlay.getBoundingClientRect(),points=componentAnchorPoints(c,s);
+ points.forEach((p,i)=>{
+  const x=p.x-overlayRect.left,y=p.y-overlayRect.top;
+  if(!Number.isFinite(x)||!Number.isFinite(y))return;
+  const marker=document.createElement('button');
+  marker.type='button';
+  marker.className='build-marker';
+  marker.dataset.buildComponent=c.id;
+  marker.dataset.layers=(c.layers||[]).join(',');
+  marker.style.left=x+'px';
+  marker.style.top=y+'px';
+  marker.setAttribute('aria-label',c.name+' — położenie '+(i+1)+' z '+points.length);
+  marker.innerHTML='';
+  layer.append(marker);
+ });
 }
 function renderBuildOverlay(s){
  const overlay=$('#build-overlay'),stage=$('.model-stage');if(!overlay||!stage)return;
  const isBuild=s.scene==='exploded';stage.classList.toggle('build-mode',isBuild);
- if(!isBuild){overlay.hidden=true;overlay.innerHTML='';activeBuildComponents=[];model.highlightLayers([]);return;}
+ if(!isBuild){
+  overlay.hidden=true;overlay.innerHTML='';activeBuildComponents=[];activeBuildId=null;hoverBuildId=null;
+  model.highlightLayers([]);return;
+ }
  activeBuildComponents=buildComponents(s);overlay.hidden=false;
- if(!activeBuildComponents.length){overlay.innerHTML='<div class="build-empty"><strong>Wybierz rozwiązanie</strong><span>Pełny skład pokażemy po wyborze konkretnego systemu w kroku 5.</span></div>';return;}
+ if(!activeBuildComponents.length){
+  activeBuildId=null;
+  overlay.innerHTML='<div class="build-empty"><strong>Wybierz rozwiązanie</strong><span>Pełny skład pokażemy po wyborze konkretnego systemu w kroku 5.</span></div>';
+  return;
+ }
+ if(activeBuildId&&!activeBuildComponents.some(c=>c.id===activeBuildId))activeBuildId=null;
  const cut=Math.ceil(activeBuildComponents.length/2),left=activeBuildComponents.slice(0,cut),right=activeBuildComponents.slice(cut);
- overlay.innerHTML='<div class="build-list left">'+left.map(c=>componentItem(c,'left')).join('')+'</div><div class="build-list right">'+right.map(c=>componentItem(c,'right')).join('')+'</div>';
+ overlay.innerHTML=
+  '<div class="build-list left">'+left.map(c=>componentItem(c,'left',s)).join('')+'</div>'+
+  '<div class="build-list right">'+right.map(c=>componentItem(c,'right',s)).join('')+'</div>'+
+  '<div class="build-marker-layer" aria-live="polite"></div>'+
+  '<div class="build-detail-hint">'+
+   (activeBuildId
+    ?'<strong>Element wybrany.</strong> Kliknij × w karcie albo ten sam przycisk, aby zamknąć szczegóły.'
+    :'<strong>Najedź:</strong> lokalizacja elementu. <strong>Kliknij:</strong> karta elementu i link do INTAGO.')+
+  '</div>';
+ requestAnimationFrame(()=>renderBuildMarkers(s));
 }
-function setBuildHighlight(target){
+function setBuildHover(target){
  const item=target?.closest?.('[data-build-component]');
- $$('.build-item').forEach(n=>n.classList.toggle('is-active',Boolean(item&&n.contains(item))));
- model.highlightLayers(item?(item.dataset.layers||'').split(',').filter(Boolean):[]);
+ hoverBuildId=item?.dataset?.buildComponent||null;
+
+ // Hover ma pokazać tylko położenie elementu:
+ // podświetlenie odpowiedniej warstwy + pulsujące markery.
+ const hoverComponent=activeBuildComponents.find(c=>c.id===hoverBuildId);
+ const activeComponent=activeBuildComponents.find(c=>c.id===activeBuildId);
+ model.highlightLayers((hoverComponent||activeComponent)?.layers||[]);
+
+ requestAnimationFrame(()=>renderBuildMarkers(store.get()));
 }
+function setBuildHighlight(target,{persist=false}={}){
+ const item=target?.closest?.('[data-build-component]');
+ const id=item?.dataset?.buildComponent||null;
+
+ if(persist){
+  activeBuildId=(activeBuildId===id?null:id);
+  hoverBuildId=null;
+ }
+
+ const component=activeBuildComponents.find(c=>c.id===activeBuildId);
+
+ $$('.build-item').forEach(n=>{
+  const active=Boolean(activeBuildId&&n.dataset.buildItem===activeBuildId);
+  n.classList.toggle('is-active',active);
+  const button=n.querySelector('[data-build-component]');
+  button?.setAttribute('aria-pressed',String(active));
+  button?.setAttribute('aria-expanded',String(active));
+ });
+
+ model.highlightLayers(component?.layers||[]);
+ requestAnimationFrame(()=>renderBuildMarkers(store.get()));
+}
+
 
 function render(s){
  const oldFocus=document.activeElement,focusChoice=oldFocus?.dataset?.choice,focusValue=oldFocus?.dataset?.value;
@@ -1583,7 +1831,7 @@ function render(s){
  mechanism:[mechanism&&v.mechanism.status==='verified'?mechanism.location:'Przykładowa droga prowadzenia',(mechanism?.description||'Dokładny mechanizm dobierzemy po potwierdzeniu wariantu.')+' Geometria oraz zajęta przestrzeń są poglądowe.'],
  dimensions:['Mierz wewnątrz korpusu.','Szerokość, wysokość i głębokość między wewnętrznymi powierzchniami. To wymiary do zapytania, nie do cięcia.'],
  section:[mountings[spec.mounting],s.orientation==='horizontal'?'Przekrój z góry. Widzisz płaszcz przechodzący z frontu w głąb mebla.':'Przekrój boczny. Pokazujemy strefę mechanizmu i odległości jej krawędzi od wewnętrznych ścianek korpusu.'],
- exploded:['Budowa tej konfiguracji','Najedź na nazwę elementu, aby zobaczyć miniaturę i podświetlić odpowiadający mu zespół na makiecie. Kliknij miniaturę lub link, aby przejść do INTAGO.'],
+ exploded:['Budowa tej konfiguracji','Najedź na element, aby podświetlić go na modelu i zobaczyć pulsujący punkt jego położenia. Kliknij, aby otworzyć kartę elementu z opisem i odnośnikiem.'],
  gallery:galleryContext(s)
  };
  renderBuildOverlay(s);
@@ -1618,10 +1866,11 @@ function go(step){
 }
 function download(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 document.addEventListener('error',e=>{if(e.target?.classList?.contains('gallery-photo'))e.target.closest('.gallery-photo-wrap')?.classList.add('is-error');},true);
-document.addEventListener('mouseover',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHighlight(item);});
-document.addEventListener('mouseout',e=>{const item=e.target.closest?.('[data-build-item]');if(item&&!item.contains(e.relatedTarget))setBuildHighlight(null);});
-document.addEventListener('focusin',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHighlight(item);});
-document.addEventListener('focusout',e=>{const item=e.target.closest?.('[data-build-item]');if(item&&!item.contains(e.relatedTarget))setBuildHighlight(null);});
+document.addEventListener('mouseover',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHover(item);});
+document.addEventListener('mouseout',e=>{const item=e.target.closest?.('[data-build-component]');if(item&&!item.contains(e.relatedTarget))setBuildHover(null);});
+document.addEventListener('focusin',e=>{const item=e.target.closest?.('[data-build-component]');if(item)setBuildHover(item);});
+document.addEventListener('focusout',e=>{const item=e.target.closest?.('[data-build-component]');if(item&&!item.contains(e.relatedTarget))setBuildHover(null);});
+window.addEventListener('resize',()=>{if(store.get().scene==='exploded'&&activeBuildId)requestAnimationFrame(()=>renderBuildMarkers(store.get()));});
 document.addEventListener('input',e=>{
  const n=e.target;
  if(n.id==='open-range'){beginInteraction();previewOpen(n.value);return;}
@@ -1634,6 +1883,14 @@ document.addEventListener('click',async e=>{
  const b=e.target.closest('button,a[data-action]');if(!b)return;
  if(animation||store.get().open!==liveOpen){stopMotion();commitOpen();}
  const s=store.get();
+ if(b.dataset.action==='close-component'){
+  activeBuildId=null;hoverBuildId=null;
+  $$('.build-item').forEach(n=>{n.classList.remove('is-active');const btn=n.querySelector('[data-build-component]');btn?.setAttribute('aria-pressed','false');btn?.setAttribute('aria-expanded','false');});
+  model.highlightLayers([]);
+  requestAnimationFrame(()=>renderBuildMarkers(store.get()));
+  return;
+ }
+ if(b.dataset.buildComponent){hoverBuildId=null;setBuildHighlight(b,{persist:true});return;}
  if(b.dataset.choice){const field=b.dataset.choice;compare=false;const patch={[field]:b.dataset.value};if(field==='orientation'&&b.dataset.value==='horizontal'){patch.mounting='inside';patch.furniture='with-bottom';}if(field==='orientation'||field==='mounting')patch.scene='front';store.update(patch);return;}
  if(b.dataset.product){store.update({selectedProduct:b.dataset.product,finish:null});return;}
  if(b.dataset.finish){store.update({finish:b.dataset.finish});return;}
