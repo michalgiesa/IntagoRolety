@@ -523,6 +523,16 @@ function visualSpec(state){
  schematic:!v||v.mechanism.status!=='verified'};
 }
 
+// Wizualizacja doradcy: po wyborze montażu "na korpusie" pokazujemy od razu
+// rzeczywistą geometrię NOBLE C3, ale NIE wybieramy produktu za klienta.
+// To jest wyłącznie stan podglądu modelu.
+function modelPreviewState(state){
+ if(!state.selectedProduct&&state.orientation==='vertical'&&state.mounting==='outside'){
+  return {...state,selectedProduct:'noble-zewn'};
+ }
+ return state;
+}
+
 function mechanismEnvelope(state,renderer){
  const product=getProduct(state.selectedProduct),variant=getVariant(product,state.orientation),mechanismId=variant?.mechanism?.value;
  if(!product||!variant)return null;
@@ -1185,9 +1195,10 @@ function render(s){
  $$('[data-scene]').forEach(n=>{n.hidden=s.step<=3?n.dataset.scene!=='front':s.step===4?!['front','dimensions'].includes(n.dataset.scene):false;n.setAttribute('aria-pressed',n.dataset.scene===s.scene);});
  if(!animation&&!model.drag)liveOpen=s.open;
  openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';
- const shape=JSON.stringify({...s,open:0,step:0,mode:''})+compare;
- if(model.shape!==shape){model.shape=shape;model.update({...s,open:liveOpen},{compare,showEnvelope});}else model.setOpen(liveOpen);
- const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),spec=visualSpec(s),mechanism=mechanisms[v?.mechanism.value];
+ const modelState=modelPreviewState(s);
+ const shape=JSON.stringify({...modelState,open:0,step:0,mode:''})+compare;
+ if(model.shape!==shape){model.shape=shape;model.update({...modelState,open:liveOpen},{compare,showEnvelope});}else model.setOpen(liveOpen);
+ const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),spec=visualSpec(modelState),mechanism=mechanisms[v?.mechanism.value];
  $('#model-title').textContent=p?.name||(s.orientation&&s.orientation!=='unknown'?'Roleta '+(s.orientation==='horizontal'?'pozioma':'pionowa'):'Sprawdź, jak to działa.');
  const livePrice=$('#live-price'),livePriceData=priceFor(s);
  if(livePrice){
