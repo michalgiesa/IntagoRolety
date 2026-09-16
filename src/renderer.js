@@ -37,7 +37,7 @@ export function makeRoute({width:w,height:h,depth:d,horizontal=false,path='rear'
  }
  const lengths=[0];for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+Math.hypot(...points[i].map((v,k)=>v-points[i-1][k])));
  const at=t=>{t=clamp(t,0,lengths.at(-1));let lo=0,hi=lengths.length-1;while(lo+1<hi){const mid=(lo+hi)>>1;if(lengths[mid]<t)lo=mid;else hi=mid;}const f=(t-lengths[lo])/(lengths[hi]-lengths[lo]||1);return points[lo].map((v,k)=>v+(points[hi][k]-v)*f);};
- return {at,length:lengths.at(-1),points,entry};
+ return {at,length:lengths.at(-1),points,entry,rearDepth:d-r};
 }
 export class CabinetRenderer{
  constructor(host,{onOpen=()=>{},onCommit=()=>{},onStart=()=>{},interactive=true}={}){
@@ -156,7 +156,10 @@ export class CabinetRenderer{
     front.setAttribute('points',poly(flat.map(q)));
    }
    back.setAttribute('visibility',stored?'visible':'hidden');
-   back.removeAttribute('clip-path');
+   // The rear return is revealed through the side, never through the top panel.
+   const sideOnly=this.spec.path==='rear'&&(this.horizontal||Math.min(a[2],b[2])>=this.routes[k].rearDepth-.01);
+   if(sideOnly)back.setAttribute('clip-path','url(#'+this.id+'-stored-side)');
+   else back.removeAttribute('clip-path');
    (stored?back:front).setAttribute('points',poly(pts.map(q)));
   }
   const lower=g.height-offset,edge=this.horizontal?offset+g.handle:lower-g.handle;
