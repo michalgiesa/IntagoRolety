@@ -107,7 +107,7 @@
 #intago-configurator .gallery-photo-fallback{position:absolute;inset:0;display:none;place-items:center;padding:30px;text-align:center;color:#707579;font-size:13px}
 #intago-configurator .gallery-photo-wrap.is-error .gallery-photo-fallback{display:grid}
 #intago-configurator .gallery-badge{position:absolute;left:14px;top:14px;z-index:2;display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border-radius:4px;background:rgba(255,255,255,.92);border:1px solid rgba(50,55,60,.12);font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#32373c;backdrop-filter:blur(5px)}
-#intago-configurator .gallery-badge.exact{background:#f5f8ea;border-color:#bdc99a;color:#34411e}
+#intago-configurator .gallery-badge.exact{background:#f5f8ea;border-color:#bdc99a;color:#34411e}#intago-configurator .gallery-badge.inspiration{background:rgba(255,255,255,.94);border-color:#cfd2d4;color:#62676b}
 #intago-configurator .gallery-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none;padding:0 10px}
 #intago-configurator .gallery-nav button{pointer-events:auto;width:42px;height:42px;min-height:42px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid rgba(50,55,60,.16);box-shadow:0 4px 18px rgba(32,37,40,.12);font-size:22px;line-height:1}
 #intago-configurator .gallery-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px 11px;background:#fff;border-top:1px solid #e1e2e3}
@@ -1265,7 +1265,7 @@ if(s.step===2)content=s.orientation==='horizontal'?'<div class="stack">'+choice(
 if(s.step===3)content=s.orientation==='horizontal'?'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Wymagane dla rolety poziomej')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma wymaga dna szafki.</strong><br>Ta opcja jest ustawiana automatycznie.</p></div>':'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Dolna płyta zamyka korpus')+choice(s,'furniture','without-bottom','Bez dna w szafce','Przestrzeń pozostaje otwarta od dołu')+'</div>';
 if(s.step===4)content='<button class="btn subtle measure-start" data-action="measure"><span>Pomóż mi zmierzyć</span><span aria-hidden="true">↗</span></button><div class="internal-dimensions-note"><strong>Podaj wymiary wewnętrzne szafki.</strong><br>S × W × G oznaczają wolną przestrzeń wewnątrz korpusu, nie wymiary zewnętrzne mebla. Grubość płyt korpusu dobierasz niezależnie.</div>'+dimensionFields(s)+'<div id="range-feedback" aria-live="polite"><p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s)+'</div>'+help('To wymiary wnętrza potrzebne do przygotowania zapytania, a nie wymiary cięcia rolety. Prowadnice i mechanizm zajmą część przestrzeni. Ich odsadzenia ustalimy dla wybranego zestawu.');
 if(s.step===5)content=recommendations(s);
-if(s.step===6)content=finishPanel(s)+(s.finish?'<div class="hint gallery-hint"><span class="hint-marker">▣</span><p><strong>Zobacz ten zestaw w realizacjach.</strong><br>Galeria dobiera zdjęcia po kierunku, montażu i widocznych elementach. Gdy brakuje wybranego koloru, pokazuje inny kolor tego samego zestawu.</p><button class="text-button" data-scene="gallery">Otwórz galerię ↗</button></div>':'<div class="hint"><span class="hint-marker">↗</span><p><strong>Wybierz kolor.</strong><br>Po wyborze pojawi się zakładka Galeria z realizacjami pasującymi do wyglądu systemu.</p></div>');
+if(s.step===6)content=finishPanel(s)+(s.finish?'<div class="hint gallery-hint"><span class="hint-marker">▣</span><p><strong>Zobacz ten zestaw w realizacjach.</strong><br>Galeria najpierw dobiera zdjęcia po kierunku, montażu i widocznych elementach. Gdy brakuje dokładnego zdjęcia, pokazuje wyraźnie oznaczoną inspirację z tej samej rodziny rolety.</p><button class="text-button" data-scene="gallery">Otwórz galerię ↗</button></div>':'<div class="hint"><span class="hint-marker">↗</span><p><strong>Wybierz kolor.</strong><br>Po wyborze pojawi się zakładka Galeria z realizacjami pasującymi do wyglądu systemu.</p></div>');
 if(s.step===7)content=summary(s);
 const next=['Dobierz roletę','Dalej','Dalej','Sprawdź rozwiązania','Wybierz wykończenie','Zobacz konfigurację'];
 return '<div class="step-meta"><span class="eyebrow">'+stepNames[s.step-1].toUpperCase()+'</span><span>0'+s.step+' / 07</span></div><section class="question"><h2 id="wizard-title" tabindex="-1">'+titles[s.step-1]+'</h2><p class="intro">'+intros[s.step-1]+'</p>'+content+'</section><div class="actions">'+(s.step>1?'<button class="prev" data-action="prev">← '+(s.step===7?'Zmień konfigurację':'Wstecz')+'</button>':'<span class="micro muted">Zacznij od kierunku</span>')+(s.step<7?'<button class="btn primary" data-action="next" '+(canNext(s)?'':'disabled')+'>'+next[s.step-1]+' <span aria-hidden="true">→</span></button>':'<button class="text-button" data-action="edit-start">Zmień od początku</button>')+'</div><div class="saved-note" id="save-note">Twoje wybory zostają na tym urządzeniu</div>';
@@ -1286,41 +1286,132 @@ return '<div class="step-meta"><span class="eyebrow">'+stepNames[s.step-1].toUpp
    Kolor jest preferencją: najpierw pokazujemy dokładny kolor, a potem inne kolory tego samego zestawu. */
 const GALLERY_SOURCE_NOBLE='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-noble-matt';
 const GALLERY_SOURCE_COLOR='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-color-decor-line';
+
+/*
+ Poziomy dopasowania galerii:
+ 1. exact visualSet + kierunek — właściwy zestaw widocznych elementów,
+ 2. ta sama rodzina wizualna + kierunek — inspiracja systemu,
+ 3. ta sama rodzina wizualna bez potwierdzonego kierunku — ostatni fallback.
+
+ Mechanizm zwijania (C3/C6/tył) celowo nie jest kryterium galerii.
+ Kolor wpływa tylko na kolejność zdjęć.
+*/
 const GALLERY_ITEMS=[
- {id:'noble-out-dark-01',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1498542/7x5/1200/857/76f9accf21c9858e2828414e63df4e08/B4F10CFEBDE677245C5145E22F4FA8D7/b41-d010-1080234.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
- {id:'noble-out-dark-02',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1726346/7x5/800/571/1aa17ab78f4b4d14217a33f91d3e7654/D352043A3854F3DED71FD33DEF4EDF64/o95-d020-cl-01-1094430.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
- {id:'noble-out-dark-03',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1494330/7x5/1200/857/79c22768591dcc7fac1a203f148bdb7d/04B2A0AD4E96E74C602F30F8EFAB19A2/animation-kitchen-midnight-03-1106319.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'}
+ // NOBLE / E9 — zdjęcia, które już mieliśmy jako dokładne dla montażu na korpusie.
+ {id:'noble-out-dark-01',family:'noble-e9',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1498542/7x5/1200/857/76f9accf21c9858e2828414e63df4e08/B4F10CFEBDE677245C5145E22F4FA8D7/b41-d010-1080234.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+ {id:'noble-out-dark-02',family:'noble-e9',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1726346/7x5/800/571/1aa17ab78f4b4d14217a33f91d3e7654/D352043A3854F3DED71FD33DEF4EDF64/o95-d020-cl-01-1094430.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+ {id:'noble-out-dark-03',family:'noble-e9',visualSet:'noble-e9-outside',orientation:'vertical',finish:'dark',finishLabel:'After Dark',image:'https://interior.rehau.com/resource/image/1494330/7x5/1200/857/79c22768591dcc7fac1a203f148bdb7d/04B2A0AD4E96E74C602F30F8EFAB19A2/animation-kitchen-midnight-03-1106319.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+
+ // Dodatkowe inspiracje NOBLE / E9. Mogą obsłużyć także NOBLE wewnątrz,
+ // gdy nie mamy zdjęcia z jednoznacznie potwierdzoną prowadnicą TOP.
+ {id:'noble-inspiration-01',family:'noble-e9',visualSet:null,orientation:'vertical',finish:null,finishLabel:'kolor poglądowy',image:'https://interior.rehau.com/resource/image/2116412/7x5/1200/857/2a226baadff4d9759db23383793791ad/2ACE491E801DD60CEE9489E22F26DEA4/o95-d039-cl-1078575.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+ {id:'noble-inspiration-02',family:'noble-e9',visualSet:null,orientation:'vertical',finish:null,finishLabel:'kolor poglądowy',image:'https://interior.rehau.com/resource/image/1450124/7x5/600/428/b9745f5ad7b43b1d87b5f085a1472ce3/87BC806B150216608B2D325CDEB58639/animation-kitchen-midnight-03-1106319.jpg',source:GALLERY_SOURCE_NOBLE,title:'RAUVOLET noble matt'},
+
+ // TOP BASIC / E23 — materiały REHAU color-/decor-line.
+ // Traktujemy je jako inspiracje systemu, jeśli na zdjęciu nie da się potwierdzić
+ // konkretnej prowadnicy TOP BASIC lub sposobu prowadzenia płaszcza.
+ {id:'e23-inspiration-01',family:'top-basic-e23',visualSet:null,orientation:'vertical',finish:'white',finishLabel:'Biały / RAL 9010',image:'https://interior.rehau.com/resource/image/1331418/7x5/1920/1371/61908497e6be63ae89afb813822b9f85/97869D980308F4460EC81AA83DACFED3/header-decor-colorline-83585.jpg',source:GALLERY_SOURCE_COLOR,title:'RAUVOLET color-/decor-line · E23'},
+ {id:'e23-inspiration-02',family:'top-basic-e23',visualSet:null,orientation:'vertical',finish:'silver',finishLabel:'Aluminium decor',image:'https://interior.rehau.com/resource/image/1331736/7x5/1200/857/2a226baadff4d9759db23383793791ad/43DCA9C9FA6465114BC4219966452108/o95-d039-cl-1078575.jpg',source:GALLERY_SOURCE_COLOR,title:'RAUVOLET color-/decor-line · E23'},
+ {id:'e23-inspiration-03',family:'top-basic-e23',visualSet:null,orientation:'any',finish:'silver',finishLabel:'Aluminium decor',image:'https://interior.rehau.com/resource/image/1491754/7x5/1200/857/473e17c2b21a666ab42f370f0b4ad66b/FCC664859050613C807894D233C0E455/o95-d039-cl-1078575.jpg',source:GALLERY_SOURCE_COLOR,title:'RAUVOLET color-/decor-line · E23'}
 ];
+
 function galleryVisualKey(s){
  const p=getProduct(s.selectedProduct);if(!p||!s.orientation)return null;
- if(p.id==='top-basic'||p.id==='top-basic-c3')return {visualSet:'top-basic-e23-inside',orientation:s.orientation,label:'TOP BASIC / E23 / wewnątrz'};
- if(p.id==='noble-wew')return {visualSet:'noble-e9-inside',orientation:s.orientation,label:'NOBLE / E9 / wewnątrz'};
- if(p.id==='noble-zewn')return {visualSet:'noble-e9-outside',orientation:s.orientation,label:'NOBLE / E9 / na korpusie'};
+ if(p.id==='top-basic'||p.id==='top-basic-c3')return {family:'top-basic-e23',visualSet:'top-basic-e23-inside',orientation:s.orientation,label:'TOP BASIC / E23 / wewnątrz'};
+ if(p.id==='noble-wew')return {family:'noble-e9',visualSet:'noble-e9-inside',orientation:s.orientation,label:'NOBLE / E9 / wewnątrz'};
+ if(p.id==='noble-zewn')return {family:'noble-e9',visualSet:'noble-e9-outside',orientation:s.orientation,label:'NOBLE / E9 / na korpusie'};
+ return null;
+}
+function galleryMatch(item,key){
+ const sameFamily=item.family===key.family;
+ const sameOrientation=item.orientation===key.orientation;
+ const genericOrientation=item.orientation==='any';
+ const exactSet=item.visualSet===key.visualSet&&sameOrientation;
+ if(exactSet)return {level:0,label:'exact'};
+ if(sameFamily&&sameOrientation)return {level:1,label:'family'};
+ if(sameFamily&&genericOrientation)return {level:2,label:'family-generic'};
  return null;
 }
 function galleryItemsFor(s){
  const key=galleryVisualKey(s);if(!key)return [];
- const same=GALLERY_ITEMS.filter(item=>item.visualSet===key.visualSet&&item.orientation===key.orientation);
- return same.slice().sort((a,b)=>(b.finish===s.finish)-(a.finish===s.finish));
+ return GALLERY_ITEMS
+  .map(item=>({item,match:galleryMatch(item,key)}))
+  .filter(x=>x.match)
+  .sort((a,b)=>{
+   // Najpierw dokładny zestaw, potem inspiracje tej samej rodziny.
+   if(a.match.level!==b.match.level)return a.match.level-b.match.level;
+   // W obrębie danego poziomu: wybrany kolor przed pozostałymi.
+   const ac=a.item.finish===s.finish?1:0,bc=b.item.finish===s.finish?1:0;
+   if(ac!==bc)return bc-ac;
+   return a.item.id.localeCompare(b.item.id);
+  })
+  .map(x=>x.item);
+}
+function galleryItemMeta(item,key,s){
+ const match=galleryMatch(item,key)||{level:9,label:'unknown'};
+ const exactColor=Boolean(item.finish&&item.finish===s.finish);
+ const finishName=item.finishLabel||finishes[item.finish]?.name||'kolor poglądowy';
+
+ if(match.level===0){
+  return {
+   badge:exactColor?'Wybrany kolor':'Inny kolor · ten sam zestaw',
+   badgeClass:exactColor?'exact':'',
+   exactColor,
+   finishName,
+   note:exactColor
+    ?'Dokładny zestaw wizualny i kolor zgodny z wyborem.'
+    :'Ten sam kierunek, montaż i zestaw widocznych elementów. Kolor zdjęcia różni się od wybranego.'
+  };
+ }
+ if(match.level===1){
+  return {
+   badge:'Inspiracja systemu',
+   badgeClass:'inspiration',
+   exactColor,
+   finishName,
+   note:'Ta sama rodzina rolety i kierunek. Sposób montażu, prowadnica lub kolor na zdjęciu mogą różnić się od wybranej konfiguracji.'
+  };
+ }
+ return {
+  badge:'Inspiracja systemu',
+  badgeClass:'inspiration',
+  exactColor,
+  finishName,
+  note:'Ta sama rodzina rolety. Kierunek, sposób montażu lub kolor na zdjęciu mogą różnić się od wybranej konfiguracji.'
+ };
 }
 function galleryContext(s){
  const key=galleryVisualKey(s),items=galleryItemsFor(s);if(!key)return ['Galeria realizacji','Wybierz konkretny system, aby dobrać zdjęcia.'];
- if(!items.length)return ['Brak zdjęć tego zestawu',key.label+'. Galeria nie podmienia innego montażu ani innego zestawu tylko po to, żeby coś pokazać.'];
- const exact=items.some(item=>item.finish===s.finish),f=finishes[s.finish];
- return [exact?'Realizacje w wybranym kolorze':'Realizacje tego samego zestawu',exact?'Zdjęcia są zgodne z zestawem wizualnym i wybranym kolorem '+(f?.name||'')+'.':'Nie mamy jeszcze zdjęcia w kolorze '+(f?.name||'wybranym')+'. Pokazujemy inny kolor, ale ten sam kierunek, montaż i zestaw widocznych elementów.'];
+ if(!items.length)return ['Brak zdjęć tego systemu',key.label+'. Galeria nie miesza rodzin produktów.'];
+ const exactSetItems=items.filter(item=>galleryMatch(item,key)?.level===0);
+ const exactColor=exactSetItems.some(item=>item.finish===s.finish),f=finishes[s.finish];
+ if(exactColor)return ['Realizacje w wybranym kolorze','Najpierw pokazujemy zdjęcia zgodne z zestawem wizualnym i kolorem '+(f?.name||'')+'.'];
+ if(exactSetItems.length)return ['Realizacje tego samego zestawu','Mamy zdjęcia właściwego zestawu wizualnego, ale nie w kolorze '+(f?.name||'wybranym')+'. Pokazujemy inny kolor tego samego zestawu.'];
+ return ['Inspiracje tego systemu','Nie mamy jeszcze zdjęcia z potwierdzonym dokładnym zestawem dla tej konfiguracji. Pokazujemy materiały REHAU z tej samej rodziny rolety, wyraźnie oznaczone jako inspiracja.'];
 }
 let galleryIndex=0,gallerySignature='';
 function renderGallery(s){
  const overlay=$('#gallery-overlay'),stage=$('.model-stage');if(!overlay||!stage)return;
  const isGallery=s.scene==='gallery';stage.classList.toggle('gallery-mode',isGallery);
  if(!isGallery){overlay.hidden=true;overlay.innerHTML='';return;}
- const key=galleryVisualKey(s),items=galleryItemsFor(s),signature=JSON.stringify([key?.visualSet,key?.orientation,s.finish,items.map(x=>x.id)]);
+ const key=galleryVisualKey(s),items=galleryItemsFor(s),signature=JSON.stringify([key?.visualSet,key?.family,key?.orientation,s.finish,items.map(x=>x.id)]);
  if(signature!==gallerySignature){gallerySignature=signature;galleryIndex=0;}
  overlay.hidden=false;
- if(!items.length){overlay.innerHTML='<div class="gallery-empty"><strong>Nie mamy jeszcze zdjęć tego zestawu.</strong><p>'+escape(key?.label||'Ta konfiguracja')+'. Nie pokazujemy zdjęcia innego kierunku lub innego montażu. Po dodaniu materiałów do GALLERY_ITEMS galeria zacznie je wyświetlać automatycznie.</p></div>';return;}
+ if(!items.length){
+  overlay.innerHTML='<div class="gallery-empty"><strong>Nie mamy jeszcze zdjęć tej rodziny.</strong><p>'+escape(key?.label||'Ta konfiguracja')+'. Nie podstawiamy zdjęć innego typu rolety tylko po to, żeby wypełnić galerię.</p></div>';
+  return;
+ }
  galleryIndex=Math.max(0,Math.min(items.length-1,galleryIndex));
- const item=items[galleryIndex],exact=item.finish===s.finish,badge=exact?'Wybrany kolor':'Inny kolor · ten sam zestaw',finishName=item.finishLabel||finishes[item.finish]?.name||'kolor referencyjny';
- overlay.innerHTML='<div class="gallery-main"><div class="gallery-photo-wrap"><img class="gallery-photo" src="'+escape(item.image)+'" alt="'+escape(item.title+' — '+finishName)+'" referrerpolicy="no-referrer"><div class="gallery-photo-fallback"><span>Zdjęcie REHAU jest chwilowo niedostępne.<br>Spróbuj ponownie później.</span></div><span class="gallery-badge '+(exact?'exact':'')+'">'+escape(badge)+'</span>'+(items.length>1?'<div class="gallery-nav"><button type="button" data-action="gallery-prev" aria-label="Poprzednie zdjęcie">‹</button><button type="button" data-action="gallery-next" aria-label="Następne zdjęcie">›</button></div>':'')+'</div></div><div class="gallery-meta"><div><strong>'+escape(item.title+' · '+finishName)+'</strong><p>'+escape(key?.label||'')+(exact?' · kolor zgodny z wyborem':' · kolor zdjęcia różni się od wybranego')+'</p></div><a href="'+escape(item.source)+'" target="_blank" rel="noopener">Źródło: REHAU ↗</a></div>'+(items.length>1?'<div class="gallery-thumbs">'+items.map((x,i)=>'<button type="button" class="gallery-thumb" data-gallery-index="'+i+'" aria-label="Zdjęcie '+(i+1)+'" aria-pressed="'+(i===galleryIndex)+'"><img src="'+escape(x.image)+'" alt="" referrerpolicy="no-referrer"></button>').join('')+'</div>':'');
+ const item=items[galleryIndex],meta=galleryItemMeta(item,key,s);
+ overlay.innerHTML=
+  '<div class="gallery-main"><div class="gallery-photo-wrap">'+
+   '<img class="gallery-photo" src="'+escape(item.image)+'" alt="'+escape(item.title+' — '+meta.finishName)+'" referrerpolicy="no-referrer">'+
+   '<div class="gallery-photo-fallback"><span>Zdjęcie REHAU jest chwilowo niedostępne.<br>Spróbuj ponownie później.</span></div>'+
+   '<span class="gallery-badge '+meta.badgeClass+'">'+escape(meta.badge)+'</span>'+
+   (items.length>1?'<div class="gallery-nav"><button type="button" data-action="gallery-prev" aria-label="Poprzednie zdjęcie">‹</button><button type="button" data-action="gallery-next" aria-label="Następne zdjęcie">›</button></div>':'')+
+  '</div></div>'+
+  '<div class="gallery-meta"><div><strong>'+escape(item.title+' · '+meta.finishName)+'</strong><p>'+escape(meta.note)+'</p></div><a href="'+escape(item.source)+'" target="_blank" rel="noopener">Źródło: REHAU ↗</a></div>'+
+  (items.length>1?'<div class="gallery-thumbs">'+items.map((x,i)=>'<button type="button" class="gallery-thumb" data-gallery-index="'+i+'" aria-label="Zdjęcie '+(i+1)+'" aria-pressed="'+(i===galleryIndex)+'"><img src="'+escape(x.image)+'" alt="" referrerpolicy="no-referrer"></button>').join('')+'</div>':'');
 }
 function setGalleryIndex(index){
  const s=store.get(),items=galleryItemsFor(s);if(!items.length)return;
@@ -1428,7 +1519,7 @@ function render(s){
  $('#stage-label').textContent=s.scene==='dimensions'?'Wymiary wewnętrzne — nie uwzględniają grubości płyt.':compare?'LINIA PRZERYWANA: DRUGI SPOSÓB MONTAŻU':s.scene==='section'?'SCHEMAT POGLĄDOWY / NIE DO CIĘCIA':s.orientation==='unknown'?'PRZYKŁADOWY RUCH PIONOWY':spec.split?'OTWIERANIE NA OBIE STRONY':'PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ';
  stageHint.hidden=s.scene==='dimensions'?false:s.scene==='exploded'||s.scene==='gallery'||(hasInteracted&&!compare&&s.scene!=='section');
  const dims=['width','height','depth'].map(k=>s.dimensions[k]??'?');
- $('#dimensions-caption').textContent=s.scene==='gallery'?'Galeria realizacji REHAU • kolor zdjęcia może różnić się od wybranego':(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary wewnętrzne':dims.join(' × ')+' mm / S × W × G • wymiary wewnętrzne'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • bez grubości płyt':'');
+ $('#dimensions-caption').textContent=s.scene==='gallery'?'Galeria REHAU • zdjęcia dokładne i inspiracje systemu są oznaczone osobno':(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary wewnętrzne':dims.join(' × ')+' mm / S × W × G • wymiary wewnętrzne'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • bez grubości płyt':'');
  if(!save(s,storage)&&$('#save-note'))$('#save-note').textContent='Zapis na urządzeniu niedostępny — pobierz kartę na końcu.';
  if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML='<p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s);
  if(editing){const k=oldFocus.dataset.dimension,error=validateDimension(s.dimensions[k]);$('#error-'+k).textContent=error||'';oldFocus.setAttribute('aria-invalid',Boolean(error));const next=$('[data-action="next"]');if(next)next.disabled=Object.values(s.dimensions).some(v=>validateDimension(v));}
