@@ -1,21 +1,33 @@
 <!-- INTAGO / SELLY — wymiary szafki są wymiarami wewnętrznymi. -->
 <style>
+/* Compact dimension compatibility and horizontal direction control. */
+#intago-configurator .direction-toggle{margin:10px 20px;padding:9px 12px;border:1px solid #d8dcde;border-radius:6px;background:#fff}
+#intago-configurator .direction-toggle[hidden]{display:none}
+#intago-configurator .color-disclaimer{font-size:12px;line-height:1.5;color:#62686c;margin:12px 0 0}
+#intago-configurator #range-feedback{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+#intago-configurator #range-feedback .range-option{margin:0;padding:14px;border:1px solid #dce0e2;border-radius:8px;background:#fff;font-size:14px;line-height:1.5}
+#intago-configurator #range-feedback .range-outside{border-color:#d2071d;background:#fff5f6}
+#intago-configurator .range-status{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#b00018}
+#intago-configurator .range-limit-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+#intago-configurator .range-limit-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border:1px solid #efb8bf;border-radius:4px;background:#fff;color:#8d0012;font-size:11px;line-height:1.2}
+#intago-configurator .range-limit-badge b{font-weight:700;color:#b00018}
+#intago-configurator #range-feedback .range-error{font-size:13px;line-height:1.5;margin:6px 0 0}
 
 /* INTAGO — precision, material, movement. No remote fonts or assets. */
 #intago-configurator{--ink:#32373c;--muted:#74797d;--accent:#d2071d;--accent-dark:#a90016;--accent-soft:#fff3f4;--paper:#fff;--bg:#f7f7f7;--line:#e5e6e7;--soft:#f0f1f1;--radius:12px;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);font-synthesis:none}
-#intago-configurator *{box-sizing:border-box}#intago-configurator{margin:0;font-size:16px;line-height:1.5}#intago-configurator button,#intago-configurator input,#intago-configurator textarea,#intago-configurator select{font:inherit;color:inherit}#intago-configurator button,#intago-configurator a,#intago-configurator input,#intago-configurator textarea,#intago-configurator summary{-webkit-tap-highlight-color:transparent}#intago-configurator button{cursor:pointer}#intago-configurator button,#intago-configurator a{touch-action:manipulation}#intago-configurator button{border:0;background:none}#intago-configurator a{color:inherit}#intago-configurator button:disabled{opacity:.4;cursor:not-allowed}#intago-configurator button:hover:not(:disabled){filter:brightness(.96)}#intago-configurator :focus-visible{outline:3px solid #607900;outline-offset:4px}#intago-configurator button,#intago-configurator input,#intago-configurator summary,#intago-configurator a.btn{min-height:44px}#intago-configurator button{transition:background .18s,border-color .18s}#intago-configurator p{margin:0 0 16px}#intago-configurator h1,#intago-configurator h2,#intago-configurator h3{font-weight:550;letter-spacing:-.045em;line-height:1.12}#intago-configurator h1{font-size:clamp(30px,3.2vw,47px);margin:11px 0 0}#intago-configurator h1>span{color:#8ca400}#intago-configurator h2{font-size:32px;margin:12px 0 18px}#intago-configurator h3{font-size:19px;margin:0 0 8px}#intago-configurator small,#intago-configurator .micro{font-size:13px}#intago-configurator .muted{color:var(--muted)}#intago-configurator .eyebrow{font-size:12px;letter-spacing:.14em;font-weight:600;color:var(--muted);margin:0}#intago-configurator .skip-link{position:fixed;left:16px;top:-100px;z-index:100;background:white;padding:16px}#intago-configurator .skip-link:focus{top:10px}
+#intago-configurator *{box-sizing:border-box}#intago-configurator{margin:0;font-size:16px;line-height:1.5}#intago-configurator button,#intago-configurator input,#intago-configurator textarea,#intago-configurator select{font:inherit;color:inherit}#intago-configurator button,#intago-configurator a,#intago-configurator input,#intago-configurator textarea,#intago-configurator summary{-webkit-tap-highlight-color:transparent}#intago-configurator button{cursor:pointer}#intago-configurator button,#intago-configurator a{touch-action:manipulation}#intago-configurator button{border:0;background:none}#intago-configurator a{color:inherit}#intago-configurator button:disabled{opacity:.4;cursor:not-allowed}#intago-configurator button:hover:not(:disabled){filter:brightness(.96)}#intago-configurator :focus-visible{outline:3px solid #607900;outline-offset:4px}#intago-configurator button,#intago-configurator input,#intago-configurator summary,#intago-configurator a.btn{min-height:44px}#intago-configurator button{transition:background .18s,border-color .18s}#intago-configurator p{margin:0 0 16px}#intago-configurator h1,#intago-configurator h2,#intago-configurator h3{font-weight:550;letter-spacing:-.045em;line-height:1.12}#intago-configurator h1{font-size:clamp(30px,3.2vw,47px);margin:11px 0 0}#intago-configurator h1>span{color:#8ca400}#intago-configurator .page-intro .tool-title{font-size:clamp(30px,3.2vw,47px);margin:11px 0 0;font-weight:550;letter-spacing:-.045em;line-height:1.12}#intago-configurator .page-intro .tool-title>span{color:var(--accent)}#intago-configurator h2{font-size:32px;margin:12px 0 18px}#intago-configurator h3{font-size:19px;margin:0 0 8px}#intago-configurator small,#intago-configurator .micro{font-size:13px}#intago-configurator .muted{color:var(--muted)}#intago-configurator .eyebrow{font-size:12px;letter-spacing:.14em;font-weight:600;color:var(--muted);margin:0}#intago-configurator .skip-link{position:fixed;left:16px;top:-100px;z-index:100;background:white;padding:16px}#intago-configurator .skip-link:focus{top:10px}
 #intago-configurator .site-header{height:88px;padding:0 4.2%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px;background:#fff}
 #intago-configurator .brand{display:flex;align-items:center;text-decoration:none}#intago-configurator .brand-logo{display:block;width:214px;height:auto}#intago-configurator .site-header nav{display:flex;gap:22px;align-items:center}#intago-configurator .site-header nav button,#intago-configurator .phone{font-size:14px;text-decoration:none}#intago-configurator .phone{margin-left:12px}#intago-configurator .expert-toggle{border:1px solid #c9cbcd;border-radius:6px;padding:0 16px;font-size:14px;white-space:nowrap}#intago-configurator .expert-toggle[aria-pressed=true]{background:var(--ink);color:white}#intago-configurator .expert-toggle span{margin-left:12px}
 #intago-configurator main{max-width:1640px;padding:0 4.2%;margin:auto}#intago-configurator .page-intro{display:flex;align-items:flex-end;justify-content:space-between;margin:36px 0 31px;gap:20px}#intago-configurator .intro-note{color:var(--muted);font-size:14px;border-left:1px solid var(--line);padding-left:24px;margin:0 0 5px}#intago-configurator .mobile-break{display:none}
 #intago-configurator .workspace{display:grid;grid-template-columns:minmax(355px,39%) minmax(0,61%);border:1px solid var(--line);border-radius:14px;background:white;align-items:start}
 #intago-configurator .decision-panel{padding:29px 32px 25px;min-height:700px}#intago-configurator .step-nav{display:flex;gap:7px;margin-bottom:31px}#intago-configurator .step-nav button{flex:1;min-width:0;padding:0 0 7px;border-bottom:3px solid #e7ebe2;color:#87917f;font-size:13px;font-variant-numeric:tabular-nums;text-align:left}#intago-configurator .step-nav button[aria-current=step]{color:#34411e;border-color:#aac625;font-weight:700}#intago-configurator .step-nav button.completed{border-color:#afb8a4;color:#526247}#intago-configurator .step-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}#intago-configurator .step-meta .eyebrow{color:#77826c}#intago-configurator .step-meta>span:last-child{font-size:13px;color:#7b8772}#intago-configurator .question{min-height:400px}#intago-configurator .question h2{max-width:370px;font-size:36px;margin-top:0}#intago-configurator .question .intro{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:26px;max-width:410px}
-#intago-configurator .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}#intago-configurator .choice{border:1px solid #d6ddd0;border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:6px;background:#fff;min-height:166px}#intago-configurator .choice svg{width:62px;height:65px;margin-bottom:13px}#intago-configurator .choice strong{font-size:17px;font-weight:600}#intago-configurator .choice small{color:var(--muted);font-size:13px}#intago-configurator .choice[aria-pressed=true]{border:1.5px solid #899e32;background:#f3f7e6;padding:17.5px}#intago-configurator .choice[aria-pressed=true]:after{content:"✓";position:absolute;right:12px;top:12px;border-radius:50%;width:21px;height:21px;display:grid;place-items:center;background:#b9d431;color:#233317;font-size:13px}#intago-configurator .choice.wide{min-height:74px;flex-direction:row;align-items:center;gap:13px}#intago-configurator .choice.wide svg{width:40px;height:46px;margin:0}#intago-configurator .choice.wide strong{font-size:15px}#intago-configurator .choice.wide small{display:block}#intago-configurator .stack{display:grid;gap:10px}#intago-configurator .unknown{display:flex;width:100%;justify-content:space-between;align-items:center;text-align:left;border-bottom:1px solid var(--line);padding:14px 2px;font-size:14px;color:#626f5c;margin-top:13px}#intago-configurator .unknown[aria-pressed=true]{color:#354513;background:#f3f7e6}#intago-configurator .unknown span{font-size:18px}#intago-configurator .hint{display:flex;gap:10px;align-items:flex-start;background:#f5f6f1;padding:14px;border-radius:6px;font-size:14px;color:#66715e;margin-top:22px}#intago-configurator .hint strong{color:#445039;font-weight:600}#intago-configurator .hint p{margin:0}#intago-configurator .hint-marker{font-size:20px;line-height:1.2;color:#65783c}#intago-configurator .why{margin-top:17px}#intago-configurator .why summary{font-size:14px;text-decoration:underline;text-underline-offset:4px;cursor:pointer;display:flex;align-items:center}#intago-configurator .why p{font-size:14px;color:var(--muted);margin-top:8px}#intago-configurator .actions{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--line);padding-top:21px;margin-top:25px;align-items:center}#intago-configurator .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 19px;min-height:48px;border-radius:6px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}#intago-configurator .primary{background:var(--accent);color:#263118}#intago-configurator .dark{background:var(--ink);color:white}#intago-configurator .subtle{border:1px solid var(--line);background:white}#intago-configurator .text-button{font-size:14px;padding:8px 0;text-decoration:underline;text-underline-offset:4px}#intago-configurator .actions .prev{padding:10px 0;font-size:14px;color:#59674e}#intago-configurator .saved-note{font-size:12px;color:#7b8477;margin-top:18px;display:flex;align-items:center;gap:7px}#intago-configurator .saved-note:before{content:"";width:6px;height:6px;border-radius:50%;background:#87996d}
+#intago-configurator .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}#intago-configurator .choice{border:1px solid #d6ddd0;border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:6px;background:#fff;min-height:166px}#intago-configurator .choice svg{width:62px;height:65px;margin-bottom:13px}#intago-configurator .choice strong{font-size:17px;font-weight:600}#intago-configurator .choice small{color:var(--muted);font-size:13px}#intago-configurator .choice[aria-pressed=true]{border:1.5px solid #899e32;background:#f3f7e6;padding:17.5px}#intago-configurator .choice[aria-pressed=true]:after{content:"✓";position:absolute;right:12px;top:12px;border-radius:50%;width:21px;height:21px;display:grid;place-items:center;background:#b9d431;color:#233317;font-size:13px}#intago-configurator .choice.wide{min-height:74px;flex-direction:row;align-items:center;gap:13px}#intago-configurator .choice.wide svg{width:40px;height:46px;margin:0}#intago-configurator .choice.wide strong{font-size:15px}#intago-configurator .choice.wide small{display:block}#intago-configurator .stack{display:grid;gap:10px}#intago-configurator .unknown{display:flex;width:100%;justify-content:space-between;align-items:center;text-align:left;border-bottom:1px solid var(--line);padding:14px 2px;font-size:14px;color:#626f5c;margin-top:13px}#intago-configurator .unknown[aria-pressed=true]{color:#354513;background:#f3f7e6}#intago-configurator .unknown span{font-size:18px}#intago-configurator .hint{display:flex;gap:10px;align-items:flex-start;background:#f5f6f1;padding:14px;border-radius:6px;font-size:14px;color:#66715e;margin-top:22px}#intago-configurator .hint strong{color:#445039;font-weight:600}#intago-configurator .hint p{margin:0}#intago-configurator .hint-marker{font-size:20px;line-height:1.2;color:#65783c}#intago-configurator .why{margin-top:17px}#intago-configurator .why summary{font-size:14px;text-decoration:underline;text-underline-offset:4px;cursor:pointer;display:flex;align-items:center}#intago-configurator .why p{font-size:14px;color:var(--muted);margin-top:8px}#intago-configurator .variant-why{padding-top:4px}#intago-configurator .variant-why-lead{color:var(--ink);margin:10px 0 8px;line-height:1.5}#intago-configurator .variant-why ul{margin:8px 0 0;padding-left:19px;display:grid;gap:7px}#intago-configurator .variant-why li{font-size:13px;line-height:1.45;color:#545b5f}#intago-configurator .variant-fit{margin:11px 0 0;padding:10px 12px;background:#f5f7ef;border-left:3px solid #b9d431;color:#4d5559;font-size:13px;line-height:1.45}#intago-configurator .actions{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--line);padding-top:21px;margin-top:25px;align-items:center}#intago-configurator .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 19px;min-height:48px;border-radius:6px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}#intago-configurator .primary{background:var(--accent);color:#263118}#intago-configurator .dark{background:var(--ink);color:white}#intago-configurator .subtle{border:1px solid var(--line);background:white}#intago-configurator .text-button{font-size:14px;padding:8px 0;text-decoration:underline;text-underline-offset:4px}#intago-configurator .actions .prev{padding:10px 0;font-size:14px;color:#59674e}#intago-configurator .saved-note{font-size:12px;color:#7b8477;margin-top:18px;display:flex;align-items:center;gap:7px}#intago-configurator .saved-note:before{content:"";width:6px;height:6px;border-radius:50%;background:#87996d}
 #intago-configurator .visual-panel{position:sticky;top:18px;border-left:1px solid var(--line);border-radius:0 14px 14px 0;background:#eff1e9;overflow:hidden;min-width:0}
 #intago-configurator .visual-heading{display:flex;align-items:center;justify-content:space-between;padding:25px 29px 12px;gap:12px}#intago-configurator .visual-heading h2{font-size:19px;letter-spacing:-.025em;margin:5px 0}#intago-configurator .visual-heading .eyebrow{font-size:11px}#intago-configurator .model-marker{font-size:10px;letter-spacing:.1em;color:#758165}#intago-configurator .scene-tabs{display:flex;gap:3px;padding:0 22px;border-bottom:1px solid #dce1d4;overflow-x:auto;scrollbar-width:thin}#intago-configurator .scene-tabs button{padding:8px 11px;font-size:13px;color:#6d7964;white-space:nowrap;border-bottom:2px solid transparent}#intago-configurator .scene-tabs button[aria-pressed=true]{color:#253716;border-color:#788e28;font-weight:600}
 #intago-configurator .model-stage{position:relative;background:radial-gradient(ellipse at 54% 46%,#fff 0,#f3f4ee 42%,#e8ecdf 100%);height:475px}#intago-configurator #model{width:100%;height:100%}#intago-configurator .cabinet-svg{width:100%;height:100%;display:block;overflow:visible}#intago-configurator .model-handle{cursor:grab;touch-action:none;outline:none}#intago-configurator .model-handle:active{cursor:grabbing}#intago-configurator .model-handle:focus-visible>rect:nth-child(2){stroke:#749300;stroke-width:5}#intago-configurator .stage-label{position:absolute;left:25px;bottom:17px;font-size:10px;color:#77836c;letter-spacing:.1em}#intago-configurator .animate-button{position:absolute;right:20px;bottom:8px;display:flex;gap:7px;align-items:center;font-size:13px;color:#4b5a41;padding:8px}#intago-configurator .animate-button>span{font-size:21px}#intago-configurator .open-control{display:flex;align-items:center;gap:10px;padding:12px 26px;background:#e9eddF}#intago-configurator .open-control button{font-size:12px;min-height:44px;color:#61704e;padding:0}#intago-configurator .open-control input{flex:1;min-width:0;accent-color:#556835;height:44px;cursor:pointer}#intago-configurator .open-control output{font-size:13px;font-weight:600;min-width:38px;font-variant-numeric:tabular-nums;text-align:right}
 #intago-configurator .model-context{padding:18px 26px;border-bottom:1px solid #d9e0d0;min-height:84px;display:flex;gap:13px;align-items:flex-start}#intago-configurator .context-icon{font-size:22px;color:#61773b}#intago-configurator .model-context strong{font-size:14px;display:block;margin:0 0 3px;font-weight:600}#intago-configurator .model-context p{font-size:13px;color:#6a775f;margin:0;line-height:1.5}#intago-configurator .context-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:11px}#intago-configurator .context-specs span{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a8f93}#intago-configurator .context-specs strong{margin:3px 0 0;font-size:13px;color:#32373c}#intago-configurator .context-note{margin-top:10px!important;color:#74797d!important}#intago-configurator .visual-foot{padding:13px 26px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:#76826b}
 #intago-configurator .bottom-strip{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line);margin:29px 0 0;padding:0 0 25px;gap:25px}#intago-configurator .bottom-strip>div,#intago-configurator .bottom-strip>button{display:flex;align-items:center;gap:17px}#intago-configurator .strip-number{font-size:13px;color:#7d896f;border:1px solid #d1d8c9;padding:12px 9px}#intago-configurator .bottom-strip p{font-size:14px;color:#7b8572;margin:0}#intago-configurator .bottom-strip strong{font-weight:500;color:#35422b}#intago-configurator .bottom-strip>button{border-left:1px solid var(--line);border-right:1px solid var(--line);padding:0 25px;text-align:left;font-size:13px;justify-content:space-between}#intago-configurator .bottom-strip button strong{display:block;font-size:16px;margin-top:2px}#intago-configurator .line-icon{font-size:31px;color:#6d8051}#intago-configurator .bottom-strip .contact-strip{display:block;padding-left:12px;align-content:center}#intago-configurator .contact-strip>span{font-size:10px;letter-spacing:.13em;color:#7a876b;display:block}#intago-configurator .contact-strip a{font-size:19px;text-decoration:none;display:block;margin-top:4px}#intago-configurator footer{max-width:1640px;padding:22px 4.2%;margin:auto;display:flex;justify-content:space-between;font-size:12px;color:#7d8577;gap:16px}#intago-configurator footer a{text-decoration:none}
-#intago-configurator .dimension-fields{display:grid;gap:13px}#intago-configurator .dimension-fields label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px}#intago-configurator .input-wrap{position:relative}#intago-configurator .input-wrap input{width:100%;border:1px solid #cdd6c5;border-radius:5px;padding:10px 50px 10px 14px;font-size:20px;background:white}#intago-configurator .input-wrap>span{position:absolute;right:15px;top:13px;font-size:14px;color:#7d8875}#intago-configurator .field-error{color:#99432b;font-size:13px;margin:5px 0 0;min-height:0}#intago-configurator .input-wrap input[aria-invalid=true]{border-color:#a44428}#intago-configurator .field-help{font-size:13px;color:#7c8971}#intago-configurator .measure-start{width:100%;justify-content:space-between;margin:8px 0 20px}#intago-configurator .mini-link{font-size:12px;color:#68765b;min-height:26px;text-decoration:underline;padding:0}#intago-configurator .recommendation-list{display:grid;gap:12px}#intago-configurator .rec-card{border:1px solid #d6ddd0;border-radius:8px;padding:16px}#intago-configurator .rec-card.selected{border-color:#8da239;background:#f7faee}#intago-configurator .rec-head{display:flex;align-items:center;justify-content:space-between;gap:10px}#intago-configurator .rec-head h3{font-size:18px;margin:3px 0 5px}#intago-configurator .rec-card p{font-size:14px;color:#68735e;margin-bottom:10px}#intago-configurator .rec-card>button{width:100%;text-align:left}#intago-configurator .rec-tag{font-size:11px;letter-spacing:.07em;color:#728444;text-transform:uppercase}#intago-configurator .rec-check{border-radius:50%;width:22px;height:22px;border:1px solid #adbaa0;display:grid;place-items:center;flex:none}#intago-configurator .selected .rec-check{background:#bdd934;border-color:#abc536}#intago-configurator .rec-card details summary{font-size:13px;cursor:pointer;color:#566c36}#intago-configurator .rec-card details ul{font-size:13px;padding-left:18px;color:#68705e}#intago-configurator .rec-card .verification{font-size:12px;color:#826430;margin-top:8px}#intago-configurator .rec-card .spec-detail{font-size:13px;border-top:1px solid var(--line);padding-top:8px;margin:6px 0}#intago-configurator .none{padding:20px;background:#faf2e7;border-radius:8px;color:#76573a}#intago-configurator .none p{font-size:14px;margin:8px 0}#intago-configurator .rejected{font-size:13px;margin-top:18px;color:#776553}#intago-configurator .rejected ul{padding-left:20px}#intago-configurator .finish-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}#intago-configurator .finish{border:1px solid #d5ddcd;border-radius:7px;text-align:left;padding:12px}#intago-configurator .finish[aria-pressed=true]{background:#f2f7e5;border-color:#8da13e}#intago-configurator .finish .swatch{height:65px;border-radius:3px;display:block;background:var(--swatch);box-shadow:inset 0 1px 0 #ffffff66,inset 0 -6px 12px #00000015}#intago-configurator .finish.metal .swatch{background:linear-gradient(115deg,#ffffff33,transparent 40%,#ffffff77 53%,transparent 66%),var(--swatch)}#intago-configurator .finish strong{display:block;font-size:14px;margin-top:9px}#intago-configurator .finish small{display:block;font-size:12px;color:#737e69}#intago-configurator .summary-list{margin:0}#intago-configurator .summary-list>div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}#intago-configurator .summary-list dt{color:#718065}#intago-configurator .summary-list dd{margin:0;text-align:right;font-weight:500}#intago-configurator .configuration-id{font-size:11px;letter-spacing:.035em;color:#637153;overflow-wrap:anywhere}#intago-configurator .summary-buttons{display:grid;gap:9px;margin-top:22px}#intago-configurator .summary-buttons .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}#intago-configurator .summary-buttons button{font-size:14px}
+#intago-configurator .dimension-fields{display:grid;gap:13px}#intago-configurator .dimension-fields label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px}#intago-configurator .input-wrap{position:relative}#intago-configurator .input-wrap input{width:100%;border:1px solid #cdd6c5;border-radius:5px;padding:10px 50px 10px 14px;font-size:20px;background:white}#intago-configurator .input-wrap>span{position:absolute;right:15px;top:13px;font-size:14px;color:#7d8875}#intago-configurator .field-error{color:#99432b;font-size:13px;margin:5px 0 0;min-height:0}#intago-configurator .input-wrap input[aria-invalid=true]{border-color:#a44428}#intago-configurator .field-help{font-size:13px;color:#7c8971}#intago-configurator .measure-start{width:100%;justify-content:space-between;margin:8px 0 20px}#intago-configurator .mini-link{font-size:12px;color:#68765b;min-height:26px;text-decoration:underline;padding:0}#intago-configurator .recommendation-list{display:grid;gap:12px}#intago-configurator .rec-card{border:1px solid #d6ddd0;border-radius:8px;padding:16px}#intago-configurator .rec-card.selected{border-color:#8da239;background:#f7faee}#intago-configurator .rec-head{display:flex;align-items:center;justify-content:space-between;gap:10px}#intago-configurator .rec-head h3{font-size:18px;margin:3px 0 5px}#intago-configurator .rec-card p{font-size:14px;color:#68735e;margin-bottom:10px}#intago-configurator .rec-card>button{width:100%;text-align:left}#intago-configurator .rec-tag{font-size:11px;letter-spacing:.07em;color:#728444;text-transform:uppercase}#intago-configurator .rec-check{border-radius:50%;width:22px;height:22px;border:1px solid #adbaa0;display:grid;place-items:center;flex:none}#intago-configurator .selected .rec-check{background:#bdd934;border-color:#abc536}#intago-configurator .rec-card details summary{font-size:13px;cursor:pointer;color:#566c36}#intago-configurator .rec-card details ul{font-size:13px;padding-left:18px;color:#68705e}#intago-configurator .rec-card .verification{font-size:12px;color:#826430;margin-top:8px}#intago-configurator .rec-card .spec-detail{font-size:13px;border-top:1px solid var(--line);padding-top:8px;margin:6px 0}#intago-configurator .none{padding:20px;background:#faf2e7;border-radius:8px;color:#76573a}#intago-configurator .none p{font-size:14px;margin:8px 0}#intago-configurator .rejected{font-size:13px;margin-top:18px;color:#776553}#intago-configurator .rejected ul{padding-left:20px}#intago-configurator .finish-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}#intago-configurator .finish{border:1px solid #d5ddcd;border-radius:7px;text-align:left;padding:12px}#intago-configurator .finish[aria-pressed=true]{background:#f2f7e5;border-color:#8da13e}#intago-configurator .finish .swatch{height:65px;border-radius:3px;display:block;background:var(--swatch);box-shadow:inset 0 1px 0 #ffffff66,inset 0 -6px 12px #00000015}#intago-configurator .finish.metal .swatch{background:linear-gradient(115deg,#ffffff33,transparent 40%,#ffffff77 53%,transparent 66%),var(--swatch)}#intago-configurator .finish strong{display:block;font-size:14px;margin-top:9px}#intago-configurator .finish small{display:block;font-size:12px;color:#737e69}#intago-configurator .summary-list{margin:0}#intago-configurator .summary-list>div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}#intago-configurator .summary-list dt{color:#718065}#intago-configurator .summary-list dd{margin:0;text-align:right;font-weight:500}#intago-configurator .configuration-id{font-size:11px;letter-spacing:.035em;color:#637153;overflow-wrap:anywhere}#intago-configurator .summary-buttons{display:grid;gap:9px;margin-top:22px}#intago-configurator .summary-buttons .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}#intago-configurator .summary-buttons button{font-size:14px}
 #intago-configurator .summary-cart-note{margin:8px 0 0;font-size:11px;line-height:1.45;color:#707579}
 #intago-configurator .summary-cart-note strong{color:#32373c}
 #intago-configurator .summary-cart-meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}
@@ -44,7 +56,7 @@
 @media print{#intago-configurator .materials-panel{display:none!important}}
 
 #intago-configurator .summary-details{font-size:14px;color:#69775e}#intago-configurator .summary-details ul{padding-left:18px}#intago-configurator .expert-card{border-bottom:1px solid var(--line);padding:17px 0}#intago-configurator .expert-card h3{display:flex;justify-content:space-between;align-items:center}#intago-configurator .expert-card h3 button{font-size:14px;letter-spacing:0;min-height:44px;color:#5c742e}#intago-configurator .expert-card p{font-size:13px;color:#737f68;margin:0 0 7px}#intago-configurator .expert-card details{font-size:13px}#intago-configurator .expert-card summary{cursor:pointer}#intago-configurator .expert-card ul{padding-left:18px}#intago-configurator .expert-card a{color:#637c30}#intago-configurator .compare-button{margin-top:12px}#intago-configurator .mounting-summary{font-size:14px;color:#69765d}
-#intago-configurator dialog{border:1px solid var(--line);border-radius:14px;padding:32px;max-width:620px;width:calc(100% - 32px);max-height:calc(100dvh - 40px);color:var(--ink);box-shadow:0 20px 100px #15201033}#intago-configurator dialog::backdrop{background:#17231988;backdrop-filter:blur(3px)}#intago-configurator .dialog-close{position:absolute;right:14px;top:12px;width:44px;height:44px;font-size:27px;color:#66765b}#intago-configurator dialog h2{padding-right:22px;font-size:30px}#intago-configurator dialog>p{color:var(--muted);font-size:15px}#intago-configurator dialog textarea{display:block;width:100%;resize:vertical;margin:8px 0 18px;padding:12px;border:1px solid #c9d3bf;border-radius:6px;line-height:1.5}#intago-configurator dialog .btn{width:100%;margin-top:8px}#intago-configurator dialog label{font-size:14px}#intago-configurator dialog details{margin-bottom:12px}#intago-configurator dialog summary{cursor:pointer;font-size:14px;display:flex;align-items:center}#intago-configurator dialog pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;font-size:13px;line-height:1.5;background:#f5f7ef;padding:14px}#intago-configurator .measurement-drawing{height:280px;margin:10px -12px;background:#f0f3e9;border-radius:8px}#intago-configurator .measurement-drawing svg{width:100%;height:100%}#intago-configurator .measurement-hint{font-size:15px;color:#67765b;margin:13px 0}#intago-configurator .measurement-progress{display:flex;gap:6px;margin:14px 0}#intago-configurator .measurement-progress i{height:4px;background:#e4e9db;flex:1}#intago-configurator .measurement-progress i.active{background:#a9c32a}#intago-configurator .measure-actions{display:flex;gap:12px;justify-content:space-between;margin-top:15px}#intago-configurator .measure-actions .btn{width:auto}#intago-configurator .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#25321e;color:white;border-radius:6px;padding:13px 22px;opacity:0;pointer-events:none;transition:.2s;z-index:1000;max-width:calc(100% - 30px);font-size:14px}#intago-configurator .toast.visible{opacity:1;transform:translate(-50%,0)}#intago-configurator .noscript{padding:30px;background:#f3eaca}
+#intago-configurator dialog{border:1px solid var(--line);border-radius:14px;padding:32px;max-width:620px;width:calc(100% - 32px);max-height:calc(100dvh - 40px);color:var(--ink);box-shadow:0 20px 100px #15201033}#intago-configurator dialog::backdrop{background:#17231988;backdrop-filter:blur(3px)}#intago-configurator .dialog-close{position:absolute;right:14px;top:12px;width:44px;height:44px;font-size:27px;color:#66765b}#intago-configurator dialog h2{padding-right:22px;font-size:30px}#intago-configurator dialog>p{color:var(--muted);font-size:15px}#intago-configurator dialog textarea{display:block;width:100%;resize:vertical;margin:8px 0 18px;padding:12px;border:1px solid #c9d3bf;border-radius:6px;line-height:1.5}#intago-configurator dialog .btn{width:100%;margin-top:8px}#intago-configurator dialog label{font-size:14px}#intago-configurator dialog details{margin-bottom:12px}#intago-configurator dialog summary{cursor:pointer;font-size:14px;display:flex;align-items:center}#intago-configurator dialog pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;font-size:13px;line-height:1.6;background:#f7f7f7;padding:16px;border:1px solid #e4e5e6;border-radius:6px;color:#3f4448}#intago-configurator .measurement-drawing{height:280px;margin:10px -12px;background:#f0f3e9;border-radius:8px}#intago-configurator .measurement-drawing svg{width:100%;height:100%}#intago-configurator .measurement-hint{font-size:15px;color:#67765b;margin:13px 0}#intago-configurator .measurement-progress{display:flex;gap:6px;margin:14px 0}#intago-configurator .measurement-progress i{height:4px;background:#e4e9db;flex:1}#intago-configurator .measurement-progress i.active{background:#a9c32a}#intago-configurator .measure-actions{display:flex;gap:12px;justify-content:space-between;margin-top:15px}#intago-configurator .measure-actions .btn{width:auto}#intago-configurator .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#25321e;color:white;border-radius:6px;padding:13px 22px;opacity:0;pointer-events:none;transition:.2s;z-index:1000;max-width:calc(100% - 30px);font-size:14px}#intago-configurator .toast.visible{opacity:1;transform:translate(-50%,0)}#intago-configurator .noscript{padding:30px;background:#f3eaca}
 /* Firmowa paleta INTAGO: czerwień #D2071D, grafit #32373C, biel i jasne szarości. */
 #intago-configurator :focus-visible{outline-color:var(--accent-dark)}#intago-configurator h1>span{color:var(--accent)}
 #intago-configurator .step-nav button[aria-current=step]{color:var(--accent-dark);border-color:var(--accent)}#intago-configurator .step-nav button.completed{border-color:#c9cbcd;color:#5f6468}
@@ -64,7 +76,7 @@
 @keyframes intago-play{0%{transform:translateX(0)}42%{transform:translateX(4px)}72%{transform:translateX(1px)}100%{transform:translateX(0)}}
 @media(min-width:1600px){#intago-configurator .model-stage{height:550px}#intago-configurator .decision-panel{min-height:775px}}
 @media(max-width:1150px){#intago-configurator .site-header{padding:0 3%;gap:16px}#intago-configurator .brand-sub,#intago-configurator .phone{display:none}#intago-configurator .site-header nav{gap:10px}#intago-configurator .page-intro .intro-note{display:none}#intago-configurator main{padding:0 3%}#intago-configurator .workspace{grid-template-columns:minmax(330px,41%) minmax(0,59%)}#intago-configurator .decision-panel{padding:25px 23px}#intago-configurator .question h2{font-size:31px}#intago-configurator .visual-heading{padding:23px 22px 10px}#intago-configurator .model-marker{display:none}#intago-configurator .model-stage{height:430px}#intago-configurator .scene-tabs{padding:0 12px}#intago-configurator .scene-tabs button{font-size:12px;padding:8px}#intago-configurator .stage-label{font-size:9px;left:18px}#intago-configurator .visual-foot{flex-direction:column;align-items:flex-start;gap:3px}#intago-configurator .bottom-strip{gap:16px}#intago-configurator .contact-strip a{font-size:17px}}
-@media(max-width:760px){#intago-configurator .site-header{height:65px;padding:0 20px;gap:8px}#intago-configurator .brand-logo{width:156px}#intago-configurator .site-header nav{display:none}#intago-configurator .expert-toggle{padding:0 9px;font-size:12px;border:0}#intago-configurator .expert-toggle span{margin-left:4px}#intago-configurator main{padding:0 15px}#intago-configurator .page-intro{margin:23px 5px 22px}#intago-configurator .page-intro .eyebrow{font-size:10px;letter-spacing:.12em}#intago-configurator h1{font-size:31px;line-height:1.14;letter-spacing:-.045em;margin-top:9px}#intago-configurator .mobile-break{display:block}#intago-configurator .workspace{display:flex;flex-direction:column;border-radius:10px;overflow:visible}#intago-configurator .visual-panel{order:-1;position:relative;top:auto;width:100%;border-left:0;border-radius:10px 10px 0 0}#intago-configurator .visual-heading{padding:16px 18px 7px}#intago-configurator .visual-heading h2{font-size:17px;margin:4px 0}#intago-configurator .visual-heading .eyebrow{font-size:9px}#intago-configurator .scene-tabs{padding:0 10px;gap:0}#intago-configurator .scene-tabs button{font-size:12px;padding:7px 9px;min-height:44px}#intago-configurator .model-stage{height:310px}#intago-configurator .stage-label{font-size:8px;bottom:10px;left:13px;max-width:170px}#intago-configurator .animate-button{font-size:11px;right:8px;bottom:0}#intago-configurator .open-control{padding:1px 14px;gap:7px}#intago-configurator .open-control button{font-size:11px}#intago-configurator .open-control output{font-size:12px}#intago-configurator .model-context{padding:13px 16px;min-height:72px;gap:10px}#intago-configurator .model-context strong{font-size:13px}#intago-configurator .model-context p{font-size:12px}#intago-configurator .visual-foot{padding:9px 16px;font-size:10px;display:block}#intago-configurator .visual-foot>span:last-child{display:none}#intago-configurator .decision-panel{padding:20px;width:100%;min-height:0;border-radius:15px 15px 0 0;background:white;border-top:1px solid #e1e2e3}#intago-configurator .step-nav{margin-bottom:21px;gap:8px}#intago-configurator .step-nav button{min-height:33px;font-size:12px}#intago-configurator .step-meta{margin-bottom:12px}#intago-configurator .step-meta .eyebrow{font-size:10px}#intago-configurator .step-meta>span:last-child{font-size:12px}#intago-configurator .question{min-height:0}#intago-configurator .question h2{font-size:29px;max-width:300px}#intago-configurator .question .intro{font-size:14px;line-height:1.6;margin-bottom:21px}#intago-configurator .choice{padding:15px;min-height:157px}#intago-configurator .choice[aria-pressed=true]{padding:14.5px}#intago-configurator .choice svg{width:51px;height:55px;margin-bottom:9px}#intago-configurator .choice strong{font-size:16px}#intago-configurator .choice small{font-size:12px}#intago-configurator .bottom-choice .choice{min-height:104px}#intago-configurator .hint{font-size:13px;margin-top:18px}#intago-configurator .actions{position:sticky;bottom:0;background:white;z-index:5;padding:13px 0;margin-top:20px}#intago-configurator .actions .btn{font-size:14px;padding:12px 16px}#intago-configurator .saved-note{font-size:11px;margin-top:8px}#intago-configurator .bottom-strip{display:block;margin-top:20px;padding-bottom:12px}#intago-configurator .bottom-strip>div:first-child,#intago-configurator .contact-strip{display:none!important}#intago-configurator .bottom-strip>button{width:100%;border:0;padding:0 10px;font-size:12px}#intago-configurator .bottom-strip button strong{font-size:15px}#intago-configurator footer{padding:20px 20px;flex-wrap:wrap;font-size:10px}#intago-configurator footer>span:nth-child(2){display:none}#intago-configurator dialog{padding:26px 22px;width:calc(100% - 20px);max-height:calc(100dvh - 20px)}#intago-configurator dialog h2{font-size:27px}#intago-configurator .measurement-drawing{height:245px}#intago-configurator .measurement-hint{font-size:14px}#intago-configurator .summary-list>div{font-size:13px}#intago-configurator .finish .swatch{height:58px}}
+@media(max-width:760px){#intago-configurator .finish-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#intago-configurator .site-header{height:65px;padding:0 20px;gap:8px}#intago-configurator .brand-logo{width:156px}#intago-configurator .site-header nav{display:none}#intago-configurator .expert-toggle{padding:0 9px;font-size:12px;border:0}#intago-configurator .expert-toggle span{margin-left:4px}#intago-configurator main{padding:0 15px}#intago-configurator .page-intro{margin:23px 5px 22px}#intago-configurator .page-intro .eyebrow{font-size:10px;letter-spacing:.12em}#intago-configurator h1{font-size:31px;line-height:1.14;letter-spacing:-.045em;margin-top:9px}#intago-configurator .page-intro .tool-title{font-size:31px;line-height:1.14;letter-spacing:-.045em;margin-top:9px}#intago-configurator .mobile-break{display:block}#intago-configurator .workspace{display:flex;flex-direction:column;border-radius:10px;overflow:visible}#intago-configurator .visual-panel{order:-1;position:relative;top:auto;width:100%;border-left:0;border-radius:10px 10px 0 0}#intago-configurator .visual-heading{padding:16px 18px 7px}#intago-configurator .visual-heading h2{font-size:17px;margin:4px 0}#intago-configurator .visual-heading .eyebrow{font-size:9px}#intago-configurator .scene-tabs{padding:0 10px;gap:0}#intago-configurator .scene-tabs button{font-size:12px;padding:7px 9px;min-height:44px}#intago-configurator .model-stage{height:310px}#intago-configurator .stage-label{font-size:8px;bottom:10px;left:13px;max-width:170px}#intago-configurator .animate-button{font-size:11px;right:8px;bottom:0}#intago-configurator .open-control{padding:1px 14px;gap:7px}#intago-configurator .open-control button{font-size:11px}#intago-configurator .open-control output{font-size:12px}#intago-configurator .model-context{padding:13px 16px;min-height:72px;gap:10px}#intago-configurator .model-context strong{font-size:13px}#intago-configurator .model-context p{font-size:12px}#intago-configurator .visual-foot{padding:9px 16px;font-size:10px;display:block}#intago-configurator .visual-foot>span:last-child{display:none}#intago-configurator .decision-panel{padding:20px;width:100%;min-height:0;border-radius:15px 15px 0 0;background:white;border-top:1px solid #e1e2e3}#intago-configurator .step-nav{margin-bottom:21px;gap:8px}#intago-configurator .step-nav button{min-height:33px;font-size:12px}#intago-configurator .step-meta{margin-bottom:12px}#intago-configurator .step-meta .eyebrow{font-size:10px}#intago-configurator .step-meta>span:last-child{font-size:12px}#intago-configurator .question{min-height:0}#intago-configurator .question h2{font-size:29px;max-width:300px}#intago-configurator .question .intro{font-size:14px;line-height:1.6;margin-bottom:21px}#intago-configurator .choice{padding:15px;min-height:157px}#intago-configurator .choice[aria-pressed=true]{padding:14.5px}#intago-configurator .choice svg{width:51px;height:55px;margin-bottom:9px}#intago-configurator .choice strong{font-size:16px}#intago-configurator .choice small{font-size:12px}#intago-configurator .bottom-choice .choice{min-height:104px}#intago-configurator .hint{font-size:13px;margin-top:18px}#intago-configurator .actions{position:sticky;bottom:0;background:white;z-index:5;padding:13px 0;margin-top:20px}#intago-configurator .actions .btn{font-size:14px;padding:12px 16px}#intago-configurator .saved-note{font-size:11px;margin-top:8px}#intago-configurator .bottom-strip{display:block;margin-top:20px;padding-bottom:12px}#intago-configurator .bottom-strip>div:first-child,#intago-configurator .contact-strip{display:none!important}#intago-configurator .bottom-strip>button{width:100%;border:0;padding:0 10px;font-size:12px}#intago-configurator .bottom-strip button strong{font-size:15px}#intago-configurator footer{padding:20px 20px;flex-wrap:wrap;font-size:10px}#intago-configurator footer>span:nth-child(2){display:none}#intago-configurator dialog{padding:26px 22px;width:calc(100% - 20px);max-height:calc(100dvh - 20px)}#intago-configurator dialog h2{font-size:27px}#intago-configurator .measurement-drawing{height:245px}#intago-configurator .measurement-hint{font-size:14px}#intago-configurator .summary-list>div{font-size:13px}#intago-configurator .finish .swatch{height:58px}}
 @media(max-width:760px){#intago-configurator .model-stage{height:345px}#intago-configurator .model-stage #model{height:300px}#intago-configurator .stage-label{left:12px;bottom:5px;max-width:48%;padding:6px 7px}#intago-configurator .animate-button{right:7px;bottom:1px}}
 @media(prefers-reduced-motion:reduce){#intago-configurator *,#intago-configurator *:before,#intago-configurator *:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @media print{@page{size:A4;margin:12mm}#intago-configurator .site-header,#intago-configurator .page-intro,#intago-configurator .step-nav,#intago-configurator .scene-tabs,#intago-configurator .open-control,#intago-configurator .stage-label,#intago-configurator .animate-button,#intago-configurator .bottom-strip,#intago-configurator footer,#intago-configurator .actions,#intago-configurator .saved-note,#intago-configurator .summary-buttons,#intago-configurator .visual-foot,#intago-configurator .toast,#intago-configurator dialog{display:none!important}#intago-configurator main{padding:0;max-width:none}#intago-configurator .workspace{display:flex;flex-direction:column;border:0}#intago-configurator .visual-panel{order:-1;width:100%;position:static;border:0;break-inside:avoid}#intago-configurator .model-stage{height:330px}#intago-configurator .visual-heading{padding:10px}#intago-configurator .model-context{display:none}#intago-configurator .decision-panel{padding:12px;min-height:0;width:100%}#intago-configurator .question h2{font-size:24px}#intago-configurator .question>.intro{display:none}#intago-configurator .summary-list{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}#intago-configurator .summary-details{font-size:11px}#intago-configurator .summary-details ul{margin:0}#intago-configurator .summary-details>summary{display:none}}
@@ -181,6 +193,17 @@
 @media(max-width:1150px){#intago-configurator .visual-meta{gap:3px}#intago-configurator .live-price{font-size:12px;padding:4px 7px}}
 @media(max-width:760px){#intago-configurator .visual-meta{align-items:flex-end}#intago-configurator .live-price{font-size:11px}#intago-configurator .rec-price{padding:9px}#intago-configurator .rec-price-text strong{font-size:18px}}
 #intago-configurator .rec-finishes{margin:12px 0 11px;padding-top:11px;border-top:1px solid #e5e6e7}#intago-configurator .rec-finishes-label{display:block;margin-bottom:7px;font-size:9px;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;color:#858a8e}#intago-configurator .rec-finish-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:8px}#intago-configurator .rec-finish{min-width:0}#intago-configurator .rec-finish-swatch{display:block;height:32px;border:1px solid rgba(50,55,60,.12);border-radius:3px;background:var(--swatch);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -5px 9px rgba(0,0,0,.06)}#intago-configurator .rec-finish-swatch.metal{background:linear-gradient(115deg,rgba(255,255,255,.28),transparent 40%,rgba(255,255,255,.62) 53%,transparent 66%),var(--swatch)}#intago-configurator .rec-finish-name{display:block;margin-top:5px;font-size:10px;line-height:1.25;color:#5f6468;overflow-wrap:anywhere}
+#intago-configurator .rec-finish-code{display:block;margin-top:2px;font-size:8px;line-height:1.2;color:#969a9d;overflow-wrap:anywhere}
+#intago-configurator .finish.decor .swatch,#intago-configurator .rec-finish-swatch.decor{background:linear-gradient(105deg,rgba(255,255,255,.12),transparent 26%,rgba(90,60,35,.09) 27%,transparent 29%,rgba(255,255,255,.08) 52%,transparent 55%,rgba(80,55,35,.08) 78%,transparent 81%),var(--swatch)}
+#intago-configurator .color-source-row{display:flex;justify-content:flex-end;margin-top:9px}
+#intago-configurator .color-source-link{font-size:10.5px;line-height:1.3;color:var(--accent-dark);text-decoration:underline;text-underline-offset:3px}
+#intago-configurator .color-source-link:hover{filter:none}
+#intago-configurator .color-disclaimer strong{color:#4d5256}
+#intago-configurator .finish-availability{display:inline-flex;align-items:center;width:max-content;margin-top:6px;padding:3px 6px;border-radius:999px;font-size:9px;line-height:1.2;font-weight:700;letter-spacing:.025em}
+#intago-configurator .finish-availability.is-stock{background:#eef5e4;color:#3d5a24;border:1px solid #ccdcb9}
+#intago-configurator .finish-availability.is-order{background:#f5f5f5;color:#666b6f;border:1px solid #d9dbdc}
+#intago-configurator .rec-finish .finish-availability{font-size:8px;margin-top:4px;padding:2px 5px}
+
 
 
 #intago-configurator .scene-tabs button[hidden]{display:none!important}#intago-configurator .range-option{padding:12px 14px;margin:8px 0;border:1px solid #dce0e2;border-radius:6px;font-size:13px}#intago-configurator .range-option p{margin:5px 0;line-height:1.5}#intago-configurator .range-outside{border-color:#d2071d;background:#fff4f5}#intago-configurator .range-error{color:#b00018;font-weight:600}#intago-configurator .model-stage:has([data-scene-unused]){position:relative}
@@ -344,20 +367,22 @@
 </style>
 
 <div id="intago-configurator">
+  <a class="skip-link" href="#wizard">Przejdź do konfiguratora</a>
   <div class="selly-expert-row"><button class="expert-toggle" data-action="expert" aria-pressed="false">Dla profesjonalisty <span aria-hidden="true">↗</span></button></div>
   <main id="top">
- <div class="page-intro"><div><p class="eyebrow">SYSTEMY ROLET MEBLOWYCH / INTAGO</p><h1>Roleta dopasowana<br class="mobile-break"> do Twojego mebla<span>.</span></h1></div><p class="intro-note">Otwórz. Zobacz. Dopasuj.<br>Od pomysłu do właściwego wariantu w koszyku.</p></div>
- <section class="workspace" aria-label="Konfigurator rolety">
+ <div class="page-intro"><div><p class="eyebrow">KONFIGURATOR ROLET MEBLOWYCH / REHAU</p><h2 id="configurator-heading" class="tool-title">Skonfiguruj roletę meblową<br class="mobile-break"> na wymiar<span>.</span></h2></div><p class="intro-note">Dobierz system, montaż, wymiary i kolor.<br>Sprawdź cenę i przejdź do koszyka.</p></div>
+ <section class="workspace" aria-labelledby="configurator-heading">
   <div class="decision-panel">
    <div id="step-nav" class="step-nav" aria-label="Etapy konfiguracji"></div>
    <div id="wizard"></div>
   </div>
-  <aside class="visual-panel" aria-label="Podgląd Twojej rolety">
+  <aside class="visual-panel" aria-label="Podgląd rolety meblowej na wymiar">
    <div class="visual-heading"><div><span class="eyebrow">TWÓJ MEBEL</span><h2 id="model-title">Sprawdź, jak to działa.</h2></div><div class="visual-meta"><span class="model-marker">PODGLĄD NA ŻYWO</span><strong id="live-price" class="live-price" aria-live="polite"></strong></div></div>
    <div class="scene-tabs" role="group" aria-label="Widok mebla">
     <button data-scene="front" aria-pressed="true">Wygląd</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Budowa</button><button data-scene="gallery" aria-pressed="false" hidden>Galeria</button>
    </div>
    <div class="model-stage"><div id="model"></div><div id="build-overlay" class="build-overlay" hidden aria-label="Elementy aktualnej konfiguracji"></div><div id="gallery-overlay" class="gallery-overlay" hidden aria-label="Galeria realizacji"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button id="assembly-button" class="assembly-button" data-action="assemble" aria-label="Zobacz animację montażu rolety" hidden><span aria-hidden="true">✦</span> Zobacz jak powstaje</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
+   <button class="direction-toggle" id="direction-toggle" data-action="toggle-direction" hidden>Otwieranie w prawo → · Zmień kierunek</button>
    <div class="open-control"><button data-action="close" aria-label="Zamknij roletę">Zamknięta</button><input id="open-range" type="range" min="0" max="100" value="35" aria-label="Otwarcie rolety"><button data-action="open" aria-label="Otwórz roletę">Otwarta</button><output id="open-value" for="open-range">35%</output></div>
    <div id="model-context" class="model-context"></div>
    <div class="visual-foot"><span id="dimensions-caption">Przykładowy mebel • podaj własne wymiary wewnętrzne</span><span>Wizualizacja poglądowa</span></div>
@@ -367,12 +392,54 @@
 </main>
   
 <dialog id="measure-dialog" aria-labelledby="measure-title"><button class="dialog-close" data-action="close-measure" aria-label="Zamknij pomiar">×</button><div id="measure-content"></div></dialog>
-<dialog id="quote-dialog" aria-labelledby="quote-title"><button class="dialog-close" data-action="close-quote" aria-label="Zamknij zapytanie">×</button><span class="eyebrow">INTAGO / ZAPYTANIE</span><h2 id="quote-title">Porozmawiajmy o Twojej rolecie.</h2><p>Przygotujemy wiadomość z całą konfiguracją. Sprawdzisz ją i wyślesz w swoim programie pocztowym.</p><label for="quote-note">Co jeszcze powinniśmy wiedzieć? <span class="muted">(opcjonalnie)</span></label><textarea id="quote-note" rows="3" maxlength="1500" placeholder="Np. szafka już jest gotowa, na plecach jest gniazdko…"></textarea><details><summary>Zobacz treść konfiguracji</summary><pre id="quote-preview"></pre></details><a id="quote-mail" class="btn primary" href="mailto:sklep@intago.pl">Otwórz wiadomość e-mail ↗</a><button class="btn subtle" data-action="download-text">Pobierz zapytanie jako plik</button><p class="micro">Konfigurator nie wysyła danych automatycznie.</p></dialog>
+<dialog id="quote-dialog" aria-labelledby="quote-title"><button class="dialog-close" data-action="close-quote" aria-label="Zamknij zapytanie">×</button><span class="eyebrow">INTAGO / ZAPYTANIE</span><h2 id="quote-title">Porozmawiajmy o Twojej rolecie.</h2><p>Przygotujemy krótkie zapytanie z najważniejszymi danymi rolety. Sprawdzisz je i wyślesz w swoim programie pocztowym.</p><label for="quote-note">Co jeszcze powinniśmy wiedzieć? <span class="muted">(opcjonalnie)</span></label><textarea id="quote-note" rows="3" maxlength="1500" placeholder="Np. szafka już jest gotowa, na plecach jest gniazdko…"></textarea><details><summary>Zobacz dane wysyłane do sklepu</summary><pre id="quote-preview"></pre></details><a id="quote-mail" class="btn primary" href="mailto:sklep@intago.pl">Otwórz wiadomość e-mail ↗</a><button class="btn subtle" data-action="download-text">Pobierz zapytanie jako plik</button><p class="micro">Konfigurator nie wysyła danych automatycznie.</p></dialog>
 <dialog id="copy-dialog" aria-labelledby="copy-title"><button class="dialog-close" data-action="close-copy" aria-label="Zamknij kopiowanie">×</button><h2 id="copy-title">Skopiuj konfigurację</h2><p>Zaznacz tekst i skopiuj go do swojej wiadomości.</p><textarea id="copy-text" rows="14" readonly aria-label="Treść konfiguracji"></textarea></dialog>
 <div id="status" role="status" aria-live="polite" class="toast"></div>
-<noscript><p class="noscript">Włącz JavaScript, aby skorzystać z konfiguratora. Możesz też napisać do sklep@intago.pl.</p></noscript>
+<noscript><p class="noscript">Konfigurator rolet meblowych na wymiar wymaga JavaScript. Możesz też napisać do sklep@intago.pl.</p></noscript>
 
 </div>
+
+
+<style id="intago-step5-price-final">
+#intago-configurator .rec-price{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;
+ gap:12px;
+ margin:12px 0 4px;
+ padding:11px 12px;
+}
+#intago-configurator .rec-price-text{min-width:0}
+#intago-configurator .rec-price-text small{display:block;margin-bottom:2px}
+#intago-configurator .rec-price-text strong{display:block;line-height:1.18;white-space:normal}
+#intago-configurator .rec-price-badge{align-self:center;max-width:92px;line-height:1.25}
+#intago-configurator .rec-price.loading{background:#fafafa;border-style:dashed}
+#intago-configurator .rec-price.loading .rec-price-text strong{font-size:16px;color:#5f6468}
+#intago-configurator .rec-price.quote .rec-price-text strong{line-height:1.25}
+@media(max-width:760px){
+ #intago-configurator .rec-price{grid-template-columns:1fr;gap:5px}
+ #intago-configurator .rec-price-badge{text-align:left;max-width:none}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://www.intago.com.pl/konfigurator-rolet-meblowych-intago,p52.html#konfigurator",
+  "name": "Konfigurator rolet meblowych REHAU",
+  "url": "https://www.intago.com.pl/konfigurator-rolet-meblowych-intago,p52.html",
+  "description": "Konfigurator rolet meblowych REHAU na wymiar. Dobór systemu, montażu, wymiarów, koloru, ceny i wariantu produktu.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "provider": {
+    "@type": "Organization",
+    "name": "INTAGO",
+    "url": "https://www.intago.com.pl/"
+  }
+}
+</script>
 
 
 <style id="intago-print-compact-fix">
@@ -490,7 +557,7 @@
 /* systems-data.js */
 
 // Oferta INTAGO; źródła, ograniczenia i konflikty: docs/product-research.md.
-const DATA_VERSION='2026-09-15.2';
+const DATA_VERSION='2026-09-17.1';
 const sources={
  business:{name:'Zakres biznesowy INTAGO',url:null},
  rehau:{name:'REHAU — mechanizmy i prowadnice',url:'https://interior.rehau.com/pl-pl/produkty/rauvolet/mechanizmy-i-systemy-prowadnic'},
@@ -521,13 +588,101 @@ const profiles={
  e9:{name:'E9',evidence:fact('E9','nobleIn'),pitch:fact(26.5,'business','verified','Jeden szczebel = 26,5 mm.'),thickness:fact(8,'business')},
  ml25:{name:'Metallic Line 25',evidence:fact('Metallic Line 25','frame')}
 };
+const REHAU_COLOR_DECOR_URL='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-color-decor-line';
+const REHAU_NOBLE_MATT_URL='https://interior.rehau.com/pl-pl/produkty/rauvolet/program-rauvolet/rauvolet-noble-matt';
+
 const finishes={
- white:{id:'white',name:'Biały',code:'RAL 9010',color:'#e5e4df',edge:'#afafa9',material:'solid'},
- silver:{id:'silver',name:'Aluminium decor',code:null,color:'#b7bbbd',edge:'#767f84',material:'metal'},
- aluminium:{id:'aluminium',name:'Aluminium',code:null,color:'#bdc3c5',edge:'#7d858a',material:'metal'},
- casa:{id:'casa',name:'Casa Blanca',code:'V3552',color:'#e8e6df',edge:'#b9b5ae',material:'matte'},
- blonde:{id:'blonde',name:'Boxcar Blonde',code:'V3610',color:'#b9af9d',edge:'#8c8170',material:'matte'},
- dark:{id:'dark',name:'After Dark',code:'V3555',color:'#333738',edge:'#1d2224',material:'matte'}
+ // TOP BASIC / TOP BASIC + C3 — finalna paleta wg ustalenia INTAGO
+ // i próbek REHAU pokazanych na stronie producenta.
+ brilliant:{
+  id:'brilliant',availability:'order',name:'Biały Brilliant',code:'V3249',
+  color:'#FFFFFF',edge:'#D9D9D9',material:'solid',
+  family:'RAUVOLET color-line',profile:'E9',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+ black:{
+  id:'black',availability:'order',name:'Czarny',code:'zbliżony do RAL 9011',
+  color:'#3D353C',edge:'#211C20',material:'solid',
+  family:'RAUVOLET color-line',profile:'E23',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+ white:{
+  id:'white',availability:'stock',name:'Biały',code:'zbliżony do RAL 9010',
+  color:'#F9FAF5',edge:'#D6D8D3',material:'solid',
+  family:'RAUVOLET color-line',profile:'E23',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+ lightgray:{
+  id:'lightgray',availability:'order',name:'Szary jasny',code:'zbliżony do RAL 7035',
+  color:'#CBCBCB',edge:'#9FA1A1',material:'solid',
+  family:'RAUVOLET color-line',profile:'E23',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+ anthracite:{
+  id:'anthracite',availability:'order',name:'Antracyt',code:'zbliżony do RAL 7016',
+  color:'#353B40',edge:'#24292D',material:'solid',
+  family:'RAUVOLET color-line',profile:'E23',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+
+ // Techniczny wpis legacy dla istniejącego cennika Selly.
+ // Nie jest pokazywany użytkownikowi w finalnej palecie.
+ silver:{
+  id:'silver',availability:'stock',name:'Aluminium',code:'7194',
+  color:'#B9BEC0',edge:'#747D82',material:'metal',
+  family:'RAUVOLET decor-line',profile:'E23',sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+ aluminium:{
+  id:'aluminium',availability:'stock',name:'Aluminium',code:'7194',
+  color:'#B9BEC0',edge:'#747D82',material:'metal',
+  family:'element systemu',profile:null,sourceUrl:REHAU_COLOR_DECOR_URL
+ },
+
+ // NOBLE MATT — finalna paleta wg ustalenia INTAGO i próbek REHAU.
+ casa:{
+  id:'casa',availability:'order',name:'Casa Blanca',code:'V3552 · 2453L',
+  shutterCode:'V3552',surfaceCode:'2453L',
+  color:'#FDFDFD',edge:'#D8D8D8',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/casa-blanca'
+ },
+ blonde:{
+  id:'blonde',availability:'stock',name:'Boxcar Blonde',code:'V3610 · 2464L',
+  shutterCode:'V3610',surfaceCode:'2464L',
+  color:'#D1C7BF',edge:'#A69A91',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/boxcar-blonde'
+ },
+ silverlake:{
+  id:'silverlake',availability:'order',name:'Silver Lake',code:'V3553 · 2456L',
+  shutterCode:'V3553',surfaceCode:'2456L',
+  color:'#DCD9D1',edge:'#B1ADA5',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/silver-lake'
+ },
+ gaslit:{
+  id:'gaslit',availability:'order',name:'Gaslit Alley',code:'V3554 · 2459L',
+  shutterCode:'V3554',surfaceCode:'2459L',
+  color:'#474B4F',edge:'#2D3033',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/gaslit-alley'
+ },
+ olive:{
+  id:'olive',availability:'order',name:'Olive Detour',code:'V3556 · 2460L / 3141L',
+  shutterCode:'V3556',surfaceCode:'2460L / 3141L',
+  color:'#3A433B',edge:'#252C27',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/olive-detour'
+ },
+ midnight:{
+  id:'midnight',availability:'order',name:'Midnight Dash',code:'V3600 · 2462L / 3145L',
+  shutterCode:'V3600',surfaceCode:'2462L / 3145L',
+  color:'#21293B',edge:'#131824',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/midnight-dash'
+ },
+ dark:{
+  id:'dark',availability:'stock',name:'After Dark',code:'V3555 · 2461L',
+  shutterCode:'V3555',surfaceCode:'2461L',
+  color:'#111111',edge:'#050505',material:'matte',
+  family:'RAUVOLET noble matt',profile:'E9',
+  sourceUrl:'https://interior.rehau.com/pl-pl/surface-select/after-dark'
+ }
 };
 const ranges=(w,h,d,source)=>({width:w?fact(w,source):unknown('Zakres szerokości'),height:h?fact(h,source):unknown('Zakres wysokości'),depth:d?fact(d,source):unknown('Wymagana głębokość')});
 const variant=(source,mechanism,profile,limits,colors,extra={})=>({
@@ -542,60 +697,120 @@ const variant=(source,mechanism,profile,limits,colors,extra={})=>({
 const unset=()=>variant('business',null,null,ranges(null,null,null,'business'),null);
 const products=[
  // Skład i dostępność wariantów zsynchronizowane 1:1 z plikiem INTAGO_systemy_sklad_PROSTY(2).csv.
- {id:'top-basic',name:'TOP BASIC',short:'Dyskretnie wewnątrz',description:'Prowadnice we wnętrzu mebla. Pionowo pracuje z C6, a w poziomie płaszcz chowa się na tył.',guideId:'basic',orientations:fact(['vertical','horizontal'],'business'),mounting:fact('inside','business'),variants:{
-  vertical:variant('horizontal','c6','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['silver','white'],{rangeProfile:'c6'}),
-  horizontal:variant('horizontal','rear','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['silver','white'],{rangeProfile:'c6',profile:fact('e23','horizontal','inferred','Profil do potwierdzenia w karcie technicznej.')})
+ {id:'top-basic',name:'TOP BASIC',short:'Płaszcz prowadzony na plecy szafki',description:'Prowadnice we wnętrzu mebla. Pionowo pracuje z C6, a w poziomie płaszcz chowa się na tył.',guideId:'basic',orientations:fact(['vertical','horizontal'],'business'),mounting:fact('inside','business'),variants:{
+  vertical:variant('horizontal','c6','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['brilliant','black','white','lightgray','anthracite'],{rangeProfile:'c6'}),
+  horizontal:variant('horizontal','rear','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['brilliant','black','white','lightgray','anthracite'],{rangeProfile:'c6',profile:fact('e23','horizontal','inferred','Profil do potwierdzenia w karcie technicznej.')})
  }},
- {id:'top-basic-c3',name:'TOP BASIC + C3',short:'Zwijanie pod górą szafki',description:'Płaszcz E23 nawija się u góry. Prowadnice pozostają wewnątrz korpusu.',guideId:'basic',orientations:fact(['vertical'],'business'),mounting:fact('inside','business'),variants:{
-  vertical:variant('c3','c3','e23',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'c3'),['silver','white'],{rangeProfile:'c3'})
+ {id:'top-basic-c3',name:'TOP BASIC + C3',short:'Płaszcz zwijany na bęben C3',description:'Płaszcz E23 nawija się u góry. Prowadnice pozostają wewnątrz korpusu.',guideId:'basic',orientations:fact(['vertical'],'business'),mounting:fact('inside','business'),variants:{
+  vertical:variant('c3','c3','e23',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'c3'),['brilliant','black','white','lightgray','anthracite'],{rangeProfile:'c3'})
  }},
- {id:'noble-wew',name:'NOBLE',short:'Matowy front, dyskretny montaż',description:'Matowe szczeble E9 i prowadnice TOP wewnątrz korpusu. System pracuje pionowo i współpracuje z C6.',guideId:'top',orientations:fact(['vertical'],'business'),mounting:fact('inside','business'),variants:{
-  vertical:variant('nobleIn','c6','e9',ranges({min:200,max:1200},{min:350,max:1050},null,'nobleIn'),['blonde','casa','dark'],{rangeProfile:'c6'})
+ {id:'noble-wew',name:'NOBLE',short:'Matowy płaszcz prowadzony na plecy szafki',description:'Matowe szczeble E9 i prowadnice TOP wewnątrz korpusu. System pracuje pionowo i współpracuje z C6.',guideId:'top',orientations:fact(['vertical'],'business'),mounting:fact('inside','business'),variants:{
+  vertical:variant('nobleIn','c6','e9',ranges({min:200,max:1200},{min:350,max:1050},null,'nobleIn'),['casa','blonde','silverlake','gaslit','olive','midnight','dark'],{rangeProfile:'c6'})
  }},
- {id:'noble-zewn',name:'NOBLE',short:'Matowa powierzchnia na froncie',description:'Prowadnice nakładane na krawędzie korpusu. W pionie płaszcz E9 zwija się na C3.',guideId:'noble',orientations:fact(['vertical'],'business'),mounting:fact('outside','business'),variants:{
-  vertical:variant('nobleOut','c3','e9',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'nobleOut'),['blonde','casa','dark'],{rangeProfile:'c3'})
+ {id:'noble-zewn',name:'NOBLE',short:'Matowy płaszcz zwijany na bęben C3',description:'Prowadnice nakładane na krawędzie korpusu. W pionie płaszcz E9 zwija się na C3.',guideId:'noble',orientations:fact(['vertical'],'business'),mounting:fact('outside','business'),variants:{
+  vertical:variant('nobleOut','c3','e9',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'nobleOut'),['casa','blonde','silverlake','gaslit','olive','midnight','dark'],{rangeProfile:'c3'})
  }}
 ];
 const getProduct=id=>products.find(p=>p.id===id);
 const getVariant=(product,orientation)=>product?.variants[orientation]??null;
-const availableFinishes=(product,orientation)=>{const f=getVariant(product,orientation)?.finishes;return f?.status==='verified'?f.value.map(id=>finishes[id]):[];};
+const availableFinishes=(product,orientation)=>{
+ const f=getVariant(product,orientation)?.finishes;
+ return f?.status==='verified'?f.value.map(id=>finishes[id]).filter(Boolean):[];
+};
+function finishPaletteSource(product){
+ if(!product)return null;
+ return (product.id==='noble-wew'||product.id==='noble-zewn')
+  ?{name:'RAUVOLET noble matt / E9',url:REHAU_NOBLE_MATT_URL}
+  :{name:'RAUVOLET color-line / decor-line / E23',url:REHAU_COLOR_DECOR_URL};
+}
+function finishAvailabilityLabel(finish){
+ return finish?.availability==='stock'?'W magazynie':'Na zamówienie';
+}
+function finishAvailabilityClass(finish){
+ return finish?.availability==='stock'?'is-stock':'is-order';
+}
+function finishSourceLink(product){
+ const source=finishPaletteSource(product);if(!source)return '';
+ return '<a class="color-source-link" href="'+escape(source.url)+'" target="_blank" rel="noopener">Paleta REHAU: '+escape(source.name)+' ↗</a>';
+}
 
 /* pricing-data.js — stan cen: 2026-09-14. Ceny brutto. Nie interpolujemy cen między punktami cennika. */
 const PRICE_VERSION='2026-09-15';
 const PRICE_VARIANTS=[["top-basic-c3","vertical",647,350,410,626,830,300,"silver",958,"6350"],["top-basic-c3","vertical",648,350,410,626,830,300,"white",958,"6350"],["top-basic-c3","vertical",649,350,410,831,1050,300,"silver",992,"6350"],["top-basic-c3","vertical",650,350,410,831,1050,300,"white",992,"6350"],["top-basic-c3","vertical",651,350,410,1051,1240,300,"silver",1037,"6350"],["top-basic-c3","vertical",652,350,410,1051,1240,300,"white",10037,"6350"],["top-basic-c3","vertical",653,350,410,1241,1400,300,"silver",1105,"6350"],["top-basic-c3","vertical",654,350,410,1241,1400,300,"white",1105,"6350"],["top-basic-c3","vertical",655,350,410,1401,1600,300,"silver",1150,"6350"],["top-basic-c3","vertical",656,350,410,1401,1600,300,"white",1150,"6350"],["top-basic-c3","vertical",657,350,410,1601,1800,300,"silver",1167,"6350"],["top-basic-c3","vertical",658,350,410,1601,1800,300,"white",1167,"6350"],["top-basic-c3","vertical",659,350,410,1801,2000,300,"silver",1207,"6350"],["top-basic-c3","vertical",660,350,410,1801,2000,300,"white",1207,"6350"],["top-basic-c3","vertical",661,350,410,350,625,300,"silver",911,"6350"],["top-basic-c3","vertical",662,350,410,350,625,300,"white",911,"6350"],["top-basic-c3","vertical",663,411,495,626,830,300,"silver",1003,"6350"],["top-basic-c3","vertical",664,411,495,626,830,300,"white",1003,"6350"],["top-basic-c3","vertical",665,411,495,831,1050,300,"silver",1048,"6350"],["top-basic-c3","vertical",666,411,495,831,1050,300,"white",1048,"6350"],["top-basic-c3","vertical",667,411,495,1051,1240,300,"silver",1099,"6350"],["top-basic-c3","vertical",668,411,495,1051,1240,300,"white",1099,"6350"],["top-basic-c3","vertical",669,411,495,1241,1400,300,"silver",1173,"6350"],["top-basic-c3","vertical",670,411,495,1241,1400,300,"white",1173,"6350"],["top-basic-c3","vertical",671,411,495,1401,1600,300,"silver",1230,"6350"],["top-basic-c3","vertical",672,411,495,1401,1600,300,"white",1230,"6350"],["top-basic-c3","vertical",673,411,495,1601,1800,300,"silver",1246,"6350"],["top-basic-c3","vertical",674,411,495,1601,1800,300,"white",1246,"6350"],["top-basic-c3","vertical",675,411,495,1801,2000,300,"silver",1292,"6350"],["top-basic-c3","vertical",676,411,495,1801,2000,300,"white",1292,"6350"],["top-basic-c3","vertical",677,411,495,350,625,300,"silver",952,"6350"],["top-basic-c3","vertical",678,411,495,350,625,300,"white",952,"6350"],["top-basic-c3","vertical",687,496,620,626,830,300,"silver",1099,"6350"],["top-basic-c3","vertical",688,496,620,626,830,300,"white",1099,"6350"],["top-basic-c3","vertical",689,496,620,831,1050,300,"silver",1150,"6350"],["top-basic-c3","vertical",690,496,620,831,1050,300,"white",1150,"6350"],["top-basic-c3","vertical",691,496,620,1051,1240,300,"silver",1212,"6350"],["top-basic-c3","vertical",692,496,620,1051,1240,300,"white",1212,"6350"],["top-basic-c3","vertical",693,496,620,1241,1400,300,"silver",1303,"6350"],["top-basic-c3","vertical",694,496,620,1241,1400,300,"white",1303,"6350"],["top-basic-c3","vertical",695,496,620,1401,1600,300,"silver",1370,"6350"],["top-basic-c3","vertical",696,496,620,1401,1600,300,"white",1370,"6350"],["top-basic-c3","vertical",697,496,620,1601,1800,300,"silver",1388,"6350"],["top-basic-c3","vertical",698,496,620,1601,1800,300,"white",1388,"6350"],["top-basic-c3","vertical",699,496,620,1801,2000,300,"silver",1450,"6350"],["top-basic-c3","vertical",700,496,620,1801,2000,300,"white",1450,"6350"],["top-basic-c3","vertical",701,496,620,350,625,300,"silver",1030,"6350"],["top-basic-c3","vertical",702,496,620,350,625,300,"white",1030,"6350"],["top-basic-c3","vertical",703,621,825,626,830,300,"silver",1229,"6350"],["top-basic-c3","vertical",704,621,825,626,830,300,"white",1229,"6350"],["top-basic-c3","vertical",705,621,825,831,1050,300,"silver",1303,"6350"],["top-basic-c3","vertical",706,621,825,831,1050,300,"white",1303,"6350"],["top-basic-c3","vertical",707,621,825,1051,1240,300,"silver",1377,"6350"],["top-basic-c3","vertical",708,621,825,1051,1240,300,"white",1377,"6350"],["top-basic-c3","vertical",709,621,825,1241,1400,300,"silver",1484,"6350"],["top-basic-c3","vertical",710,621,825,1241,1400,300,"white",1484,"6350"],["top-basic-c3","vertical",711,621,825,1401,1600,300,"silver",1569,"6350"],["top-basic-c3","vertical",712,621,825,1401,1600,300,"white",1569,"6350"],["top-basic-c3","vertical",713,621,825,1601,1800,300,"silver",1603,"6350"],["top-basic-c3","vertical",714,621,825,1601,1800,300,"white",1603,"6350"],["top-basic-c3","vertical",715,621,825,1801,2000,300,"silver",1677,"6350"],["top-basic-c3","vertical",716,621,825,1801,2000,300,"white",1677,"6350"],["top-basic-c3","vertical",717,621,825,2001,2200,300,"silver",1756,"6350"],["top-basic-c3","vertical",718,621,825,2001,2200,300,"white",1756,"6350"],["top-basic-c3","vertical",719,621,825,350,625,300,"silver",1144,"6350"],["top-basic-c3","vertical",720,621,825,350,625,300,"white",1144,"6350"],["top-basic-c3","vertical",721,826,1200,626,830,300,"silver",1416,"6350"],["top-basic-c3","vertical",722,826,1200,626,830,300,"white",1416,"6350"],["top-basic-c3","vertical",723,826,1200,831,1050,300,"silver",1520,"6350"],["top-basic-c3","vertical",724,826,1200,831,1050,300,"white",1520,"6350"],["top-basic-c3","vertical",725,826,1200,1051,1240,300,"silver",1632,"6350"],["top-basic-c3","vertical",726,826,1200,1051,1240,300,"white",1632,"6350"],["top-basic-c3","vertical",727,826,1200,1241,1400,300,"silver",1767,"6350"],["top-basic-c3","vertical",728,826,1200,1241,1400,300,"white",1767,"6350"],["top-basic-c3","vertical",729,826,1200,1401,1600,300,"silver",1899,"6350"],["top-basic-c3","vertical",730,826,1200,1401,1600,300,"white",1899,"6350"],["top-basic-c3","vertical",731,826,1200,1601,1800,300,"silver",1937,"6350"],["top-basic-c3","vertical",732,826,1200,1601,1800,300,"white",1937,"6350"],["top-basic-c3","vertical",733,826,1200,1801,2000,300,"silver",2050,"6350"],["top-basic-c3","vertical",734,826,1200,1801,2000,300,"white",2050,"6350"],["top-basic-c3","vertical",735,826,1200,2001,2200,300,"silver",2163,"6350"],["top-basic-c3","vertical",736,826,1200,2001,2200,300,"white",2163,"6350"],["top-basic-c3","vertical",737,826,1200,350,625,300,"silver",1303,"6350"],["top-basic-c3","vertical",738,826,1200,350,625,300,"white",1303,"6350"],["top-basic","vertical",575,100,349,300,420,0,"silver",328,"6346"],["top-basic","vertical",576,100,349,300,420,0,"white",328,"6346"],["top-basic","vertical",577,100,349,421,500,0,"silver",351,"6346"],["top-basic","vertical",578,100,349,421,500,0,"white",351,"6346"],["top-basic","vertical",579,100,349,501,625,0,"silver",374,"6346"],["top-basic","vertical",580,100,349,501,625,0,"white",374,"6346"],["top-basic","vertical",581,100,349,626,830,0,"silver",425,"6346"],["top-basic","vertical",582,100,349,626,830,0,"white",425,"6346"],["top-basic","vertical",583,100,349,831,1050,0,"silver",482,"6346"],["top-basic","vertical",584,100,349,831,1050,0,"white",482,"6346"],["top-basic","vertical",585,350,410,300,420,0,"silver",352,"6346"],["top-basic","vertical",586,350,410,300,420,0,"white",352,"6346"],["top-basic","vertical",587,350,410,421,500,0,"silver",408,"6346"],["top-basic","vertical",588,350,410,421,500,0,"white",408,"6346"],["top-basic","vertical",589,350,410,501,625,0,"silver",408,"6346"],["top-basic","vertical",590,350,410,501,625,0,"white",408,"6346"],["top-basic","vertical",591,350,410,626,830,0,"silver",459,"6346"],["top-basic","vertical",592,350,410,626,830,0,"white",459,"6346"],["top-basic","vertical",593,350,410,831,1050,0,"silver",522,"6346"],["top-basic","vertical",594,350,410,831,1050,0,"white",522,"6346"],["top-basic","vertical",595,411,495,300,420,0,"silver",385,"6346"],["top-basic","vertical",596,411,495,300,420,0,"white",385,"6346"],["top-basic","vertical",597,411,495,421,500,0,"silver",413,"6346"],["top-basic","vertical",598,411,495,421,500,0,"white",413,"6346"],["top-basic","vertical",599,411,495,501,625,0,"silver",442,"6346"],["top-basic","vertical",600,411,495,501,625,0,"white",442,"6346"],["top-basic","vertical",601,411,495,626,830,0,"silver",510,"6346"],["top-basic","vertical",602,411,495,626,830,0,"white",510,"6346"],["top-basic","vertical",603,411,495,831,1050,0,"silver",583,"6346"],["top-basic","vertical",604,411,495,831,1050,0,"white",583,"6346"],["top-basic","vertical",605,496,620,300,420,0,"silver",430,"6346"],["top-basic","vertical",606,496,620,300,420,0,"white",430,"6346"],["top-basic","vertical",607,496,620,421,500,0,"silver",465,"6346"],["top-basic","vertical",608,496,620,421,500,0,"white",465,"6346"],["top-basic","vertical",609,496,620,501,625,0,"silver",505,"6346"],["top-basic","vertical",610,496,620,501,625,0,"white",505,"6346"],["top-basic","vertical",611,496,620,626,830,0,"silver",578,"6346"],["top-basic","vertical",612,496,620,626,830,0,"white",578,"6346"],["top-basic","vertical",613,496,620,831,1050,0,"silver",663,"6346"],["top-basic","vertical",614,496,620,831,1050,0,"white",663,"6346"],["top-basic","vertical",615,621,825,300,420,0,"silver",505,"6346"],["top-basic","vertical",616,621,825,300,420,0,"white",505,"6346"],["top-basic","vertical",617,621,825,421,500,0,"silver",550,"6346"],["top-basic","vertical",618,621,825,421,500,0,"white",550,"6346"],["top-basic","vertical",619,621,825,501,625,0,"silver",595,"6346"],["top-basic","vertical",620,621,825,501,625,0,"white",595,"6346"],["top-basic","vertical",621,621,825,626,830,0,"silver",691,"6346"],["top-basic","vertical",622,621,825,626,830,0,"white",691,"6346"],["top-basic","vertical",623,621,825,831,1050,0,"silver",799,"6346"],["top-basic","vertical",624,621,825,831,1050,0,"white",799,"6346"],["top-basic","vertical",625,826,1200,300,420,0,"silver",641,"6346"],["top-basic","vertical",626,826,1200,300,420,0,"white",641,"6346"],["top-basic","horizontal",981,1970,1550,1150,826,0,"silver",1782,"7716"],["top-basic","horizontal",982,1970,1550,1150,826,0,"white",1782,"7716"],["top-basic","horizontal",983,1970,1550,825,621,0,"silver",1585,"7716"],["top-basic","horizontal",984,1970,1550,825,621,0,"white",1585,"7716"],["top-basic","horizontal",985,1970,1550,620,496,0,"silver",1219,"7716"],["top-basic","horizontal",986,1970,1550,620,496,0,"white",1219,"7716"],["top-basic","horizontal",987,1549,1250,1150,826,0,"silver",1552,"7716"],["top-basic","horizontal",988,1549,1250,1150,826,0,"white",1552,"7716"],["top-basic","horizontal",989,1549,1250,825,621,0,"silver",1224,"7716"],["top-basic","horizontal",990,1549,1250,825,621,0,"white",1224,"7716"],["top-basic","horizontal",991,1549,1250,620,496,0,"silver",985,"7716"],["top-basic","horizontal",992,1549,1250,620,496,0,"white",985,"7716"],["top-basic","horizontal",993,1549,1250,495,150,0,"silver",872,"7716"],["top-basic","horizontal",994,1549,1250,495,150,0,"white",872,"7716"],["top-basic","horizontal",995,1249,750,1150,826,0,"silver",1155,"7716"],["top-basic","horizontal",996,1249,750,1150,826,0,"white",1155,"7716"],["top-basic","horizontal",997,1249,750,825,621,0,"silver",929,"7716"],["top-basic","horizontal",998,1249,750,825,621,0,"white",929,"7716"],["top-basic","horizontal",999,1249,750,620,496,0,"silver",770,"7716"],["top-basic","horizontal",1000,1249,750,620,496,0,"white",770,"7716"],["top-basic","horizontal",1001,1249,750,495,150,0,"silver",635,"7716"],["top-basic","horizontal",1002,1249,750,495,150,0,"white",635,"7716"],["top-basic","horizontal",1003,749,560,1150,826,0,"silver",782,"7716"],["top-basic","horizontal",1004,749,560,1150,826,0,"white",782,"7716"],["top-basic","horizontal",1005,749,560,825,621,0,"silver",646,"7716"],["top-basic","horizontal",1006,749,560,825,621,0,"white",646,"7716"],["top-basic","horizontal",1007,749,560,620,496,0,"silver",487,"7716"],["top-basic","horizontal",1008,749,560,620,496,0,"white",487,"7716"],["top-basic","horizontal",1009,749,560,495,150,0,"silver",430,"7716"],["top-basic","horizontal",1010,749,560,495,150,0,"white",430,"7716"],["noble-zewn","vertical",1011,350,410,350,625,300,"blonde",1353,"9290"],["noble-zewn","vertical",1012,350,410,350,625,300,"casa",1353,"9290"],["noble-zewn","vertical",1013,350,410,350,625,300,"dark",1353,"9290"],["noble-zewn","vertical",1014,350,410,626,830,300,"blonde",1436,"9290"],["noble-zewn","vertical",1015,350,410,626,830,300,"casa",1436,"9290"],["noble-zewn","vertical",1016,350,410,626,830,300,"dark",1436,"9290"],["noble-zewn","vertical",1017,350,410,831,1050,300,"blonde",1471,"9290"],["noble-zewn","vertical",1018,350,410,831,1050,300,"casa",1471,"9290"],["noble-zewn","vertical",1019,350,410,831,1050,300,"dark",1471,"9290"],["noble-zewn","vertical",1020,350,410,1051,1240,300,"blonde",1701,"9290"],["noble-zewn","vertical",1021,350,410,1051,1240,300,"casa",1701,"9290"],["noble-zewn","vertical",1022,350,410,1051,1240,300,"dark",1701,"9290"],["noble-zewn","vertical",1023,350,410,1241,1400,300,"blonde",1736,"9290"],["noble-zewn","vertical",1024,350,410,1241,1400,300,"casa",1736,"9290"],["noble-zewn","vertical",1025,350,410,1241,1400,300,"dark",1736,"9290"],["noble-zewn","vertical",1026,350,410,1401,1600,300,"blonde",1805,"9290"],["noble-zewn","vertical",1027,350,410,1401,1600,300,"casa",1805,"9290"],["noble-zewn","vertical",1028,350,410,1401,1600,300,"dark",1805,"9290"],["noble-zewn","vertical",1029,350,410,1601,1800,300,"blonde",1840,"9290"],["noble-zewn","vertical",1030,350,410,1601,1800,300,"casa",1840,"9290"],["noble-zewn","vertical",1031,350,410,1601,1800,300,"dark",1840,"9290"],["noble-zewn","vertical",1032,350,410,1801,2000,300,"blonde",1875,"9290"],["noble-zewn","vertical",1033,350,410,1801,2000,300,"casa",1875,"9290"],["noble-zewn","vertical",1034,350,410,1801,2000,300,"dark",1875,"9290"],["noble-zewn","vertical",1038,411,495,350,625,300,"blonde",1426,"9290"],["noble-zewn","vertical",1039,411,495,350,625,300,"casa",1426,"9290"],["noble-zewn","vertical",1040,411,495,350,625,300,"dark",1426,"9290"],["noble-zewn","vertical",1041,411,495,626,830,300,"blonde",1496,"9290"],["noble-zewn","vertical",1042,411,495,626,830,300,"casa",1496,"9290"],["noble-zewn","vertical",1043,411,495,626,830,300,"dark",1496,"9290"],["noble-zewn","vertical",1044,411,495,831,1050,300,"blonde",1531,"9290"],["noble-zewn","vertical",1045,411,495,831,1050,300,"casa",1531,"9290"],["noble-zewn","vertical",1046,411,495,831,1050,300,"dark",1531,"9290"],["noble-zewn","vertical",1047,411,495,1051,1240,300,"blonde",1796,"9290"],["noble-zewn","vertical",1048,411,495,1051,1240,300,"casa",1796,"9290"],["noble-zewn","vertical",1049,411,495,1051,1240,300,"dark",1796,"9290"],["noble-zewn","vertical",1050,411,495,1241,1400,300,"blonde",1831,"9290"],["noble-zewn","vertical",1051,411,495,1241,1400,300,"casa",1831,"9290"],["noble-zewn","vertical",1052,411,495,1241,1400,300,"dark",1831,"9290"],["noble-zewn","vertical",1053,411,495,1401,1600,300,"blonde",1901,"9290"],["noble-zewn","vertical",1054,411,495,1401,1600,300,"casa",1901,"9290"],["noble-zewn","vertical",1055,411,495,1401,1600,300,"dark",1901,"9290"],["noble-zewn","vertical",1056,411,495,1601,1800,300,"blonde",1936,"9290"],["noble-zewn","vertical",1057,411,495,1601,1800,300,"casa",1936,"9290"],["noble-zewn","vertical",1058,411,495,1601,1800,300,"dark",1936,"9290"],["noble-zewn","vertical",1059,411,495,1801,2000,300,"blonde",2006,"9290"],["noble-zewn","vertical",1060,411,495,1801,2000,300,"casa",2006,"9290"],["noble-zewn","vertical",1061,411,495,1801,2000,300,"dark",2006,"9290"],["noble-zewn","vertical",1065,496,620,350,625,300,"blonde",1460,"9290"],["noble-zewn","vertical",1066,496,620,350,625,300,"casa",1460,"9290"],["noble-zewn","vertical",1067,496,620,350,625,300,"dark",1460,"9290"],["noble-zewn","vertical",1068,496,620,626,830,300,"blonde",1611,"9290"],["noble-zewn","vertical",1069,496,620,626,830,300,"casa",1611,"9290"],["noble-zewn","vertical",1070,496,620,626,830,300,"dark",1611,"9290"],["noble-zewn","vertical",1071,496,620,831,1050,300,"blonde",1681,"9290"],["noble-zewn","vertical",1072,496,620,831,1050,300,"casa",1681,"9290"],["noble-zewn","vertical",1073,496,620,831,1050,300,"dark",1681,"9290"],["noble-zewn","vertical",1074,496,620,1051,1240,300,"blonde",1946,"9290"],["noble-zewn","vertical",1075,496,620,1051,1240,300,"casa",1946,"9290"],["noble-zewn","vertical",1076,496,620,1051,1240,300,"dark",1946,"9290"],["noble-zewn","vertical",1077,496,620,1241,1400,300,"blonde",2016,"9290"],["noble-zewn","vertical",1078,496,620,1241,1400,300,"casa",2016,"9290"],["noble-zewn","vertical",1079,496,620,1241,1400,300,"dark",2016,"9290"],["noble-zewn","vertical",1080,496,620,1401,1600,300,"blonde",2086,"9290"],["noble-zewn","vertical",1081,496,620,1401,1600,300,"casa",2086,"9290"],["noble-zewn","vertical",1082,496,620,1401,1600,300,"dark",2086,"9290"],["noble-zewn","vertical",1083,496,620,1601,1800,300,"blonde",2120,"9290"],["noble-zewn","vertical",1084,496,620,1601,1800,300,"casa",2120,"9290"],["noble-zewn","vertical",1085,496,620,1601,1800,300,"dark",2120,"9290"],["noble-zewn","vertical",1086,496,620,1801,2000,300,"blonde",2190,"9290"],["noble-zewn","vertical",1087,496,620,1801,2000,300,"casa",2190,"9290"],["noble-zewn","vertical",1088,496,620,1801,2000,300,"dark",2190,"9290"],["noble-zewn","vertical",1092,621,825,350,625,300,"blonde",1749,"9290"],["noble-zewn","vertical",1093,621,825,350,625,300,"casa",1749,"9290"],["noble-zewn","vertical",1094,621,825,350,625,300,"dark",1749,"9290"],["noble-zewn","vertical",1095,621,825,626,830,300,"blonde",1854,"9290"],["noble-zewn","vertical",1096,621,825,626,830,300,"casa",1854,"9290"],["noble-zewn","vertical",1097,621,825,626,830,300,"dark",1854,"9290"],["noble-zewn","vertical",1098,621,825,831,1050,300,"blonde",1959,"9290"],["noble-zewn","vertical",1099,621,825,831,1050,300,"casa",1959,"9290"],["noble-zewn","vertical",1100,621,825,831,1050,300,"dark",1959,"9290"],["noble-zewn","vertical",1101,621,825,1051,1240,300,"blonde",2224,"9290"],["noble-zewn","vertical",1102,621,825,1051,1240,300,"casa",2224,"9290"],["noble-zewn","vertical",1103,621,825,1051,1240,300,"dark",2224,"9290"],["noble-zewn","vertical",1104,621,825,1241,1400,300,"blonde",2293,"9290"],["noble-zewn","vertical",1105,621,825,1241,1400,300,"casa",2293,"9290"],["noble-zewn","vertical",1106,621,825,1241,1400,300,"dark",2293,"9290"],["noble-zewn","vertical",1107,621,825,1401,1600,300,"blonde",2398,"9290"],["noble-zewn","vertical",1108,621,825,1401,1600,300,"casa",2398,"9290"],["noble-zewn","vertical",1109,621,825,1401,1600,300,"dark",2398,"9290"],["noble-zewn","vertical",1110,621,825,1601,1800,300,"blonde",2468,"9290"],["noble-zewn","vertical",1111,621,825,1601,1800,300,"casa",2468,"9290"],["noble-zewn","vertical",1112,621,825,1601,1800,300,"dark",2468,"9290"],["noble-zewn","vertical",1113,621,825,1801,2000,300,"blonde",2573,"9290"],["noble-zewn","vertical",1114,621,825,1801,2000,300,"casa",2573,"9290"],["noble-zewn","vertical",1115,621,825,1801,2000,300,"dark",2573,"9290"],["noble-zewn","vertical",1116,621,825,2001,2200,300,"blonde",2643,"9290"],["noble-zewn","vertical",1117,621,825,2001,2200,300,"casa",2643,"9290"],["noble-zewn","vertical",1118,621,825,2001,2200,300,"dark",2643,"9290"],["noble-zewn","vertical",1119,826,1200,350,625,300,"blonde",2036,"9290"],["noble-zewn","vertical",1120,826,1200,350,625,300,"casa",2036,"9290"],["noble-zewn","vertical",1121,826,1200,350,625,300,"dark",2036,"9290"],["noble-zewn","vertical",1122,826,1200,626,830,300,"blonde",2175,"9290"],["noble-zewn","vertical",1123,826,1200,626,830,300,"casa",2175,"9290"],["noble-zewn","vertical",1124,826,1200,626,830,300,"dark",2175,"9290"],["noble-zewn","vertical",1125,826,1200,831,1050,300,"blonde",2315,"9290"],["noble-zewn","vertical",1126,826,1200,831,1050,300,"casa",2315,"9290"],["noble-zewn","vertical",1127,826,1200,831,1050,300,"dark",2315,"9290"],["noble-zewn","vertical",1128,826,1200,1051,1240,300,"blonde",2650,"9290"],["noble-zewn","vertical",1129,826,1200,1051,1240,300,"casa",2650,"9290"],["noble-zewn","vertical",1130,826,1200,1051,1240,300,"dark",2650,"9290"],["noble-zewn","vertical",1131,826,1200,1241,1400,300,"blonde",2755,"9290"],["noble-zewn","vertical",1132,826,1200,1241,1400,300,"casa",2755,"9290"],["noble-zewn","vertical",1133,826,1200,1241,1400,300,"dark",2755,"9290"],["noble-zewn","vertical",1134,826,1200,1401,1600,300,"blonde",2894,"9290"],["noble-zewn","vertical",1135,826,1200,1401,1600,300,"casa",2894,"9290"],["noble-zewn","vertical",1136,826,1200,1401,1600,300,"dark",2894,"9290"],["noble-zewn","vertical",1137,826,1200,1601,1800,300,"blonde",2999,"9290"],["noble-zewn","vertical",1138,826,1200,1601,1800,300,"casa",2999,"9290"],["noble-zewn","vertical",1139,826,1200,1601,1800,300,"dark",2999,"9290"],["noble-zewn","vertical",1140,826,1200,1801,2000,300,"blonde",3139,"9290"],["noble-zewn","vertical",1141,826,1200,1801,2000,300,"casa",3139,"9290"],["noble-zewn","vertical",1142,826,1200,1801,2000,300,"dark",3139,"9290"],["noble-zewn","vertical",1143,826,1200,2001,2200,300,"blonde",3278,"9290"],["noble-zewn","vertical",1144,826,1200,2001,2200,300,"casa",3278,"9290"],["noble-zewn","vertical",1145,826,1200,2001,2200,300,"dark",3278,"9290"],["noble-wew","vertical",1146,100,349,300,420,0,"blonde",511,"9291"],["noble-wew","vertical",1147,100,349,300,420,0,"casa",511,"9291"],["noble-wew","vertical",1148,100,349,300,420,0,"dark",511,"9291"],["noble-wew","vertical",1149,100,349,421,500,0,"blonde",536,"9291"],["noble-wew","vertical",1150,100,349,421,500,0,"casa",536,"9291"],["noble-wew","vertical",1151,100,349,421,500,0,"dark",536,"9291"],["noble-wew","vertical",1152,100,349,501,625,0,"blonde",586,"9291"],["noble-wew","vertical",1153,100,349,501,625,0,"casa",586,"9291"],["noble-wew","vertical",1154,100,349,501,625,0,"dark",586,"9291"],["noble-wew","vertical",1155,100,349,626,830,0,"blonde",746,"9291"],["noble-wew","vertical",1156,100,349,626,830,0,"casa",746,"9291"],["noble-wew","vertical",1157,100,349,626,830,0,"dark",746,"9291"],["noble-wew","vertical",1158,100,349,831,1050,0,"blonde",796,"9291"],["noble-wew","vertical",1159,100,349,831,1050,0,"casa",796,"9291"],["noble-wew","vertical",1160,100,349,831,1050,0,"dark",796,"9291"],["noble-wew","vertical",1161,350,410,300,420,0,"blonde",555,"9291"],["noble-wew","vertical",1162,350,410,300,420,0,"casa",555,"9291"],["noble-wew","vertical",1163,350,410,300,420,0,"dark",555,"9291"],["noble-wew","vertical",1164,350,410,421,500,0,"blonde",579,"9291"],["noble-wew","vertical",1165,350,410,421,500,0,"casa",579,"9291"],["noble-wew","vertical",1166,350,410,421,500,0,"dark",579,"9291"],["noble-wew","vertical",1167,350,410,501,625,0,"blonde",604,"9291"],["noble-wew","vertical",1168,350,410,501,625,0,"casa",604,"9291"],["noble-wew","vertical",1169,350,410,501,625,0,"dark",604,"9291"],["noble-wew","vertical",1170,350,410,626,830,0,"blonde",789,"9291"],["noble-wew","vertical",1171,350,410,626,830,0,"casa",789,"9291"],["noble-wew","vertical",1172,350,410,626,830,0,"dark",789,"9291"],["noble-wew","vertical",1173,350,410,831,1050,0,"blonde",974,"9291"],["noble-wew","vertical",1174,350,410,831,1050,0,"casa",974,"9291"],["noble-wew","vertical",1175,350,410,831,1050,0,"dark",974,"9291"],["noble-wew","vertical",1176,411,495,300,420,0,"blonde",597,"9291"],["noble-wew","vertical",1177,411,495,300,420,0,"casa",597,"9291"],["noble-wew","vertical",1178,411,495,300,420,0,"dark",597,"9291"],["noble-wew","vertical",1179,411,495,421,500,0,"blonde",622,"9291"],["noble-wew","vertical",1180,411,495,421,500,0,"casa",622,"9291"],["noble-wew","vertical",1181,411,495,421,500,0,"dark",622,"9291"],["noble-wew","vertical",1182,411,495,501,625,0,"blonde",672,"9291"],["noble-wew","vertical",1183,411,495,501,625,0,"casa",672,"9291"],["noble-wew","vertical",1184,411,495,501,625,0,"dark",672,"9291"],["noble-wew","vertical",1185,411,495,626,830,0,"blonde",857,"9291"],["noble-wew","vertical",1186,411,495,626,830,0,"casa",857,"9291"],["noble-wew","vertical",1187,411,495,626,830,0,"dark",857,"9291"],["noble-wew","vertical",1188,411,495,831,1050,0,"blonde",1041,"9291"],["noble-wew","vertical",1189,411,495,831,1050,0,"casa",1041,"9291"],["noble-wew","vertical",1190,411,495,831,1050,0,"dark",1041,"9291"],["noble-wew","vertical",1191,496,620,300,420,0,"blonde",640,"9291"],["noble-wew","vertical",1192,496,620,300,420,0,"casa",640,"9291"],["noble-wew","vertical",1193,496,620,300,420,0,"dark",640,"9291"],["noble-wew","vertical",1194,496,620,421,500,0,"blonde",690,"9291"],["noble-wew","vertical",1195,496,620,421,500,0,"casa",690,"9291"],["noble-wew","vertical",1196,496,620,421,500,0,"dark",690,"9291"],["noble-wew","vertical",1197,496,620,501,625,0,"blonde",740,"9291"],["noble-wew","vertical",1198,496,620,501,625,0,"casa",740,"9291"],["noble-wew","vertical",1199,496,620,501,625,0,"dark",740,"9291"],["noble-wew","vertical",1200,496,620,626,830,0,"blonde",906,"9291"],["noble-wew","vertical",1201,496,620,626,830,0,"casa",906,"9291"],["noble-wew","vertical",1202,496,620,626,830,0,"dark",906,"9291"],["noble-wew","vertical",1203,496,620,831,1050,0,"blonde",1159,"9291"],["noble-wew","vertical",1204,496,620,831,1050,0,"casa",1159,"9291"],["noble-wew","vertical",1205,496,620,831,1050,0,"dark",1159,"9291"],["noble-wew","vertical",1206,621,825,300,420,0,"blonde",751,"9291"],["noble-wew","vertical",1207,621,825,300,420,0,"casa",751,"9291"],["noble-wew","vertical",1208,621,825,300,420,0,"dark",751,"9291"],["noble-wew","vertical",1209,621,825,421,500,0,"blonde",801,"9291"],["noble-wew","vertical",1210,621,825,421,500,0,"casa",801,"9291"],["noble-wew","vertical",1211,621,825,421,500,0,"dark",801,"9291"],["noble-wew","vertical",1212,621,825,501,625,0,"blonde",876,"9291"],["noble-wew","vertical",1213,621,825,501,625,0,"casa",876,"9291"],["noble-wew","vertical",1214,621,825,501,625,0,"dark",876,"9291"],["noble-wew","vertical",1215,621,825,626,830,0,"blonde",1092,"9291"],["noble-wew","vertical",1216,621,825,626,830,0,"casa",1092,"9291"],["noble-wew","vertical",1217,621,825,626,830,0,"dark",1092,"9291"],["noble-wew","vertical",1218,621,825,831,1050,0,"blonde",1370,"9291"],["noble-wew","vertical",1219,621,825,831,1050,0,"casa",1370,"9291"],["noble-wew","vertical",1220,621,825,831,1050,0,"dark",1370,"9291"],["noble-wew","vertical",1221,826,1200,300,420,0,"blonde",930,"9291"],["noble-wew","vertical",1222,826,1200,300,420,0,"casa",930,"9291"],["noble-wew","vertical",1223,826,1200,300,420,0,"dark",930,"9291"]];
-const PRICE_SOURCES={"6350":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=6350","6346":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=6346","7716":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=7716","9290":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=9290","9291":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=9291"};
+const PRICE_SOURCES={"6350":"https://www.intago.com.pl/roleta-meblowa-pionowa-na-wymiar-zawijana-na-beben-z-systemem-c3,id6350.html","6346":"https://www.intago.com.pl/roleta-meblowa-na-wymiar-top-basic,id6346.html","7716":"https://www.intago.com.pl/roleta-meblowa-pozioma-na-wymiar-zawijana-na-tyl-szafki-docinamy-na-wymiar,id7716.html","9290":"https://www.intago.com.pl/roleta-meblowa-noble-matt-pionowa-na-wymiar-zawijana-na-gorze-szafki-z-systemem-c3-docinamy-na-wymiar,id9290.html","9291":"https://www.intago.com.pl/roleta-meblowa-noble-matt-pionowa-na-wymiar-zawijana-na-gorze-szafki-z-systemem-c6-top-docinamy-na-wymiar,id9291.html"};
 const priceFormat=new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',minimumFractionDigits:0,maximumFractionDigits:0});
-function suspiciousPriceRow(row){
- if(!row)return false;
- const peers=PRICE_VARIANTS.filter(v=>v[0]===row[0]&&v[1]===row[1]&&v[3]===row[3]&&v[4]===row[4]&&v[5]===row[5]&&v[6]===row[6]&&v[7]===row[7]);
- if(peers.length<2)return false;
- const values=peers.map(v=>Number(v[9])).filter(Number.isFinite);
- if(values.length<2)return false;
- const min=Math.min(...values),max=Math.max(...values);
- return min>0&&max/min>=3;
+
+
+const SELLY_LIVE_PRICE_CACHE=new Map();
+const SELLY_LIVE_PRICE_INFLIGHT=new Map();
+const SELLY_LIVE_PRICE_FAILURES=new Map();
+const SELLY_LIVE_PRICE_TTL=60*1000;
+const SELLY_LIVE_PRICE_RETRY_AFTER=15*1000;
+
+function sellyPriceKey(productId,variantId){return String(productId)+':'+String(variantId);}
+function cachedSellyPrice(productId,variantId){
+ const key=sellyPriceKey(productId,variantId),item=SELLY_LIVE_PRICE_CACHE.get(key);
+ if(!item)return null;
+ if(Date.now()-item.ts>SELLY_LIVE_PRICE_TTL){SELLY_LIVE_PRICE_CACHE.delete(key);return null;}
+ return Number.isFinite(Number(item.gross))?Number(item.gross):null;
 }
-function priceFor(state,productId=state.selectedProduct){
+function sellyPriceFailedRecently(productId,variantId){
+ const ts=SELLY_LIVE_PRICE_FAILURES.get(sellyPriceKey(productId,variantId));
+ return Number.isFinite(ts)&&Date.now()-ts<SELLY_LIVE_PRICE_RETRY_AFTER;
+}
+
+
+function staticPriceFor(state,productId=state.selectedProduct){
  if(!productId||!state.orientation)return null;
  const all=PRICE_VARIANTS.filter(v=>v[0]===productId&&v[1]===state.orientation);
- if(!all.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak wariantów cenowych Selly dla tej konfiguracji.',source:null};
+ if(!all.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak wariantów cenowych dla tej konfiguracji.',source:null};
  const w=Number(state.dimensions.width),h=Number(state.dimensions.height),d=Number(state.dimensions.depth),hasDims=Number.isFinite(w)&&Number.isFinite(h);
  let matches=hasDims?all.filter(v=>w>=Math.min(v[3],v[4])&&w<=Math.max(v[3],v[4])&&h>=Math.min(v[5],v[6])&&h<=Math.max(v[5],v[6])&&(!v[7]||Number.isFinite(d)&&d>=v[7])):all;
  if(state.finish)matches=matches.filter(v=>v[8]===state.finish);
- if(!matches.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak pasującego wariantu cenowego Selly dla tych wymiarów i wykończenia.',source:null};
- if(matches.length===1&&suspiciousPriceRow(matches[0]))return {mode:'quote',gross:null,label:'Cena do weryfikacji',note:'Wykryto niespójność ceny tego wariantu w danych cennika. Zakup jest celowo zablokowany do czasu weryfikacji ceny w Selly.',source:null};
- const prices=[...new Set(matches.map(v=>v[9]))],gross=Math.min(...prices),exact=hasDims&&(state.finish||prices.length===1);
+ if(!matches.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak pasującego wariantu cenowego dla tych wymiarów i wykończenia.',source:null};
+
  const productSource=String(matches[0][10]);
- return {mode:exact?'exact':'from',gross,label:(exact?'':'od ')+priceFormat.format(gross),variantId:exact&&matches.length===1?matches[0][2]:null,productId:Number(productSource),note:exact?'Cena brutto wariantu Selly dopasowanego do zakresu wymiarów i wykończenia.':'Najniższa cena brutto w pasujących wariantach Selly; dokładna cena zależy od wymiarów i wykończenia.',source:PRICE_SOURCES[productSource]};
+ const exact=hasDims&&(Boolean(state.finish)||matches.length===1);
+ const exactRow=exact&&matches.length===1?matches[0]:null;
+ if(!exactRow)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Wybierz komplet wymiarów i wykończenie, aby pobrać aktualną cenę.',source:PRICE_SOURCES[productSource],live:false};
+ return {
+  mode:'pending',gross:null,label:'Sprawdzam cenę…',variantId:exactRow[2],
+  productId:Number(productSource),
+  note:'Aktualna cena zostanie pobrana dla dokładnie dopasowanego wariantu.',
+  source:PRICE_SOURCES[productSource],
+  live:false
+ };
 }
 
-/* INTAGO / Selly — natywne dodawanie wariantu do koszyka.
-   Request potwierdzony z DevTools sklepu:
+function priceFor(state,productId=state.selectedProduct){
+ const base=staticPriceFor(state,productId);
+ if(!base?.variantId||!base?.productId)return base;
+
+ const live=cachedSellyPrice(base.productId,base.variantId);
+ if(Number.isFinite(live)){
+  return {...base,mode:'exact',gross:live,label:priceFormat.format(live),note:'Aktualna cena brutto dla wybranego wariantu.',live:true};
+ }
+
+ if(isIntagoHost()&&!sellyPriceFailedRecently(base.productId,base.variantId)){
+  return {...base,mode:'loading',label:'Sprawdzam cenę…',note:'Pobieram aktualną cenę dla wybranego wariantu.',live:false};
+ }
+
+ return {...base,mode:'quote',gross:null,label:'Cena chwilowo niedostępna',note:'Nie udało się pobrać aktualnej ceny. Nieaktualna lokalna kwota nie jest pokazywana klientowi.',live:false};
+}
+
+/* INTAGO / Selly — ceny live + natywne dodawanie wariantu do koszyka.
+   PRICE PROBE: publiczna karta produktu, GET same-origin bez parametrów koszyka i bez efektów ubocznych.
+   ADD TO CART: osobny GET z credentials='same-origin' — normalne dodanie do koszyka.
+   Request dodawania potwierdzony z DevTools sklepu:
    GET /?a=cart.addAjax&produkt=ID&form=1&wariant_id=ID_WARIANTU&ilosc=1&_=TIMESTAMP
    Nagłówki wymagane przez frontend Selly:
    Accept: application/xml, text/xml oraz wildcard MIME; q=0.01
    X-Requested-With: XMLHttpRequest
    Cookies/sesja są pobierane automatycznie przez przeglądarkę — niczego nie hardkodujemy. */
 const INTAGO_CART_STORAGE_KEY='INTAGO_PENDING_CART_CONFIGURATION_V1';
+const INTAGO_CART_QUEUE_KEY='INTAGO_CART_CONFIGURATIONS_V2';
+const INTAGO_CART_QUEUE_TTL=30*24*60*60*1000;
+const INTAGO_CART_QUEUE_MAX=40;
 const INTAGO_CART_PATH='/';
 const INTAGO_CART_PAGE='/koszyk.html';
 
@@ -613,6 +828,8 @@ function cartSelectionFor(s){
   productKey:s.selectedProduct,
   productName:p?.name||s.selectedProduct,
   orientation:s.orientation,
+  horizontalDirection:s.orientation==='horizontal'?(s.horizontalDirection||'right'):null,
+  orderNotes:cartOrderNotes(s),
   mounting:s.mounting,
   furniture:s.furniture,
   finishId:s.finish,
@@ -625,6 +842,19 @@ function cartSelectionFor(s){
   createdAt:new Date().toISOString()
  };
 }
+function cartOrderNotes(s){
+ const product=getProduct(s.selectedProduct),variant=getVariant(product,s.orientation);
+ return [
+  'KONFIGURACJA ROLETY INTAGO ['+configurationId(s)+']',
+  'System: '+(product?.name||s.selectedProduct),
+  'Mechanizm: '+(mechanisms[variant?.mechanism.value]?.name||'do potwierdzenia'),
+  'Wymiary wewnętrzne S × W × G: '+s.dimensions.width+' × '+s.dimensions.height+' × '+s.dimensions.depth+' mm',
+  'Kolor: '+(finishes[s.finish]?.name||s.finish),
+  'Otwieranie: '+(s.orientation==='horizontal'?'poziomo '+(s.horizontalDirection==='left'?'w lewo':'w prawo'):'pionowo do góry'),
+  'Montaż: '+(mountings[s.mounting]||s.mounting),
+  'Dno: '+(furniture[s.furniture]||s.furniture)
+ ].join('\n');
+}
 function isIntagoHost(){
  return /^(www\.)?intago\.com\.pl$/i.test(location.hostname);
 }
@@ -635,6 +865,8 @@ function cartAjaxUrlFor(payload){
  url.searchParams.set('form','1');
  url.searchParams.set('wariant_id',String(payload.variantId));
  url.searchParams.set('ilosc','1');
+ // Fallback kompatybilności. Główne „Uwagi do zamówienia” uzupełnia globalny most INTAGO na koszyku/checkout.
+ url.searchParams.set('komentarz',payload.orderNotes);
  url.searchParams.set('_',String(Date.now()));
  return url.toString();
 }
@@ -649,19 +881,282 @@ function cartAjaxOptions(){
   }
  };
 }
-function persistCartConfiguration(payload){
- const serialized=JSON.stringify(payload);
- try{localStorage.setItem(INTAGO_CART_STORAGE_KEY,serialized);}catch{}
- try{sessionStorage.setItem(INTAGO_CART_STORAGE_KEY,serialized);}catch{}
- // Cookie is intentionally first-party only; it gives the Selly template/backend
- // an additional way to read the exact millimetres after the cart handoff.
+
+function sellyProductPageUrl(productId){
+ const source=PRICE_SOURCES[String(productId)];
+ if(!source)return null;
+ const url=new URL(source,location.origin);
+ url.searchParams.set('_intago_price',String(Date.now()));
+ return url.toString();
+}
+
+const INTAGO_PRODUCT_PAGE_INFLIGHT=new Map();
+async function fetchProductPageBody(productId){
+ const key=String(productId);
+ if(INTAGO_PRODUCT_PAGE_INFLIGHT.has(key))return INTAGO_PRODUCT_PAGE_INFLIGHT.get(key);
+ const promise=(async()=>{
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),5000);
+  try{
+   const pageUrl=sellyProductPageUrl(productId);
+   if(!pageUrl)throw new Error('Brak publicznej karty produktu.');
+   const response=await fetch(pageUrl,{
+    method:'GET',
+    credentials:'same-origin',
+    cache:'no-store',
+    headers:{'Accept':'text/html,application/xhtml+xml'},
+    signal:controller.signal
+   });
+   const body=await response.text();
+   if(!response.ok)throw new Error('HTTP '+response.status);
+   return body;
+  }finally{
+   clearTimeout(timer);
+   INTAGO_PRODUCT_PAGE_INFLIGHT.delete(key);
+  }
+ })();
+ INTAGO_PRODUCT_PAGE_INFLIGHT.set(key,promise);
+ return promise;
+}
+
+
+
+function normalizeSellyMoney(value){
+ let s=String(value??'').replace(/\u00a0/g,' ').trim();
+ s=s.replace(/[^\d,.\s]/g,'').replace(/\s+/g,'');
+ if(!s)return NaN;
+ const comma=s.lastIndexOf(','),dot=s.lastIndexOf('.');
+ if(comma>=0&&dot>=0){
+  if(comma>dot)s=s.replace(/\./g,'').replace(',','.');
+  else s=s.replace(/,/g,'');
+ }else if(comma>=0){
+  s=s.replace(',','.');
+ }else if(dot>=0){
+  const decimals=s.length-dot-1;
+  if(decimals===3&&s.indexOf('.')===dot)s=s.replace('.','');
+ }
+ const n=Number(s);
+ return Number.isFinite(n)?n:NaN;
+}
+
+function parseSellyVariantPrice(body,variantId){
+ const source=String(body||''),wanted=Number(variantId);
+ if(!Number.isInteger(wanted)||wanted<=0)return null;
+ const assignment=/variants\s*\[\s*\d+\s*\]\s*=\s*\{([^{}]*)\}\s*;/g;
+ let match;
+ while((match=assignment.exec(source))){
+  const fields=match[1],idMatch=fields.match(/(?:^|,)\s*id\s*:\s*(\d+)\s*(?=,|$)/);
+  if(!idMatch||Number(idMatch[1])!==wanted)continue;
+  for(const key of ['user_price','price']){
+   const priceMatch=fields.match(new RegExp('(?:^|,)\\s*'+key+'\\s*:\\s*([0-9][0-9.,]*)\\s*(?=,|$)'));
+   const gross=priceMatch?normalizeSellyMoney(priceMatch[1]):NaN;
+   if(Number.isFinite(gross)&&gross>0&&gross<100000)return Math.round(gross*100)/100;
+  }
+  return null;
+ }
+ return null;
+}
+async function fetchSellyVariantPrice(productId,variantId){
+ if(!isIntagoHost())return null;
+ const key=sellyPriceKey(productId,variantId),cached=cachedSellyPrice(productId,variantId);
+ if(Number.isFinite(cached))return cached;
+ if(sellyPriceFailedRecently(productId,variantId))return null;
+ if(SELLY_LIVE_PRICE_INFLIGHT.has(key))return SELLY_LIVE_PRICE_INFLIGHT.get(key);
+
+ const promise=(async()=>{
+  try{
+   const body=await fetchProductPageBody(productId);
+   const gross=parseSellyVariantPrice(body,variantId);
+   if(!Number.isFinite(gross))throw new Error('Nie znaleziono ceny dla wariantu.');
+   SELLY_LIVE_PRICE_CACHE.set(key,{gross,ts:Date.now()});
+   SELLY_LIVE_PRICE_FAILURES.delete(key);
+   return gross;
+  }catch(error){
+   SELLY_LIVE_PRICE_FAILURES.set(key,Date.now());
+   console.warn('INTAGO live price:',productId,variantId,error);
+   return null;
+  }finally{
+   SELLY_LIVE_PRICE_INFLIGHT.delete(key);
+  }
+ })();
+
+ SELLY_LIVE_PRICE_INFLIGHT.set(key,promise);
+ return promise;
+}
+
+let sellyPriceProbeTimer=0;
+function ensureLivePriceForState(state){
+ const base=staticPriceFor(state);
+ if(!base?.variantId||!base?.productId||!isIntagoHost())return;
+ if(Number.isFinite(cachedSellyPrice(base.productId,base.variantId)))return;
+ if(sellyPriceFailedRecently(base.productId,base.variantId))return;
+
+ clearTimeout(sellyPriceProbeTimer);
+ const productId=base.productId,variantId=base.variantId;
+ sellyPriceProbeTimer=setTimeout(async()=>{
+  await fetchSellyVariantPrice(productId,variantId);
+  const current=staticPriceFor(store.get());
+  if(current?.productId===productId&&current?.variantId===variantId){
+   previousKey='';
+   store.update({});
+  }
+ },240);
+}
+
+
+function comparisonPriceRows(state,productKey){
+ if(!productKey||!state.orientation)return [];
+ const product=getProduct(productKey),variant=getVariant(product,state.orientation);
+ if(!product||!variant)return [];
+ const w=Number(state.dimensions.width),h=Number(state.dimensions.height),d=Number(state.dimensions.depth);
+ if(!Number.isFinite(w)||!Number.isFinite(h))return [];
+
+ const allowedFinishes=new Set(
+  variant.finishes?.status==='verified'&&Array.isArray(variant.finishes.value)
+   ?variant.finishes.value
+   :[]
+ );
+
+ return PRICE_VARIANTS.filter(v=>
+  v[0]===productKey&&
+  v[1]===state.orientation&&
+  w>=Math.min(v[3],v[4])&&w<=Math.max(v[3],v[4])&&
+  h>=Math.min(v[5],v[6])&&h<=Math.max(v[5],v[6])&&
+  (!v[7]||Number.isFinite(d)&&d>=v[7])&&
+  (!allowedFinishes.size||allowedFinishes.has(v[8]))
+ );
+}
+
+function comparisonPriceFor(state,productKey){
+ const rows=comparisonPriceRows(state,productKey);
+ if(!rows.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak jednoznacznego wariantu cenowego dla podanych wymiarów.'};
+
+ const variants=[];
+ const seen=new Set();
+ for(const row of rows){
+  const productId=Number(row[10]),variantId=Number(row[2]),key=sellyPriceKey(productId,variantId);
+  if(seen.has(key))continue;
+  seen.add(key);
+  variants.push({productId,variantId});
+ }
+
+ const prices=variants.map(v=>cachedSellyPrice(v.productId,v.variantId)).filter(Number.isFinite);
+ const allResolved=variants.every(v=>Number.isFinite(cachedSellyPrice(v.productId,v.variantId))||sellyPriceFailedRecently(v.productId,v.variantId));
+
+ if(prices.length===variants.length&&prices.length){
+  const gross=Math.min(...prices);
+  return {
+   mode:'exact',
+   gross,
+   label:(variants.length>1?'od ':'')+priceFormat.format(gross),
+   note:variants.length>1
+    ?'Najniższa aktualna cena dla dostępnych wykończeń tego systemu przy podanych wymiarach.'
+    :'Aktualna cena dla tego systemu przy podanych wymiarach.',
+   live:true,
+   variants
+  };
+ }
+
+ if(isIntagoHost()&&!allResolved)return {mode:'loading',gross:null,label:'Sprawdzam cenę…',note:'Pobieram aktualną cenę dla tego systemu.',live:false,variants};
+
+ return {mode:'quote',gross:null,label:'Cena chwilowo niedostępna',note:'Aktualna cena tego systemu nie została pobrana.',live:false,variants};
+}
+
+let recommendationPriceTimer=0;
+function ensureLivePricesForRecommendations(state){
+ if(state.step!==5||!isIntagoHost())return;
+ const candidates=recommend(state).map(r=>r.product);
+ const pending=[];
+ const seen=new Set();
+
+ for(const product of candidates){
+  for(const row of comparisonPriceRows(state,product.id)){
+   const productId=Number(row[10]),variantId=Number(row[2]),key=sellyPriceKey(productId,variantId);
+   if(seen.has(key))continue;
+   seen.add(key);
+   if(Number.isFinite(cachedSellyPrice(productId,variantId)))continue;
+   if(sellyPriceFailedRecently(productId,variantId))continue;
+   pending.push({productId,variantId});
+  }
+ }
+
+ if(!pending.length)return;
+ clearTimeout(recommendationPriceTimer);
+ recommendationPriceTimer=setTimeout(async()=>{
+  await Promise.allSettled(pending.map(v=>fetchSellyVariantPrice(v.productId,v.variantId)));
+  if(store.get().step===5){
+   previousKey='';
+   store.update({});
+  }
+ },120);
+}
+
+function cartQueueNormalize(items){
+ const now=Date.now(),seen=new Set();
+ return (Array.isArray(items)?items:[])
+  .filter(item=>{
+   if(!item||typeof item!=='object')return false;
+   const ts=Date.parse(item.addedAt||item.createdAt||0);
+   if(!Number.isFinite(ts)||now-ts>INTAGO_CART_QUEUE_TTL)return false;
+   const id=item.cartEntryId||[item.configurationId,item.productId,item.variantId,item.addedAt||item.createdAt].join(':');
+   if(seen.has(id))return false;
+   seen.add(id);
+   return true;
+  })
+  .slice(-INTAGO_CART_QUEUE_MAX);
+}
+function readCartConfigurationQueue(){
+ let queue=[];
  try{
-  if(/(^|\.)intago\.com\.pl$/i.test(location.hostname)){
-   document.cookie='INTAGO_CART_CONFIG='+encodeURIComponent(serialized).slice(0,3600)+'; path=/; max-age=7200; SameSite=Lax';
+  const raw=localStorage.getItem(INTAGO_CART_QUEUE_KEY);
+  if(raw)queue=cartQueueNormalize(JSON.parse(raw));
+ }catch{}
+
+ // Jednorazowa migracja starszej wersji, która przechowywała tylko jedną konfigurację.
+ try{
+  const legacyRaw=localStorage.getItem(INTAGO_CART_STORAGE_KEY);
+  if(legacyRaw){
+   const legacy=JSON.parse(legacyRaw);
+   if(legacy&&legacy.configurationId&&!queue.some(x=>x.configurationId===legacy.configurationId&&x.variantId===legacy.variantId)){
+    queue.push({...legacy,cartEntryId:'LEGACY-'+legacy.configurationId,addedAt:legacy.createdAt||new Date().toISOString()});
+   }
+   localStorage.removeItem(INTAGO_CART_STORAGE_KEY);
   }
  }catch{}
+
+ return cartQueueNormalize(queue);
+}
+function writeCartConfigurationQueue(queue){
+ const normalized=cartQueueNormalize(queue),serialized=JSON.stringify(normalized);
+ try{localStorage.setItem(INTAGO_CART_QUEUE_KEY,serialized);}catch{}
+ try{sessionStorage.setItem(INTAGO_CART_QUEUE_KEY,serialized);}catch{}
+ return normalized;
+}
+function makeCartEntry(payload){
+ const stamp=Date.now(),random=Math.random().toString(36).slice(2,8).toUpperCase();
+ return {
+  ...payload,
+  cartEntryId:'IC-'+stamp.toString(36).toUpperCase()+'-'+random,
+  addedAt:new Date(stamp).toISOString()
+ };
+}
+function persistCartConfiguration(payload){
+ const entry=makeCartEntry(payload);
+ const queue=readCartConfigurationQueue();
+ queue.push(entry);
+ writeCartConfigurationQueue(queue);
+
+ // Kompatybilność/fallback: w cookie trzymamy tylko najnowszy wpis.
+ // localStorage przechowuje pełną kolejkę przez 30 dni.
+ try{
+  if(/(^|\.)intago\.com\.pl$/i.test(location.hostname)){
+   document.cookie='INTAGO_CART_CONFIG='+encodeURIComponent(JSON.stringify(entry)).slice(0,3600)+'; path=/; max-age=2592000; SameSite=Lax';
+  }
+ }catch{}
+ return entry;
 }
 function cartButtonHtml(s){
+ const current=priceFor(s);
+ if(current?.mode==='loading')return '<button class="btn primary cart-primary" disabled>Pobieram aktualną cenę…</button>';
  const item=cartSelectionFor(s);
  if(item)return '<button class="btn primary cart-primary" data-action="add-cart">Dodaj do koszyka · '+escape(item.priceLabel)+'</button>';
  return '<button class="btn primary" data-action="quote">Poproś o wycenę ↗</button>';
@@ -688,8 +1183,6 @@ async function addConfiguredProductToCart(s,button){
   return;
  }
 
- persistCartConfiguration(payload);
-
  const originalText=button?.textContent||'Dodaj do koszyka';
  if(button){
   button.disabled=true;
@@ -704,27 +1197,24 @@ async function addConfiguredProductToCart(s,button){
    throw new Error('HTTP '+response.status);
   }
 
-  // Selly zwraca XML/HTML. Sam status 200 oznacza, że natywne żądanie zostało obsłużone.
-  // Dodatkowo odświeżamy reprezentację koszyka tak samo jak frontend sklepu.
-  let cartView='';
-  try{
-   const viewUrl=new URL(INTAGO_CART_PATH,location.origin);
-   viewUrl.searchParams.set('a','cart.viewCart');
-   viewUrl.searchParams.set('_',String(Date.now()));
-   const viewResponse=await fetch(viewUrl.toString(),cartAjaxOptions());
-   if(viewResponse.ok)cartView=await viewResponse.text();
-  }catch{}
+  // Dopiero potwierdzone dodanie do koszyka trafia do trwałej kolejki konfiguracji.
+  const cartEntry=persistCartConfiguration(payload);
 
+  // Produkt jest już w koszyku Selly. Nie wymagamy drugiego kliknięcia:
+  // zapisujemy konfigurację, informujemy integracje i od razu przechodzimy do koszyka.
   document.dispatchEvent(new CustomEvent('intago:cart-updated',{
-   detail:{payload,responseText:body,cartView}
+   detail:{payload,cartEntry,responseText:body}
   }));
 
   if(button){
-   button.disabled=false;
-   button.dataset.action='go-cart';
-   button.textContent='Dodano ✓ — przejdź do koszyka';
+   button.disabled=true;
+   button.textContent='Dodano ✓ — otwieram koszyk…';
   }
-  announce('Produkt został dodany do koszyka INTAGO.');
+  announce('Produkt został dodany. Otwieram koszyk…');
+
+  // localStorage/cookie są zapisane synchronicznie przez persistCartConfiguration(),
+  // więc można bezpiecznie przejść do koszyka od razu po odpowiedzi 200 z Selly.
+  window.location.assign(INTAGO_CART_PAGE);
  }catch(error){
   console.error('INTAGO cart.addAjax:',error);
   if(button){
@@ -736,10 +1226,13 @@ async function addConfiguredProductToCart(s,button){
 }
 
 function priceCardHtml(state,productId){
- const p=priceFor(state,productId);if(!p)return '';
- const caption=p.mode==='exact'?'Cena dla konfiguracji':p.mode==='from'?'Cena orientacyjna':'Cena';
- const badge=p.mode==='exact'?(p.variantId?'wariant '+p.variantId:'brutto / Selly'):p.mode==='from'?'brutto / od':'wycena indywidualna';
- return '<div class="rec-price '+p.mode+'"><span class="rec-price-text"><small>'+caption+'</small><strong>'+escape(p.label)+'</strong></span><span class="rec-price-badge">'+badge+'</span></div>';
+ const p=comparisonPriceFor(state,productId);if(!p)return '';
+ const caption=p.mode==='exact'?'Cena dla podanych wymiarów':p.mode==='loading'?'Aktualna cena':'Cena';
+ const badge=p.mode==='exact'?'brutto · aktualna':p.mode==='loading'?'aktualizuję':'do wyceny';
+ return '<div class="rec-price '+p.mode+'">'+
+  '<span class="rec-price-text"><small>'+caption+'</small><strong>'+escape(p.label)+'</strong></span>'+
+  '<span class="rec-price-badge">'+badge+'</span>'+
+ '</div>';
 }
 
 const MATERIAL_DOCS={
@@ -817,7 +1310,12 @@ function materialsPanel(s){
 
 function selectedPriceHtml(state){
  const p=priceFor(state);if(!p)return '';
- return '<div class="summary-price-note"><strong>'+escape(p.label)+'</strong><br><span class="muted">Cennik: '+PRICE_VERSION+' · Cena końcowa potwierdzana w koszyku.</span></div>';
+ let sourceNote='';
+ if(p.mode==='loading')sourceNote='Pobieram aktualną cenę dla wybranego wariantu…';
+ else if(p.live)sourceNote='Aktualna cena brutto dla wybranej konfiguracji.';
+ else if(p.mode==='quote')sourceNote=p.note||'Cena zostanie potwierdzona po doborze wariantu.';
+ else sourceNote='Cena brutto dla wybranej konfiguracji.';
+ return '<div class="summary-price-note"><strong>'+escape(p.label)+'</strong><br><span class="muted">'+escape(sourceNote)+'</span></div>';
 }
 
 const ROLETA_ASSET_BASE='https://www.intago.com.pl/img/RoletyKonfigurator/';
@@ -965,7 +1463,7 @@ const STATUS={COMPATIBLE:'COMPATIBLE',INCOMPATIBLE:'INCOMPATIBLE',NEEDS_VERIFICA
 const dimensionLabels={width:'Szerokość',height:'Wysokość',depth:'Głębokość'};
 function validateDimension(value){
  if(value===null||value==='')return null;
- if(!Number.isFinite(Number(value))||Number(value)<=0)return 'Wpisz liczbę większą od zera albo wybierz „Nie znam wymiaru”.';
+ if(!Number.isFinite(Number(value))||Number(value)<=0)return 'Wpisz liczbę większą od zera.';
  if(Number(value)>10000)return 'Sprawdź jednostkę. Podaj mm (maks. 10 000) lub zostaw do ustalenia.';
  if(!Number.isInteger(Number(value)))return 'Podaj wymiar w pełnych milimetrach.';
  return null;
@@ -1120,7 +1618,7 @@ function mechanismEnvelope(state,renderer){
 /* src/state.js */
 
 
-function createState(){return {version:3,step:1,orientation:null,mounting:null,furniture:null,dimensions:{width:null,height:null,depth:null},selectedProduct:null,finish:null,scene:'front',open:35,mode:'guided'};}
+function createState(){return {version:3,step:1,orientation:null,horizontalDirection:'right',mounting:null,furniture:null,dimensions:{width:null,height:null,depth:null},selectedProduct:null,finish:null,scene:'front',open:35,mode:'guided'};}
 function reconcile(state){
  if(state.step<=3)state.scene='front';else if(state.step===4&&!['front','dimensions'].includes(state.scene))state.scene='dimensions';
  if(state.scene==='gallery'&&(state.step<6||!state.selectedProduct||!state.finish))state.scene='front';
@@ -1151,6 +1649,7 @@ function deserialize(raw){
   const x=data.state,s=createState();
   for(const k of ['orientation','mounting']){const valid=k==='orientation'?['vertical','horizontal','unknown']:['inside','outside','unknown'];s[k]=valid.includes(x[k])?x[k]:null;}
   s.furniture=Object.hasOwn(furniture,x.furniture)?x.furniture:null;
+  s.horizontalDirection=x.horizontalDirection==='left'?'left':'right';
   for(const k of ['width','height','depth']){const n=x.dimensions?.[k];s.dimensions[k]=typeof n==='number'&&!validateDimension(n)?n:null;}
   s.selectedProduct=getProduct(x.selectedProduct)?.id||null;s.finish=Object.hasOwn(finishes,x.finish)?x.finish:null;
   s.open=typeof x.open==='number'&&Number.isFinite(x.open)?Math.max(0,Math.min(100,x.open)):35;
@@ -1170,26 +1669,58 @@ function restore(storage){try{return deserialize(storage.getItem(STORAGE_KEY));}
 
 
 function configurationId(state){
- const data=JSON.stringify([state.orientation,state.mounting,state.furniture,state.dimensions,state.selectedProduct,state.finish,DATA_VERSION,PRICE_VERSION]);
+ const data=JSON.stringify([state.orientation,state.orientation==='horizontal'?(state.horizontalDirection||'right'):null,state.mounting,state.furniture,state.dimensions,state.selectedProduct,state.finish,DATA_VERSION,PRICE_VERSION]);
  let a=2166136261,b=5381;for(let i=0;i<data.length;i++){a=Math.imul(a^data.charCodeAt(i),16777619);b=Math.imul(b,33)^data.charCodeAt(i);}
  return ('INT-'+(a>>>0).toString(16).padStart(8,'0')+(b>>>0).toString(16).padStart(8,'0')).toUpperCase();
 }
 function configurationText(s){
- const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),f=finishes[s.finish],r=p?evaluate(p,s):null,price=priceFor(s);
- return ['INTAGO / KARTA KONFIGURACJI / '+configurationId(s),'Wersja danych: '+DATA_VERSION,'Cennik: '+PRICE_VERSION,
- 'Wariant: '+(p?.name||'Dobór indywidualny'),'Otwieranie: '+(orientations[s.orientation]||'Do ustalenia'),'Montaż: '+(mountings[s.mounting]||'Do ustalenia'),'Dno szafki: '+(furniture[s.furniture]||'Do ustalenia'),
- 'Wymiary wewnętrzne S × W × G: '+['width','height','depth'].map(k=>s.dimensions[k]??'?').join(' × ')+' mm',
- 'UWAGA: są to wymiary wolnej przestrzeni wewnątrz korpusu, bez doliczania grubości płyt. Nie są to wymiary zewnętrzne mebla.',
- 'Wykończenie: '+(f?f.name+(f.code?' / '+f.code:''):'Do ustalenia'),
- 'Mechanizm: '+(v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do potwierdzenia'),
- 'Cena orientacyjna brutto: '+(price?.label||'Do wyceny')+(price?.mode==='exact'?' (opublikowany gotowy set)':''),
- 'Produkt Selly: '+(price?.productId||'Do ustalenia'),
- 'Wariant Selly: '+(price?.variantId||'Do ustalenia'),
- 'Status: '+(r?.status||'NEEDS_VERIFICATION'),'','POWODY DOBORU',...(r?.reasons||['Wymagany dobór indywidualny.']),'','DO POTWIERDZENIA',...(r?.missing||['Wariant, wykonalność, mechanizm i wykończenie.']),
- '','Rysunek poglądowy. Karta jest podstawą zapytania, nie dokumentacją cięcia.'].join('\n');
+ const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),f=finishes[s.finish],price=priceFor(s);
+ const dims=s.dimensions||{};
+ const opening=s.orientation==='horizontal'
+  ?'Poziomo — '+(s.horizontalDirection==='left'?'w lewo':'w prawo')
+  :(orientations[s.orientation]||'Do ustalenia');
+ const mechanism=v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do ustalenia';
+ const availability=f?finishAvailabilityLabel(f):'Do ustalenia';
+
+ const lines=[
+  'ZAPYTANIE O ROLETĘ MEBLOWĄ',
+  '',
+  'SYSTEM',
+  'System: '+(p?.name||'Do ustalenia'),
+  'Mechanizm: '+mechanism,
+  'Montaż: '+(mountings[s.mounting]||'Do ustalenia'),
+  'Otwieranie: '+opening,
+  'Dno szafki: '+(furniture[s.furniture]||'Do ustalenia'),
+  '',
+  'WYMIARY WEWNĘTRZNE KORPUSU',
+  'Szerokość: '+(dims.width??'—')+' mm',
+  'Wysokość: '+(dims.height??'—')+' mm',
+  'Głębokość: '+(dims.depth??'—')+' mm',
+  '',
+  'KOLOR',
+  (f?f.name+(f.code?' ('+f.code+')':''):'Do ustalenia'),
+  'Dostępność: '+availability
+ ];
+
+ if(price&&Number.isFinite(Number(price.gross))){
+  lines.push('','CENA','Cena brutto: '+price.label);
+ }
+
+ if(price?.productId&&price?.variantId){
+  lines.push('','SELLY','Produkt: '+price.productId+' / wariant: '+price.variantId);
+ }
+
+ lines.push('','ID konfiguracji: '+configurationId(s));
+ return lines.join('\n');
 }
 // Adapter przygotowuje wiadomość. Użytkownik sam ją sprawdza i wysyła.
-function quoteDraft(state,note=''){return {to:'sklep@intago.pl',subject:'Zapytanie o roletę '+configurationId(state),body:configurationText(state)+(note?'\n\nUwagi: '+note:'')};}
+function quoteDraft(state,note=''){
+ const p=getProduct(state.selectedProduct),f=finishes[state.finish],d=state.dimensions||{};
+ const dims=[d.width??'—',d.height??'—',d.depth??'—'].join('×');
+ const subject='Zapytanie: '+(p?.name||'roleta meblowa')+' | '+dims+' mm'+(f?' | '+f.name:'');
+ const body=configurationText(state)+(note?'\n\nUWAGI KLIENTA\n'+String(note).trim():'');
+ return {to:'sklep@intago.pl',subject,body};
+}
 function mailto(draft){return 'mailto:'+draft.to+'?subject='+encodeURIComponent(draft.subject)+'&body='+encodeURIComponent(draft.body);}
 
 
@@ -1338,7 +1869,7 @@ class CabinetRenderer{
   this.svg.addEventListener('pointermove',e=>{
    const d=this.drag;if(!d||e.pointerId!==d.id)return;
    const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(d.inv);
-   const delta=this.horizontal?(p.x-d.start.x)*(d.mirror?-1:1):d.start.y-p.y;
+   const delta=this.horizontal?(p.x-d.start.x)*(d.mirror?-1:1)*(this.mirrored?-1:1):d.start.y-p.y;
    d.latest=clamp(d.open+delta/(this.guide.travel*this.scale)*100,0,100);
    if(!this.dragFrame)this.dragFrame=requestAnimationFrame(()=>{this.dragFrame=0;if(this.drag)this.onOpen(this.drag.latest);});
   });
@@ -1349,7 +1880,7 @@ class CabinetRenderer{
   };
   this.svg.addEventListener('pointerup',stop);this.svg.addEventListener('pointercancel',stop);this.svg.addEventListener('lostpointercapture',stop);
   this.svg.addEventListener('keydown',e=>{
-   const handle=e.target.closest('[data-handle]');if(!handle)return;const reverse=handle.dataset.handle==='mirror';
+   const handle=e.target.closest('[data-handle]');if(!handle)return;const reverse=(handle.dataset.handle==='mirror')!==Boolean(this.mirrored);
    const keys={ArrowUp:5,ArrowDown:-5,ArrowRight:reverse?-5:5,ArrowLeft:reverse?5:-5,PageUp:20,PageDown:-20};
    if(!(e.key in keys)&&e.key!=='Home'&&e.key!=='End')return;
    e.preventDefault();this.onStart();const value=e.key==='Home'?100:e.key==='End'?0:clamp(this.open+keys[e.key],0,100);this.onOpen(value);this.onCommit(value);
@@ -1391,7 +1922,7 @@ class CabinetRenderer{
   }
   this.routes=[makeRoute({width:g.width,height:g.height,depth:g.depth,horizontal:this.horizontal,path:this.spec.path,coil:this.coil,radius:Math.max(1,c.rearReturn?Math.min(g.fascia-g.pitch,c.topBand*.35):g.fascia-g.pitch),ceiling:c.rearReturn?c.topBand*.5-g.top:0})];
   if(g.split)this.routes.push(makeRoute({width:g.width,height:g.height,depth:g.depth,horizontal:true,mirror:true,radius:Math.max(1,g.fascia-g.pitch)}));
-  if(this.section){this.drawSection();this.setOpen(state.open);this.resizeTargets();return;}
+  if(this.section){this.drawSection();this.applySceneMirror();this.setOpen(state.open);this.resizeTargets();return;}
   const ground=p([w*.5,h,d*.5]);layer('SHADOW').append(el('ellipse',{cx:ground[0],cy:p([0,h+t,0])[1]+14,rx:(w+d*.42)*c.scale*.62,ry:22,fill:fill('shadow')}));
   const body=layer('CABINET',{opacity:xray?'.18':'1'});
   body.innerHTML=pg([[0,c.backTop,c.backDepth],[w,c.backTop,c.backDepth],[w,h,c.backDepth],[0,h,c.backDepth]],fill('back'))+pg([[0,0,0],[0,0,d],[0,h,d],[0,h,0]],fill('inside'))+pg([[w,0,0],[w,0,d],[w,h,d],[w,h,0]],fill('inside'))+(c.hasBottom?pg([[0,h,0],[w,h,0],[w,h,d],[0,h,d]],fill('shelf')):'');
@@ -1447,7 +1978,21 @@ class CabinetRenderer{
   const aa=q([0,0,0]),bb=q([g.width,h,0]);this.reflection=el('rect',{x:aa[0],y:aa[1],width:bb[0]-aa[0],height:bb[1]-aa[1],fill:fill('reflection'),'pointer-events':'none'});this.front.append(this.reflection);
   if(scene==='dimensions')this.drawDimensions(measure);
   if(xray){const n=layer('MECHANISM_LABEL');n.innerHTML='<text x="380" y="606" text-anchor="middle" fill="#74797d" font-size="14">'+(this.spec.path==='coil'?'Zwijanie płaszcza w kasecie u góry':'Powrót płaszcza w głąb korpusu')+' · schemat drogi</text>';}
-  this.setOpen(state.open);this.resizeTargets();
+  this.applySceneMirror();this.setOpen(state.open);this.resizeTargets();
+ }
+ applySceneMirror(){
+  this.mirrored=this.horizontal&&this.state.horizontalDirection==='left';
+  if(!this.mirrored)return;
+  const group=el('g',{'data-horizontal-mirror':'true',transform:'translate(760 0) scale(-1 1)'});
+  for(const child of [...this.svg.children])if(!['defs','title','desc'].includes(child.tagName.toLowerCase()))group.append(child);
+  this.svg.append(group);
+  // Keep dimension and caption text readable in the mirrored projection.
+  for(const text of group.querySelectorAll('text')){
+   const x=Number(text.getAttribute('x'))||0;
+   text.setAttribute('transform','translate('+2*x+' 0) scale(-1 1)');
+   const anchor=text.getAttribute('text-anchor')||'start';
+   if(anchor!=='middle')text.setAttribute('text-anchor',anchor==='end'?'start':'end');
+  }
  }
  setOpen(value){
   this.open=clamp(value,0,100);if(this.section){this.updateSectionMotion();return;}if(!this.slats)return;
@@ -1607,10 +2152,22 @@ const choice=(s,field,id,title,sub)=>'<button type="button" class="choice'+(fiel
 const unknownChoice=(s,field)=>'<button class="unknown" data-choice="'+field+'" data-value="unknown" aria-pressed="'+(s[field]==='unknown')+'">Nie wiem, pomóż mi wybrać<span aria-hidden="true">'+(s[field]==='unknown'?'✓':'+')+'</span></button>';
 const help=text=>'<details class="why"><summary>Dlaczego o to pytamy?</summary><p>'+text+'</p></details>';
 function canNext(s){if(s.mode==='expert')return false;if(s.step===1)return Boolean(s.orientation);if(s.step===2)return Boolean(s.mounting);if(s.step===3)return Boolean(s.furniture);if(s.step===5)return Boolean(s.selectedProduct);if(s.step===6)return Boolean(s.finish);return true;}
-function dimensionFields(s){return '<div class="dimension-fields">'+['width','height','depth'].map(k=>'<div class="dimension-field"><label for="dim-'+k+'">'+dimensionLabels[k]+' wewnętrzna<button class="mini-link" data-clear-dim="'+k+'" type="button">Nie znam wymiaru</button></label><div class="input-wrap"><input type="number" id="dim-'+k+'" data-dimension="'+k+'" inputmode="numeric" min="1" max="10000" step="1" placeholder="Do ustalenia" value="'+(s.dimensions[k]??'')+'" aria-describedby="error-'+k+'"><span>mm</span></div><p class="field-error" id="error-'+k+'"></p></div>').join('')+'</div>';}
+function dimensionFields(s){return '<div class="dimension-fields">'+['width','height','depth'].map(k=>'<div class="dimension-field"><label for="dim-'+k+'">'+dimensionLabels[k]+' wewnętrzna</label><div class="input-wrap"><input type="number" id="dim-'+k+'" data-dimension="'+k+'" inputmode="numeric" min="1" max="10000" step="1" placeholder="Do ustalenia" value="'+(s.dimensions[k]??'')+'" aria-describedby="error-'+k+'"><span>mm</span></div><p class="field-error" id="error-'+k+'"></p></div>').join('')+'</div>';}
 function finishPreview(product,orientation){
  const list=availableFinishes(product,orientation);if(!list.length)return '';
- return '<div class="rec-finishes" aria-label="Dostępne kolory"><span class="rec-finishes-label">Dostępne kolory</span><div class="rec-finish-list">'+list.map(f=>'<div class="rec-finish"><span class="rec-finish-swatch '+f.material+'" style="--swatch:'+f.color+'"></span><span class="rec-finish-name">'+escape(f.name)+'</span></div>').join('')+'</div></div>';
+ return '<div class="rec-finishes" aria-label="Dostępne kolory">'+
+  '<span class="rec-finishes-label">Dostępne kolory REHAU</span>'+
+  '<div class="rec-finish-list">'+list.map(f=>
+   '<div class="rec-finish" title="'+escape(f.name+(f.code?' · '+f.code:''))+'">'+
+    '<span class="rec-finish-swatch '+f.material+'" style="--swatch:'+f.color+'"></span>'+
+    '<span class="rec-finish-name">'+escape(f.name)+'</span>'+
+    '<span class="rec-finish-code">'+escape(f.code||'')+'</span>'+
+    '<span class="finish-availability '+finishAvailabilityClass(f)+'">'+finishAvailabilityLabel(f)+'</span>'+
+   '</div>'
+  ).join('')+'</div>'+
+  '<div class="color-source-row">'+finishSourceLink(product)+'</div>'+
+  '<p class="color-disclaimer">Nazwy, kody i dostępność kolorów odpowiadają aktualnej palecie REHAU dla tego profilu. Podgląd odcienia na ekranie jest poglądowy — przed zamówieniem porównaj fizyczną próbkę REHAU.</p>'+
+ '</div>';
 }
 function rangeGuidance(product,orientation){
  const v=getVariant(product,orientation);if(!v)return '';
@@ -1618,46 +2175,176 @@ function rangeGuidance(product,orientation){
  if(v.rangeProfile==='c3')return 'Wymiary wewnętrzne: szer. 400–599 × wys. 650–1900 mm; szer. 600–1200 × wys. 650–2200 mm.';
  return '';
 }
+function rangeLimitBadges(product,orientation,state){
+ const v=getVariant(product,orientation);if(!v)return '';
+ const labels={width:'szer.',height:'wys.',depth:'gł.'},badges=[];
+ for(const key of ['width','height','depth']){
+  const raw=state.dimensions[key],val=Number(raw),rule=v.dimensions?.[key];
+  if(raw===null||raw===''||!Number.isFinite(val)||!rule||rule.status!=='verified')continue;
+  const min=rule.value?.min,max=rule.value?.max;
+  if(min!==undefined&&val<min)badges.push('<span class="range-limit-badge">min '+labels[key]+': <b>'+min+' mm</b></span>');
+  if(max!==undefined&&val>max)badges.push('<span class="range-limit-badge">max '+labels[key]+': <b>'+max+' mm</b></span>');
+ }
+
+ // C3/C6 mają dodatkową zależność maksymalnej wysokości od szerokości.
+ const width=Number(state.dimensions.width),height=Number(state.dimensions.height);
+ const widthRule=v.dimensions?.width?.value;
+ const widthInside=Number.isFinite(width)&&(!widthRule?.min||width>=widthRule.min)&&(!widthRule?.max||width<=widthRule.max);
+ if(v.rangeProfile&&widthInside&&Number.isFinite(height)){
+  const effectiveMax=profileHeightMax(v.rangeProfile,width);
+  const publishedMax=v.dimensions?.height?.value?.max;
+  if(Number.isFinite(effectiveMax)&&height>effectiveMax&&effectiveMax!==publishedMax){
+   badges.push('<span class="range-limit-badge">max wys. dla tej szer.: <b>'+effectiveMax+' mm</b></span>');
+  }
+ }
+ return badges.length?'<div class="range-limit-badges">'+[...new Set(badges)].join('')+'</div>':'';
+}
 function dimensionRangeFeedback(s){
  const candidates=products.filter(p=>(!s.orientation||s.orientation==='unknown'||p.orientations.value.includes(s.orientation))&&(!s.mounting||s.mounting==='unknown'||p.mounting.value===s.mounting));
- return candidates.map(p=>{const v=getVariant(p,s.orientation);if(!v?.rangeProfile)return '';const result=evaluate(p,{...s,finish:null});const errors=result.rejections.filter(x=>x.includes('poza ofertą')||x.includes('maksymalna wysokość')||x.startsWith('Głębokość:')||x.startsWith('Szerokość:')||x.startsWith('Wysokość:'));return '<div class="range-option'+(errors.length?' range-outside':'')+'"><strong>'+escape(p.name)+(errors.length?' — poza zakresem':'')+'</strong><p>'+escape(rangeGuidance(p,s.orientation))+'</p>'+(v.dimensions.depth?.value?.min?'<p>Głębokość: od '+v.dimensions.depth.value.min+' mm.</p>':'')+errors.map(x=>'<p class="range-error">'+escape(x)+'</p>').join('')+'</div>';}).join('');
+ return candidates.map(p=>{const result=evaluate(p,{...s,finish:null});const errors=result.rejections.filter(x=>x.includes('poza ofertą')||x.includes('maksymalna wysokość')||x.startsWith('Głębokość:')||x.startsWith('Szerokość:')||x.startsWith('Wysokość:'));return '<div class="range-option'+(errors.length?' range-outside':'')+'" title="'+escape(errors.join(' '))+'"><strong>'+escape(p.name)+'</strong>'+(errors.length?'<span class="range-status">Poza zakresem</span>'+rangeLimitBadges(p,s.orientation,s):'')+'</div>';}).join('');
+}
+function variantWhyData(product,state){
+ const v=getVariant(product,state.orientation);
+ const w=Number(state.dimensions?.width),h=Number(state.dimensions?.height);
+ const hasW=Number.isFinite(w),hasH=Number.isFinite(h);
+ const currentMax=v?.rangeProfile&&hasW?profileHeightMax(v.rangeProfile,w):null;
+ const c6Max=hasW?profileHeightMax('c6',w):null;
+ const c3Max=hasW?profileHeightMax('c3',w):null;
+ const fitLine=(Number.isFinite(currentMax)&&hasH)
+  ?('Przy szerokości '+w+' mm ten system dopuszcza wysokość do '+currentMax+' mm; podane '+h+' mm '+(h<=currentMax?'mieści się w tym zakresie.':'przekracza ten zakres.'))
+  :'';
+
+ if(product.id==='top-basic'&&state.orientation==='horizontal'){
+  return {
+   lead:'Wariant do otwierania poziomego — płaszcz nie jest zwijany na bęben.',
+   points:[
+    'To jedyny system w konfiguratorze przeznaczony do otwierania rolety na bok.',
+    'Płaszcz E23 przechodzi przez narożnik 90° i chowa się na plecy szafki, dlatego nie potrzebuje bębna C3.',
+    'Prowadnice TOP BASIC są montowane wewnątrz korpusu — front mebla pozostaje bez nakładanych prowadnic NOBLE.',
+    'Ten wariant ma sens, gdy za tylną częścią korpusu jest miejsce na drogę płaszcza.'
+   ],
+   fit:fitLine
+  };
+ }
+ if(product.id==='top-basic'){
+  const compare=hasW&&Number.isFinite(c3Max)
+   ?'Dla szerokości '+w+' mm C6 pozwala na wysokość do '+c6Max+' mm, podczas gdy wariant C3 może obsłużyć do '+c3Max+' mm.'
+   :'C6 jest przeznaczony do niższych zabudów; do wysokich rolet pionowych przewagę ma wariant z C3.';
+  return {
+   lead:'Prostszy system wewnętrzny: płaszcz E23 jest prowadzony na plecy szafki, bez bębna C3.',
+   points:[
+    'Mechanizm C6 wspomaga pracę rolety u góry, a płaszcz po zmianie kierunku jest prowadzony za wnętrze mebla.',
+    'Przewaga nad TOP BASIC + C3: brak bębna zwijającego C3 — dobry wybór, gdy wysokość mieści się w zakresie C6 i można przeznaczyć miejsce z tyłu na płaszcz.',
+    compare,
+    'Prowadnice są wewnątrz korpusu, więc system nie wymaga nakładanych prowadnic na krawędziach mebla.'
+   ],
+   fit:fitLine
+  };
+ }
+ if(product.id==='top-basic-c3'){
+  const compare=hasW&&Number.isFinite(c6Max)
+   ?'Dla szerokości '+w+' mm C3 pozwala na wysokość do '+c3Max+' mm; TOP BASIC z C6 przy tej szerokości ma limit '+c6Max+' mm.'
+   :'C3 ma przewagę przy wysokich roletach pionowych — zakres wysokości jest większy niż w systemie C6.';
+  return {
+   lead:'Wariant do wyższych rolet pionowych: płaszcz E23 jest zwijany na bęben C3 pod górą szafki.',
+   points:[
+    'Płaszcz nawija się na C3 zamiast schodzić po plecach mebla — nie trzeba prowadzić całego płaszcza w dół za wnętrzem szafki.',
+    compare,
+    'System zachowuje montaż wewnątrz korpusu i prowadnice TOP BASIC.',
+    'Wymagana głębokość korpusu zaczyna się od 300 mm — trzeba przewidzieć miejsce na bęben i jego przedłużkę.'
+   ],
+   fit:fitLine
+  };
+ }
+ if(product.id==='noble-wew'){
+  const compare=hasW&&Number.isFinite(c3Max)
+   ?'Dla szerokości '+w+' mm C6 ma limit wysokości '+c6Max+' mm; NOBLE z C3 może przy tej szerokości dojść do '+c3Max+' mm.'
+   :'Jeżeli roleta ma być wysoka, NOBLE z C3 ma większy zakres wysokości niż wersja z C6.';
+  return {
+   lead:'NOBLE MATT w wersji wewnętrznej — matowy płaszcz E9 z prowadnicami TOP i wspomaganiem C6.',
+   points:[
+    'Przewaga nad TOP BASIC: zamiast profilu E23 otrzymujesz matowy profil E9 NOBLE MATT i dedykowaną paletę NOBLE.',
+    'Prowadnice TOP są montowane wewnątrz korpusu — nie są nakładane na przednie krawędzie mebla.',
+    'Przewaga nad NOBLE + C3: brak bębna C3 i prowadnic nakładanych; to wariant do zabudowy wewnętrznej, gdy wymiary mieszczą się w zakresie C6.',
+    compare
+   ],
+   fit:fitLine
+  };
+ }
+ if(product.id==='noble-zewn'){
+  const compare=hasW&&Number.isFinite(c6Max)
+   ?'Dla szerokości '+w+' mm C3 pozwala na wysokość do '+c3Max+' mm, a NOBLE z C6 do '+c6Max+' mm.'
+   :'C3 daje większy zakres wysokości niż wariant NOBLE z C6.';
+  return {
+   lead:'NOBLE MATT z prowadnicami nakładanymi i bębnem C3 — wariant do montażu na krawędziach korpusu.',
+   points:[
+    'Matowy płaszcz E9 NOBLE MATT łączy się z prowadnicami i elementami wykończeniowymi przeznaczonymi do tej serii.',
+    'Prowadnice są nakładane na krawędzie korpusu, zamiast być prowadnicami TOP schowanymi wewnątrz wnęki.',
+    'Przewaga nad NOBLE z C6: bęben C3 obsługuje wyższe rolety pionowe.',
+    compare,
+    'Płaszcz zwija się u góry na C3; minimalna głębokość korpusu dla tego wariantu to 300 mm.'
+   ],
+   fit:fitLine
+  };
+ }
+ return {lead:product.description||'',points:[],fit:fitLine};
+}
+function variantWhyHtml(product,state){
+ const data=variantWhyData(product,state);
+ const points=(data.points||[]).filter(Boolean);
+ return '<div class="variant-why">'+
+  (data.lead?'<p class="variant-why-lead"><strong>Przewaga tego wariantu:</strong> '+escape(data.lead)+'</p>':'')+
+  (points.length?'<ul>'+points.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ul>':'')+
+  (data.fit?'<p class="variant-fit"><strong>W Twojej konfiguracji:</strong> '+escape(data.fit)+'</p>':'')+
+ '</div>';
 }
 function recommendations(s){
 const list=recommend(s),rejected=products.map(p=>evaluate(p,s)).filter(r=>r.status===STATUS.INCOMPATIBLE);
 const availableRanges=products.filter(p=>p.orientations.value.includes(s.orientation)&&(!s.mounting||s.mounting==='unknown'||p.mounting.value===s.mounting)).map(p=>[p.name,rangeGuidance(p,s.orientation)]).filter(x=>x[1]);
 return(list.length?'<div class="recommendation-list">'+list.map((r,i)=>{
-const p=r.product,v=getVariant(p,s.orientation),m=mechanisms[v?.mechanism.value];
-return '<article class="rec-card'+(s.selectedProduct===p.id?' selected':'')+'"><button data-product="'+p.id+'" aria-pressed="'+(s.selectedProduct===p.id)+'"><span class="rec-tag">'+(i===0?'Najlepszy punkt wyjścia':'Alternatywa '+i)+'</span><span class="rec-head"><h3>'+p.name+'</h3><span class="rec-check">'+(s.selectedProduct===p.id?'✓':'')+'</span></span><p>'+p.short+'</p>'+priceCardHtml(s,p.id)+'</button>'+finishPreview(p,s.orientation)+'<details><summary>Dlaczego ten wariant?</summary><ul>'+r.reasons.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ul><p class="spec-detail">'+p.description+'</p><p>'+(m?m.description:'Dokładną drogę prowadzenia dobierzemy z INTAGO.')+' '+(v?.mechanism.status!=='verified'?'Schemat poglądowy. ':'')+'Miejsce zajmowane przez mechanizm: do potwierdzenia.</p><ul>'+r.missing.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ul></details></article>';
+const p=r.product,v=getVariant(p,s.orientation);
+return '<article class="rec-card'+(s.selectedProduct===p.id?' selected':'')+'"><button data-product="'+p.id+'" aria-pressed="'+(s.selectedProduct===p.id)+'"><span class="rec-tag">'+(i===0?'Najlepszy punkt wyjścia':'Alternatywa '+i)+'</span><span class="rec-head"><h3>'+p.name+'</h3><span class="rec-check">'+(s.selectedProduct===p.id?'✓':'')+'</span></span><p>'+p.short+'</p>'+priceCardHtml(s,p.id)+'</button>'+finishPreview(p,s.orientation)+'<details><summary>Dlaczego ten wariant?</summary>'+variantWhyHtml(p,s)+'</details></article>';
 }).join('')+'</div>':'<div class="none"><strong>Podane wymiary są poza zakresem dostępnych systemów.</strong><p>Możliwe zakresy:</p><ul>'+availableRanges.map(x=>'<li><strong>'+escape(x[0])+':</strong> '+escape(x[1])+'</li>').join('')+'</ul><button class="btn subtle" data-action="manual">Przygotuj zapytanie</button></div>')+
-(rejected.length?'<details class="rejected" '+(rejected.some(r=>r.rejections.some(x=>x.includes('poza ofertą')||x.includes('maksymalna wysokość')))?'open':'')+'><summary>Dlaczego pozostałe nie pasują? ('+rejected.length+')</summary>'+rejected.map(r=>'<p><strong>'+r.product.name+'</strong></p><ul>'+r.rejections.map(x=>'<li>'+escape(x)+'</li>').join('')+(rangeGuidance(r.product,s.orientation)?'<li><strong>Zakres:</strong> '+escape(rangeGuidance(r.product,s.orientation))+'</li>':'')+'</ul>').join('')+'</details>':'')+
+
 (list.length?'<p class="pricing-footnote">Cennik: '+PRICE_VERSION+' · Cena końcowa potwierdzana w koszyku.</p>':'');
 }
 function finishPanel(s){const product=getProduct(s.selectedProduct),list=availableFinishes(product,s.orientation),priceBox=selectedPriceHtml(s);
-return list.length?priceBox+'<div class="finish-grid">'+list.map(f=>'<button class="finish '+f.material+'" data-finish="'+f.id+'" aria-pressed="'+(s.finish===f.id)+'" style="--swatch:'+f.color+'"><span class="swatch"></span><strong>'+f.name+'</strong><small>'+(f.code||'Wykończenie materiału')+'</small></button>').join('')+'</div>':
+return list.length?priceBox+
+ '<div class="finish-grid">'+list.map(f=>
+  '<button class="finish '+f.material+'" data-finish="'+f.id+'" aria-pressed="'+(s.finish===f.id)+'" style="--swatch:'+f.color+'" title="'+escape(f.family+' · '+(f.profile||''))+'">'+
+   '<span class="swatch"></span>'+
+   '<strong>'+escape(f.name)+'</strong>'+
+   '<small>'+escape(f.code||'Wykończenie materiału')+'</small>'+
+   '<span class="finish-availability '+finishAvailabilityClass(f)+'">'+finishAvailabilityLabel(f)+'</span>'+
+  '</button>'
+ ).join('')+'</div>'+
+ '<div class="color-source-row">'+finishSourceLink(product)+'</div>'+
+ '<p class="color-disclaimer"><strong>Paleta wg REHAU.</strong> „W magazynie” oznacza kolor utrzymywany standardowo przez INTAGO dla aktualnie wybranego systemu. Pozostałe widoczne warianty są dostępne „Na zamówienie”. Nazwy i kody odpowiadają profilowi '+escape(getVariant(product,s.orientation)?.profile?.value?.toUpperCase?.()||'')+'. Odcień na monitorze jest poglądowy — sprawdź fizyczną próbkę.</p>':
 priceBox+'<div class="hint"><span class="hint-marker">i</span><p><strong>Brak potwierdzonej palety wykończeń.</strong><br>Skontaktuj się z INTAGO, aby dobrać kolor dla tego wariantu.</p></div>';}
 function summary(s){
 const p=getProduct(s.selectedProduct),v=getVariant(p,s.orientation),f=finishes[s.finish],r=p?evaluate(p,s):null,price=priceFor(s);
 const dimsFinal=['width','height','depth'].map(k=>s.dimensions[k]??'?').join(' × ')+' mm';
 const completion='<div class="completion-card"><div class="completion-head"><span class="completion-check" aria-hidden="true">✓</span><div><span class="eyebrow">KONFIGURACJA GOTOWA</span><h3>Twoja roleta jest gotowa.</h3></div></div><div class="completion-config"><b>'+escape(p?.name||'Dobór indywidualny')+'</b><span>•</span><span>'+escape(f?.name||'kolor do ustalenia')+'</span><span>•</span><span>'+escape(dimsFinal)+'</span><b class="completion-price">'+escape(price?.label||'Do wyceny')+'</b></div><p class="completion-note">Poniżej masz pełne podsumowanie, materiały i przejście do koszyka.</p></div>';
-const rows=[['Wariant',p?.name||'Dobór indywidualny'],['Kierunek',orientations[s.orientation]||'Do ustalenia'],['Montaż',mountings[s.mounting]||'Do ustalenia'],['Dno szafki',furniture[s.furniture]||'Do ustalenia'],['Wymiary wewnętrzne S × W × G',dimsFinal],['Wykończenie',f?f.name+(f.code?' / '+f.code:''):'Do ustalenia'],['Mechanizm',v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do potwierdzenia'],['Cena brutto',price?.label||'Do wyceny']];
-return completion+'<div class="internal-dimensions-note"><strong>WAŻNE — wszystkie wymiary szafki w tej karcie są wymiarami wewnętrznymi.</strong><br>S × W × G odnoszą się do wolnej przestrzeni wewnątrz korpusu. Nie doliczaj grubości płyt i nie traktuj tych wartości jako wymiarów zewnętrznych mebla.</div><dl class="summary-list">'+rows.map(([k,val])=>'<div><dt>'+k+'</dt><dd>'+escape(val)+'</dd></div>').join('')+'</dl>'+selectedPriceHtml(s)+
+const rows=[['Wariant',p?.name||'Dobór indywidualny'],['Kierunek',(orientations[s.orientation]||'Do ustalenia')+(s.orientation==='horizontal'?' — '+(s.horizontalDirection==='left'?'w lewo':'w prawo'):'')],['Montaż',mountings[s.mounting]||'Do ustalenia'],['Dno szafki',furniture[s.furniture]||'Do ustalenia'],['Wymiary wewnętrzne S × W × G',dimsFinal],['Wykończenie',f?f.name+(f.code?' / '+f.code:''):'Do ustalenia'],['Mechanizm',v?.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Do potwierdzenia'],['Cena brutto',price?.label||'Do wyceny']];
+return completion+'<dl class="summary-list">'+rows.map(([k,val])=>'<div><dt>'+k+'</dt><dd>'+escape(val)+'</dd></div>').join('')+'</dl>'+selectedPriceHtml(s)+
 '<div class="summary-buttons">'+cartButtonHtml(s)+'</div>'+materialsPanel(s)+
 '<div class="summary-buttons"><button class="btn subtle" data-action="copy">Kopiuj konfigurację</button></div>';}
 const rangeLabel=r=>r.min===undefined?'do '+r.max:r.max===undefined?'od '+r.min:r.min+'–'+r.max;
 function expert(s){return '<div class="step-meta"><span class="eyebrow">DLA PROFESJONALISTY</span></div><div class="question"><h2 id="wizard-title" tabindex="-1">Znasz system?<br>Zacznij tutaj.</h2><p class="intro">Wybierz wariant. Przejdziesz od razu do pomiaru. Reguły doboru są takie same jak w doradcy.</p>'+products.map(p=>'<article class="expert-card"><h3>'+p.name+'<button data-expert="'+p.id+'">Wybierz ↗</button></h3><p>'+p.orientations.value.map(o=>orientations[o]).join(' / ')+' · '+mountings[p.mounting.value]+'</p><p class="expert-price">'+(priceFor({...s,orientation:p.orientations.value.includes(s.orientation)?s.orientation:p.orientations.value[0]},p.id)?.label||'Cena po wycenie')+'</p><details><summary>Dane i źródła</summary><p>Prowadnice: '+guides[p.guideId].name+'</p>'+Object.entries(p.variants).map(([orientation,v])=>'<p><strong>'+orientations[orientation]+'</strong> · '+(v.mechanism.status==='verified'?mechanisms[v.mechanism.value].name:'Mechanizm do potwierdzenia')+' · Profil: '+(v.profile.status==='verified'?profiles[v.profile.value].name:'do potwierdzenia')+'</p><ul>'+Object.entries(v.dimensions).map(([key,f])=>'<li>'+dimensionLabels[key]+' wewnętrzna: '+(f.status==='verified'?rangeLabel(f.value)+' mm':'do potwierdzenia')+'</li>').join('')+'</ul>'+(sources[v.sourceReference]?.url?'<a target="_blank" rel="noopener" href="'+sources[v.sourceReference].url+'">Karta INTAGO ↗</a>':'<p>Szczegóły zlecenia do potwierdzenia.</p>')).join('')+'</details></article>').join('')+'</div><button class="text-button" data-action="expert">Wróć do doradcy</button>';}
 function renderWizard(s){
 if(s.mode==='expert')return expert(s);
-const titles=['Jak ma otwierać się Twoja roleta?','Gdzie mają być prowadnice?','Czy szafka ma dno?','Zmierz wnętrze swojej szafki.','Zacznij od tych rozwiązań.','Nadaj rolecie swój charakter.','Twój mebel. Twoja roleta.'];
-const intros=['Wybierz kierunek i od razu sprawdź go na modelu. Przeciągnij uchwyt, aby zajrzeć do środka.','Zdecyduj, czy krawędzie korpusu mają pozostać widoczne. Różnicę zobaczysz także w przekroju.','Wybierz konstrukcję korpusu. Dolna płyta pojawi się lub zniknie także na modelu.','Mierz w milimetrach, między <strong>wewnętrznymi</strong> ściankami. Nie znasz któregoś wymiaru? Ustalimy go później.','Porównaliśmy kierunek, montaż, zakresy wymiarów i aktualne ceny INTAGO. Wybierz rozwiązanie.','Wykończenia z oferty wybranego wariantu. Dotknij próbki, aby zobaczyć zmianę na meblu.','Karta zbiera Twoje wybory, cenę orientacyjną i informacje do potwierdzenia przez INTAGO.'];
+const titles=['Jak ma otwierać się Twoja roleta?','Gdzie mają być prowadnice?','Czy szafka ma dno?','Zmierz wnętrze swojej szafki.','Dostępne warianty','Nadaj rolecie swój charakter.','Twój mebel. Twoja roleta.'];
+const intros=['Wybierz kierunek i od razu sprawdź go na modelu. Przeciągnij uchwyt, aby zajrzeć do środka.','Zdecyduj, czy krawędzie korpusu mają pozostać widoczne. Różnicę zobaczysz także w przekroju.','Wybierz konstrukcję korpusu. Dolna płyta pojawi się lub zniknie także na modelu.','Mierz w milimetrach, między <strong>wewnętrznymi</strong> ściankami.','Porównaliśmy kierunek, montaż, zakresy wymiarów i aktualne ceny INTAGO. Wybierz rozwiązanie.','Wykończenia z oferty wybranego wariantu. Dotknij próbki, aby zobaczyć zmianę na meblu.','Karta zbiera Twoje wybory, cenę orientacyjną i informacje do potwierdzenia przez INTAGO.'];
 let content='';
 if(s.step===1)content='<div class="choice-grid">'+choice(s,'orientation','vertical','Pionowo','Otwieranie do góry')+choice(s,'orientation','horizontal','Poziomo','Otwieranie na bok')+'</div>';
-if(s.step===2)content=s.orientation==='horizontal'?'<div class="stack">'+choice(s,'mounting','inside','Wewnątrz korpusu','Prowadnice TOP-BASIC')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma jest montowana wewnątrz korpusu.</strong><br>Ten sposób montażu ustawiamy automatycznie.</p></div>':'<div class="choice-grid">'+choice(s,'mounting','inside','Wewnątrz','Widoczne krawędzie korpusu')+choice(s,'mounting','outside','Na korpusie','Prowadnice na krawędziach')+'</div>'+help('Położenie prowadnic wpływa na wygląd frontu i dobór systemu. Pomiar do zapytania zbieramy wewnątrz korpusu; wymiar cięcia potwierdzi INTAGO.');
-if(s.step===3)content=s.orientation==='horizontal'?'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Wymagane dla rolety poziomej')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma wymaga dna szafki.</strong><br>Ta opcja jest ustawiana automatycznie.</p></div>':'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Dolna płyta zamyka korpus')+choice(s,'furniture','without-bottom','Bez dna w szafce','Przestrzeń pozostaje otwarta od dołu')+'</div>';
-if(s.step===4)content='<button class="btn subtle measure-start" data-action="measure"><span>Pomóż mi zmierzyć</span><span aria-hidden="true">↗</span></button><div class="internal-dimensions-note"><strong>Podaj wymiary wewnętrzne szafki.</strong><br>S × W × G oznaczają wolną przestrzeń wewnątrz korpusu, nie wymiary zewnętrzne mebla. Grubość płyt korpusu dobierasz niezależnie.</div>'+dimensionFields(s)+'<div id="range-feedback" aria-live="polite"><p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s)+'</div>'+help('To wymiary wnętrza potrzebne do przygotowania zapytania, a nie wymiary cięcia rolety. Prowadnice i mechanizm zajmą część przestrzeni. Ich odsadzenia ustalimy dla wybranego zestawu.');
+if(s.step===2)content=s.orientation==='horizontal'?'<div class="stack">'+choice(s,'mounting','inside','Wewnątrz korpusu','Prowadnice TOP-BASIC')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma jest montowana wewnątrz korpusu.</strong><br>Ten sposób montażu ustawiamy automatycznie.</p></div>':'<div class="choice-grid">'+choice(s,'mounting','inside','Wewnątrz','Widoczne krawędzie korpusu')+choice(s,'mounting','outside','Na korpusie','Prowadnice na krawędziach')+'</div>'+help('Przy montażu wewnątrz korpusu krawędzie szafki pozostają widoczne, a roleta jest cofnięta względem sąsiednich frontów. Przy montażu na korpusie elementy rolety zakrywają jego krawędzie — podobnie jak fronty nakładane.');
+if(s.step===3)content=s.orientation==='horizontal'?'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Wymagane dla rolety poziomej')+'</div><div class="hint"><span class="hint-marker">i</span><p><strong>Roleta pozioma wymaga dna szafki.</strong><br>Ta opcja jest ustawiana automatycznie.</p></div>':'<div class="stack bottom-choice">'+choice(s,'furniture','with-bottom','Z dnem w szafce','Dolna płyta zamyka korpus')+choice(s,'furniture','without-bottom','Bez dna w szafce','Przestrzeń pozostaje otwarta od dołu')+'</div>'+(s.furniture==='without-bottom'?'<div class="hint"><span class="hint-marker">i</span><p><strong>Zadbaj o podparcie rolety od dołu.</strong><br>Roleta musi opierać się na dnie szafki, blacie lub odpowiednim ograniczniku. Bez podparcia może wysunąć się dołem z prowadnic.</p></div>':'');
+if(s.step===4)content='<button class="btn subtle measure-start" data-action="measure"><span>Pomóż mi zmierzyć</span><span aria-hidden="true">↗</span></button>'+dimensionFields(s)+'<div id="range-feedback" aria-live="polite">'+dimensionRangeFeedback(s)+'</div>';
 if(s.step===5)content=recommendations(s);
 if(s.step===6)content=finishPanel(s);
+if(s.step===6)content+='<p class="field-help color-disclaimer">Kolory na ekranie są poglądowe. Ich wygląd zależy od ustawień monitora i oświetlenia, dlatego może różnić się od rzeczywistego materiału. Przed wyborem porównaj fizyczną próbkę.</p>';
 if(s.step===7)content=summary(s);
-const next=['Dobierz roletę','Dalej','Dalej','Sprawdź rozwiązania','Wybierz wykończenie','Zobacz konfigurację'];
+const next=['Dalej','Dalej','Dalej','Sprawdź rozwiązania','Wybierz wykończenie','Zobacz konfigurację'];
 return '<div class="step-meta"><span class="eyebrow">'+stepNames[s.step-1].toUpperCase()+'</span><span>0'+s.step+' / 07</span></div><section class="question"><h2 id="wizard-title" tabindex="-1">'+titles[s.step-1]+'</h2><p class="intro">'+intros[s.step-1]+'</p>'+content+'</section><div class="actions">'+(s.step>1?'<button class="prev" data-action="prev">← '+(s.step===7?'Zmień konfigurację':'Wstecz')+'</button>':'<span class="micro muted">Zacznij od kierunku</span>')+(s.step<7?'<button class="btn primary" data-action="next" '+(canNext(s)?'':'disabled')+'>'+next[s.step-1]+' <span aria-hidden="true">→</span></button>':'<button class="text-button" data-action="edit-start">Zmień od początku</button>')+'</div>';
 }
 
@@ -1802,6 +2489,7 @@ function setGalleryIndex(index){
 }
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+document.title='Rolety meblowe na wymiar – konfigurator | REHAU';
 let storage;try{storage=window.localStorage;}catch{}
 const store=createStore(restore(storage)||createState());
 let compare=false,measureStep=0,measureDraft={},measureRenderer,previousKey='',previousStep=0,frame=0,animation=0,toastTimer,showEnvelope=true;
@@ -2288,6 +2976,7 @@ function render(s){
  $('.expert-toggle').setAttribute('aria-pressed',s.mode==='expert');
  $$('[data-scene]').forEach(n=>{let hidden=s.step<=3?n.dataset.scene!=='front':s.step===4?!['front','dimensions'].includes(n.dataset.scene):false;if(n.dataset.scene==='gallery')hidden=!(s.step>=6&&s.selectedProduct&&s.finish);n.hidden=hidden;n.setAttribute('aria-pressed',n.dataset.scene===s.scene);});
  if(!animation&&!model.drag)liveOpen=s.open;
+ const directionButton=$('#direction-toggle');if(directionButton){directionButton.hidden=s.orientation!=='horizontal'||s.scene==='gallery';directionButton.textContent=(s.horizontalDirection==='left'?'← Otwieranie w lewo':'Otwieranie w prawo →')+' · Zmień kierunek';directionButton.setAttribute('aria-label','Zmień kierunek otwierania na '+(s.horizontalDirection==='left'?'prawy':'lewy'));}
  openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';
  const modelState=modelPreviewState(s.scene==='gallery'?{...s,scene:'front'}:s);
  const shape=JSON.stringify({...modelState,open:0,step:0,mode:''})+compare;
@@ -2296,10 +2985,12 @@ function render(s){
  $('#model-title').textContent=p?.name||(s.orientation&&s.orientation!=='unknown'?'Roleta '+(s.orientation==='horizontal'?'pozioma':'pionowa'):'Sprawdź, jak to działa.');
  const livePrice=$('#live-price'),livePriceData=priceFor(s);
  if(livePrice){
-  livePrice.className='live-price'+(livePriceData?' is-visible '+(livePriceData.mode==='exact'?'is-exact':livePriceData.mode==='quote'?'is-quote':''):'');
+  livePrice.className='live-price'+(livePriceData?' is-visible '+(livePriceData.mode==='exact'?'is-exact':livePriceData.mode==='quote'||livePriceData.mode==='loading'?'is-quote':''):'');
   livePrice.textContent=livePriceData?livePriceData.label:'';
   livePrice.title=livePriceData?livePriceData.note:'';
  }
+ if(s.step===5)ensureLivePricesForRecommendations(s);
+ ensureLivePriceForState(s);
  const sceneInfo={
  front:[s.orientation==='horizontal'?'Ruch w bok. Dostęp bez otwierania drzwiczek.':'Unieś listwę. Zajrzyj do środka.',spec.split?'Dwa płaszcze otwierają się od środka na obie strony.':'Przeciągnij uchwyt lub użyj suwaka. Strzałki klawiatury także otwierają roletę.'],
  mechanism:[mechanism&&v.mechanism.status==='verified'?mechanism.location:'Przykładowa droga prowadzenia',(mechanism?.description||'Dokładny mechanizm dobierzemy po potwierdzeniu wariantu.')+' Geometria oraz zajęta przestrzeń są poglądowe.'],
@@ -2327,7 +3018,7 @@ function render(s){
  const dims=['width','height','depth'].map(k=>s.dimensions[k]??'?');
  $('#dimensions-caption').textContent=s.scene==='gallery'?'Galeria REHAU • zdjęcia dokładne i inspiracje systemu są oznaczone osobno':(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary wewnętrzne':dims.join(' × ')+' mm / S × W × G • wymiary wewnętrzne'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • bez grubości płyt':'');
  if(!save(s,storage)&&$('#save-note'))$('#save-note').textContent='Zapis na urządzeniu niedostępny — pobierz kartę na końcu.';
- if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML='<p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s);
+ if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML=''+dimensionRangeFeedback(s);
  if(editing){const k=oldFocus.dataset.dimension,error=validateDimension(s.dimensions[k]);$('#error-'+k).textContent=error||'';oldFocus.setAttribute('aria-invalid',Boolean(error));const next=$('[data-action="next"]');if(next)next.disabled=Object.values(s.dimensions).some(v=>validateDimension(v));}
  if(enteredFinalStep&&s.selectedProduct&&s.finish)requestAnimationFrame(()=>setTimeout(()=>playFinalizationMoment(store.get()),140));
 }
@@ -2337,7 +3028,7 @@ function go(step){
  const fromStep=store.get().step;
  if(step>fromStep&&(!canNext(store.get())||Object.values(store.get().dimensions).some(v=>validateDimension(v))))return;
  const patch={step:Math.max(1,Math.min(7,step)),mode:'guided'};
- if(step===4)patch.scene='dimensions';if(step===5||step===6||step===7)patch.scene='front';
+ if(step===4)patch.scene='dimensions';if(step===5)patch.scene='mechanism';if(step===6||step===7)patch.scene='front';
  compare=false;previousKey='';store.update(patch);
  if(patch.step===1&&fromStep!==1)requestAnimationFrame(()=>playIntroMotion());
 }
@@ -2393,6 +3084,7 @@ document.addEventListener('click',async e=>{
  case 'expert':store.update({mode:s.mode==='expert'?'guided':'expert'});break;
  case 'demo':store.update({scene:'mechanism'});animateTo(s.open>50?15:85);$('.visual-panel').scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});break;
  case 'assemble':playAssemblyAnimation();break;
+ case 'toggle-direction':store.update({horizontalDirection:s.horizontalDirection==='left'?'right':'left'});break;
  case 'animate':animateTo(s.open>50?0:100);break;
  case 'open':animateTo(100);break;
  case 'close':animateTo(0);break;
@@ -2425,7 +3117,7 @@ function advanceMeasure(){if(measureStep<2){measureStep++;renderMeasure();}else{
 function renderMeasure(){
  const key=['width','height','depth'][measureStep],s=store.get();
  const instructions={width:'Przyłóż miarkę do lewej wewnętrznej ścianki. Zmierz odległość do prawej wewnętrznej ścianki.',height:s.furniture==='without-bottom'?'Mierz od spodu górnej płyty do planowanej dolnej krawędzi zamknięcia rolety.':'Mierz wewnątrz: od spodu górnej płyty do górnej powierzchni dolnej płyty.',depth:'Mierz od wewnętrznej krawędzi frontu w głąb szafki, do przedniej powierzchni pleców.'};
- $('#measure-content').innerHTML='<span class="eyebrow">POMÓŻ MI ZMIERZYĆ / 0'+(measureStep+1)+' Z 03</span><h2 id="measure-title" tabindex="-1">Zmierz '+({width:'szerokość.',height:'wysokość.',depth:'głębokość.'}[key])+'</h2><div class="measurement-progress">'+[0,1,2].map(i=>'<i class="'+(i<=measureStep?'active':'')+'"></i>').join('')+'</div><div class="measurement-drawing" id="measure-model"></div><p class="measurement-hint">'+instructions[key]+'</p><label for="measure-value">'+dimensionLabels[key]+' wnętrza korpusu</label><div class="input-wrap"><input type="number" id="measure-value" min="1" max="10000" step="1" inputmode="numeric" placeholder="Wpisz wymiar" value="'+(measureDraft[key]??'')+'" aria-describedby="measure-error"><span>mm</span></div><p class="field-error" id="measure-error"></p><div class="measure-actions"><button data-action="measure-back" '+(measureStep===0?'disabled':'')+'>← Wstecz</button><button class="btn primary" data-action="measure-next">'+(measureStep===2?'Zapisz wymiary':'Dalej')+' →</button></div><button class="text-button" data-action="measure-unknown">Nie znam tego wymiaru</button><p class="micro muted">Pomiar do zapytania. Odliczenia na mechanizm i prowadnice potwierdzi INTAGO.</p>';
+ $('#measure-content').innerHTML='<span class="eyebrow">POMÓŻ MI ZMIERZYĆ / 0'+(measureStep+1)+' Z 03</span><h2 id="measure-title" tabindex="-1">Zmierz '+({width:'szerokość.',height:'wysokość.',depth:'głębokość.'}[key])+'</h2><div class="measurement-progress">'+[0,1,2].map(i=>'<i class="'+(i<=measureStep?'active':'')+'"></i>').join('')+'</div><div class="measurement-drawing" id="measure-model"></div><p class="measurement-hint">'+instructions[key]+'</p><label for="measure-value">'+dimensionLabels[key]+' wnętrza korpusu</label><div class="input-wrap"><input type="number" id="measure-value" min="1" max="10000" step="1" inputmode="numeric" placeholder="Wpisz wymiar" value="'+(measureDraft[key]??'')+'" aria-describedby="measure-error"><span>mm</span></div><p class="field-error" id="measure-error"></p><div class="measure-actions"><button data-action="measure-back" '+(measureStep===0?'disabled':'')+'>← Wstecz</button><button class="btn primary" data-action="measure-next">'+(measureStep===2?'Zapisz wymiary':'Dalej')+' →</button></div>';
  measureRenderer?.dispose();measureRenderer=new CabinetRenderer($('#measure-model'),{interactive:false});measureRenderer.update({...s,scene:'dimensions',dimensions:measureDraft,open:100},{measure:key});validateMeasure();$('#measure-title').focus({preventScroll:true});
 }
 window.addEventListener('offline',()=>announce('Jesteś offline. Możesz nadal konfigurować; wiadomość wyślesz po połączeniu.'));

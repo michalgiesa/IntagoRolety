@@ -53,7 +53,7 @@ export class CabinetRenderer{
   this.svg.addEventListener('pointermove',e=>{
    const d=this.drag;if(!d||e.pointerId!==d.id)return;
    const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(d.inv);
-   const delta=this.horizontal?(p.x-d.start.x)*(d.mirror?-1:1):d.start.y-p.y;
+   const delta=this.horizontal?(p.x-d.start.x)*(d.mirror?-1:1)*(this.mirrored?-1:1):d.start.y-p.y;
    d.latest=clamp(d.open+delta/(this.guide.travel*this.scale)*100,0,100);
    if(!this.dragFrame)this.dragFrame=requestAnimationFrame(()=>{this.dragFrame=0;if(this.drag)this.onOpen(this.drag.latest);});
   });
@@ -64,7 +64,7 @@ export class CabinetRenderer{
   };
   this.svg.addEventListener('pointerup',stop);this.svg.addEventListener('pointercancel',stop);this.svg.addEventListener('lostpointercapture',stop);
   this.svg.addEventListener('keydown',e=>{
-   const handle=e.target.closest('[data-handle]');if(!handle)return;const reverse=handle.dataset.handle==='mirror';
+   const handle=e.target.closest('[data-handle]');if(!handle)return;const reverse=(handle.dataset.handle==='mirror')!==Boolean(this.mirrored);
    const keys={ArrowUp:5,ArrowDown:-5,ArrowRight:reverse?-5:5,ArrowLeft:reverse?5:-5,PageUp:20,PageDown:-20};
    if(!(e.key in keys)&&e.key!=='Home'&&e.key!=='End')return;
    e.preventDefault();this.onStart();const value=e.key==='Home'?100:e.key==='End'?0:clamp(this.open+keys[e.key],0,100);this.onOpen(value);this.onCommit(value);
@@ -104,7 +104,7 @@ export class CabinetRenderer{
   }
   this.routes=[makeRoute({width:g.width,height:g.height,depth:g.depth,horizontal:this.horizontal,path:this.spec.path,coil:this.coil,radius:Math.max(1,c.rearReturn?Math.min(g.fascia-g.pitch,c.topBand*.35):g.fascia-g.pitch),ceiling:c.rearReturn?c.topBand*.5-g.top:0})];
   if(g.split)this.routes.push(makeRoute({width:g.width,height:g.height,depth:g.depth,horizontal:true,mirror:true,radius:Math.max(1,g.fascia-g.pitch)}));
-  if(this.section){this.drawSection();this.setOpen(state.open);this.resizeTargets();return;}
+  if(this.section){this.drawSection();this.applySceneMirror();this.setOpen(state.open);this.resizeTargets();return;}
   const ground=p([w*.5,h,d*.5]);layer('SHADOW').append(el('ellipse',{cx:ground[0],cy:p([0,h+t,0])[1]+14,rx:(w+d*.42)*c.scale*.62,ry:22,fill:fill('shadow')}));
   const body=layer('CABINET',{opacity:xray?'.18':'1'});
   body.innerHTML=pg([[0,c.backTop,c.backDepth],[w,c.backTop,c.backDepth],[w,h,c.backDepth],[0,h,c.backDepth]],fill('back'))+pg([[0,0,0],[0,0,d],[0,h,d],[0,h,0]],fill('inside'))+pg([[w,0,0],[w,0,d],[w,h,d],[w,h,0]],fill('inside'))+(c.hasBottom?pg([[0,h,0],[w,h,0],[w,h,d],[0,h,d]],fill('shelf')):'');
@@ -138,7 +138,21 @@ export class CabinetRenderer{
   const aa=q([0,0,0]),bb=q([g.width,h,0]);this.reflection=el('rect',{x:aa[0],y:aa[1],width:bb[0]-aa[0],height:bb[1]-aa[1],fill:fill('reflection'),'pointer-events':'none'});this.front.append(this.reflection);
   if(scene==='dimensions')this.drawDimensions(measure);
   if(xray){const n=layer('MECHANISM_LABEL');n.innerHTML='<text x="380" y="606" text-anchor="middle" fill="#74797d" font-size="14">'+(this.spec.path==='coil'?'Zwijanie płaszcza w kasecie u góry':'Powrót płaszcza w głąb korpusu')+' · schemat drogi</text>';}
-  this.setOpen(state.open);this.resizeTargets();
+  this.applySceneMirror();this.setOpen(state.open);this.resizeTargets();
+ }
+ applySceneMirror(){
+  this.mirrored=this.horizontal&&this.state.horizontalDirection==='left';
+  if(!this.mirrored)return;
+  const group=el('g',{'data-horizontal-mirror':'true',transform:'translate(760 0) scale(-1 1)'});
+  for(const child of [...this.svg.children])if(!['defs','title','desc'].includes(child.tagName.toLowerCase()))group.append(child);
+  this.svg.append(group);
+  // Keep dimension and caption text readable in the mirrored projection.
+  for(const text of group.querySelectorAll('text')){
+   const x=Number(text.getAttribute('x'))||0;
+   text.setAttribute('transform','translate('+2*x+' 0) scale(-1 1)');
+   const anchor=text.getAttribute('text-anchor')||'start';
+   if(anchor!=='middle')text.setAttribute('text-anchor',anchor==='end'?'start':'end');
+  }
  }
  setOpen(value){
   this.open=clamp(value,0,100);if(this.section){this.updateSectionMotion();return;}if(!this.slats)return;

@@ -9,6 +9,7 @@ export function deserialize(raw){
   const x=data.state,s=createState();
   for(const k of ['orientation','mounting']){const valid=k==='orientation'?['vertical','horizontal','unknown']:['inside','outside','unknown'];s[k]=valid.includes(x[k])?x[k]:null;}
   s.furniture=Object.hasOwn(furniture,x.furniture)?x.furniture:null;
+  s.horizontalDirection=x.horizontalDirection==='left'?'left':'right';
   for(const k of ['width','height','depth']){const n=x.dimensions?.[k];s.dimensions[k]=typeof n==='number'&&!validateDimension(n)?n:null;}
   s.selectedProduct=getProduct(x.selectedProduct)?.id||null;s.finish=Object.hasOwn(finishes,x.finish)?x.finish:null;
   s.open=typeof x.open==='number'&&Number.isFinite(x.open)?Math.max(0,Math.min(100,x.open)):35;

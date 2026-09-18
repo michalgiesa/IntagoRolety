@@ -31,38 +31,16 @@ const variants = source.flatMap(product => product.rows.map(row => {
   return [productMap[product.productId], orientationMap[product.productId] || 'vertical', Number(row.variantId), w0, w1, h0, h1, Number.isFinite(depth) ? depth : 0, finishMap[f['Kolor rolety meblowej']], Number(row.gross), product.productId];
 }));
 
+// Aktualizujemy wyłącznie mapę konfiguracja -> productId/variantId.
+// Ceny z kolumny gross są danymi synchronizacyjnymi i nie mogą zastąpić odczytu live z publicznej karty Selly.
 const pricing = `const PRICE_VERSION='2026-09-15';
-const PRICE_VARIANTS=${JSON.stringify(variants)};
-const PRICE_SOURCES={"6350":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=6350","6346":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=6346","7716":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=7716","9290":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=9290","9291":"https://www.intago.com.pl/adm/?a=produkty.produktWarianty&produkt=9291"};
-const priceFormat=new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',minimumFractionDigits:0,maximumFractionDigits:0});
-function priceFor(state,productId=state.selectedProduct){
- if(!productId||!state.orientation)return null;
- const all=PRICE_VARIANTS.filter(v=>v[0]===productId&&v[1]===state.orientation);
- if(!all.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak wariantów cenowych Selly dla tej konfiguracji.',source:null};
- const w=Number(state.dimensions.width),h=Number(state.dimensions.height),d=Number(state.dimensions.depth),hasDims=Number.isFinite(w)&&Number.isFinite(h);
- let matches=hasDims?all.filter(v=>w>=Math.min(v[3],v[4])&&w<=Math.max(v[3],v[4])&&h>=Math.min(v[5],v[6])&&h<=Math.max(v[5],v[6])&&(!v[7]||Number.isFinite(d)&&d>=v[7])):all;
- if(state.finish)matches=matches.filter(v=>v[8]===state.finish);
- if(!matches.length)return {mode:'quote',gross:null,label:'Cena po wycenie',note:'Brak pasującego wariantu cenowego Selly dla tych wymiarów i wykończenia.',source:null};
- const prices=[...new Set(matches.map(v=>v[9]))],gross=Math.min(...prices),exact=hasDims&&(state.finish||prices.length===1);
- const productSource=String(matches[0][10]);
- return {mode:exact?'exact':'from',gross,label:(exact?'':'od ')+priceFormat.format(gross),variantId:exact&&matches.length===1?matches[0][2]:null,note:exact?'Cena brutto wariantu Selly dopasowanego do zakresu wymiarów i wykończenia.':'Najniższa cena brutto w pasujących wariantach Selly; dokładna cena zależy od wymiarów i wykończenia.',source:PRICE_SOURCES[productSource]};
-}
-function priceCardHtml(state,productId){
- const p=priceFor(state,productId);if(!p)return '';
- const caption=p.mode==='exact'?'Cena dla konfiguracji':p.mode==='from'?'Cena orientacyjna':'Cena';
- const badge=p.mode==='exact'?(p.variantId?'wariant '+p.variantId:'brutto / Selly'):p.mode==='from'?'brutto / od':'wycena indywidualna';
- return '<div class="rec-price '+p.mode+'"><span class="rec-price-text"><small>'+caption+'</small><strong>'+escape(p.label)+'</strong></span><span class="rec-price-badge">'+badge+'</span></div>';
-}
-function selectedPriceHtml(state){
- const p=priceFor(state);if(!p)return '';
- return '<div class="summary-price-note"><strong>'+escape(p.label)+'</strong><br>'+escape(p.note)+' <span class="muted">Cennik Selly: '+PRICE_VERSION+'.</span></div>';
-}`;
+const PRICE_VARIANTS=${JSON.stringify(variants)};`;
 
 let html = await fs.readFile(htmlPath, 'utf8');
 const start = html.indexOf("const PRICE_VERSION='");
-const end = html.indexOf('const componentImages=', start);
+const end = html.indexOf('\nconst PRICE_SOURCES=', start);
 if (start < 0 || end < 0) throw new Error('Nie znaleziono istniejącego bloku cen w wersji klienckiej.');
-html = html.slice(0, start) + pricing + '\n\n' + html.slice(end);
+html = html.slice(0, start) + pricing + html.slice(end);
 
 const favicon = await fs.readFile(path.join(root, 'assets', 'intago-favicon.webp'));
 const faviconData = `data:image/webp;base64,${favicon.toString('base64')}`;
