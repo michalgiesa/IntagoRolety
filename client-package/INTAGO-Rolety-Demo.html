@@ -392,7 +392,7 @@
 </main>
   
 <dialog id="measure-dialog" aria-labelledby="measure-title"><button class="dialog-close" data-action="close-measure" aria-label="Zamknij pomiar">×</button><div id="measure-content"></div></dialog>
-<dialog id="quote-dialog" aria-labelledby="quote-title"><button class="dialog-close" data-action="close-quote" aria-label="Zamknij zapytanie">×</button><span class="eyebrow">INTAGO / ZAPYTANIE</span><h2 id="quote-title">Porozmawiajmy o Twojej rolecie.</h2><p>Przygotujemy krótkie zapytanie z najważniejszymi danymi rolety. Sprawdzisz je i wyślesz w swoim programie pocztowym.</p><label for="quote-note">Co jeszcze powinniśmy wiedzieć? <span class="muted">(opcjonalnie)</span></label><textarea id="quote-note" rows="3" maxlength="1500" placeholder="Np. szafka już jest gotowa, na plecach jest gniazdko…"></textarea><details><summary>Zobacz dane wysyłane do sklepu</summary><pre id="quote-preview"></pre></details><a id="quote-mail" class="btn primary" href="mailto:sklep@intago.pl">Otwórz wiadomość e-mail ↗</a><button class="btn subtle" data-action="download-text">Pobierz zapytanie jako plik</button><p class="micro">Konfigurator nie wysyła danych automatycznie.</p></dialog>
+<dialog id="quote-dialog" aria-labelledby="quote-title"><button class="dialog-close" data-action="close-quote" aria-label="Zamknij zapytanie">×</button><span class="eyebrow">INTAGO / ZAPYTANIE</span><h2 id="quote-title">Wyślij zapytanie o wycenę.</h2><p>Podaj dane kontaktowe. Konfiguracja rolety zostanie dołączona automatycznie, a Ty pozostaniesz na tej stronie.</p><div id="quote-form" class="quote-form"><div class="quote-fields"><label for="quote-name">Imię i nazwisko <span aria-hidden="true">*</span><input id="quote-name" type="text" maxlength="120" autocomplete="name" required placeholder="Jan Kowalski"></label><label for="quote-email">Adres e-mail <span aria-hidden="true">*</span><input id="quote-email" type="email" maxlength="180" autocomplete="email" required placeholder="jan@firma.pl"></label><label for="quote-phone">Telefon <span class="muted">(opcjonalnie)</span><input id="quote-phone" type="tel" maxlength="40" autocomplete="tel" placeholder="+48 500 000 000"></label></div><label for="quote-note">Co jeszcze powinniśmy wiedzieć? <span class="muted">(opcjonalnie)</span></label><textarea id="quote-note" rows="3" maxlength="1500" placeholder="Np. szafka już jest gotowa, na plecach jest gniazdko…"></textarea><input id="quote-company" class="quote-honey" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="quote-consent" for="quote-consent"><input id="quote-consent" type="checkbox" required><span>Wyrażam zgodę na przetwarzanie podanych danych w celu odpowiedzi na zapytanie, zgodnie z <a href="/prywatnosc,p6.html" target="_blank" rel="noopener">Polityką prywatności</a>.</span></label><p id="quote-error" class="quote-error" role="alert" aria-live="polite"></p><details><summary>Zobacz dane wysyłane do sklepu</summary><pre id="quote-preview"></pre></details><button id="quote-send" class="btn primary" data-action="send-quote">Wyślij zapytanie</button><button class="btn subtle" data-action="download-text">Pobierz kopię zapytania</button><p class="micro"></p></div><div id="quote-success" class="quote-success" hidden><span class="quote-success-icon" aria-hidden="true">✓</span><h3>Zapytanie zostało wysłane.</h3><p>Dziękujemy. Odpowiemy na podany adres e-mail.</p><button class="btn primary" data-action="close-quote">Zamknij</button></div></dialog>
 <dialog id="copy-dialog" aria-labelledby="copy-title"><button class="dialog-close" data-action="close-copy" aria-label="Zamknij kopiowanie">×</button><h2 id="copy-title">Skopiuj konfigurację</h2><p>Zaznacz tekst i skopiuj go do swojej wiadomości.</p><textarea id="copy-text" rows="14" readonly aria-label="Treść konfiguracji"></textarea></dialog>
 <div id="status" role="status" aria-live="polite" class="toast"></div>
 <noscript><p class="noscript">Konfigurator rolet meblowych na wymiar wymaga JavaScript. Możesz też napisać do sklep@intago.pl.</p></noscript>
@@ -419,6 +419,41 @@
 @media(max-width:760px){
  #intago-configurator .rec-price{grid-template-columns:1fr;gap:5px}
  #intago-configurator .rec-price-badge{text-align:left;max-width:none}
+}
+</style>
+
+
+<style id="intago-quote-ajax">
+#intago-configurator .quote-form{display:block}
+#intago-configurator .quote-fields{display:grid;grid-template-columns:1fr 1fr;gap:11px 12px;margin:17px 0 12px}
+#intago-configurator .quote-fields label:last-child{grid-column:1/-1}
+#intago-configurator .quote-fields input{
+ display:block;width:100%;margin-top:6px;padding:11px 12px;
+ border:1px solid #cfd2d4;border-radius:6px;background:#fff;font-size:15px;
+}
+#intago-configurator .quote-fields input:focus,
+#intago-configurator #quote-note:focus{border-color:#8f969a}
+#intago-configurator .quote-consent{
+ display:flex;align-items:flex-start;gap:9px;margin:3px 0 13px;
+ font-size:11px;line-height:1.45;color:#676c70;
+}
+#intago-configurator .quote-consent input{width:18px;height:18px;min-height:18px;margin:1px 0 0;flex:none;accent-color:var(--accent)}
+#intago-configurator .quote-consent a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:2px}
+#intago-configurator .quote-error{min-height:18px;margin:0 0 6px;color:#a90016;font-size:12px;line-height:1.4}
+#intago-configurator .quote-honey{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+#intago-configurator .quote-success{text-align:center;padding:20px 4px 4px}
+#intago-configurator .quote-success[hidden]{display:none}
+#intago-configurator .quote-success-icon{
+ display:grid;place-items:center;width:48px;height:48px;margin:0 auto 13px;
+ border-radius:50%;background:var(--accent);color:#fff;font-size:24px;font-weight:800;
+ box-shadow:0 0 0 7px rgba(210,7,29,.08);
+}
+#intago-configurator .quote-success h3{font-size:23px;margin:0 0 7px}
+#intago-configurator .quote-success p{font-size:14px;color:#6b7074}
+#intago-configurator #quote-send.is-sending{cursor:wait}
+@media(max-width:760px){
+ #intago-configurator .quote-fields{grid-template-columns:1fr}
+ #intago-configurator .quote-fields label:last-child{grid-column:auto}
 }
 </style>
 
@@ -1707,7 +1742,7 @@ function configurationText(s){
  }
 
  if(price?.productId&&price?.variantId){
-  lines.push('','SELLY','Produkt: '+price.productId+' / wariant: '+price.variantId);
+  lines.push('','IDENTYFIKACJA','ID produktu: '+price.productId+' / ID wariantu: '+price.variantId);
  }
 
  lines.push('','ID konfiguracji: '+configurationId(s));
@@ -1721,7 +1756,144 @@ function quoteDraft(state,note=''){
  const body=configurationText(state)+(note?'\n\nUWAGI KLIENTA\n'+String(note).trim():'');
  return {to:'sklep@intago.pl',subject,body};
 }
-function mailto(draft){return 'mailto:'+draft.to+'?subject='+encodeURIComponent(draft.subject)+'&body='+encodeURIComponent(draft.body);}
+const INTAGO_QUOTE_ENDPOINT='https://formsubmit.co/ajax/sklep@intago.pl';
+const INTAGO_QUOTE_LAST_SENT_KEY='INTAGO_QUOTE_LAST_SENT_V1';
+const INTAGO_QUOTE_COOLDOWN=30*1000;
+let intagoQuoteOpenedAt=0;
+
+function quoteContactValues(){
+ return {
+  name:($('#quote-name')?.value||'').trim(),
+  email:($('#quote-email')?.value||'').trim(),
+  phone:($('#quote-phone')?.value||'').trim(),
+  note:($('#quote-note')?.value||'').trim(),
+  honey:($('#quote-company')?.value||'').trim(),
+  consent:Boolean($('#quote-consent')?.checked)
+ };
+}
+
+function resetQuoteDialog(state){
+ const form=$('#quote-form'),success=$('#quote-success'),error=$('#quote-error');
+ if(form)form.hidden=false;
+ if(success)success.hidden=true;
+ if(error)error.textContent='';
+ for(const id of ['quote-name','quote-email','quote-phone','quote-note','quote-company']){
+  const node=$('#'+id);if(node)node.value='';
+ }
+ const consent=$('#quote-consent');if(consent)consent.checked=false;
+ const send=$('#quote-send');
+ if(send){send.disabled=false;send.classList.remove('is-sending');send.textContent='Wyślij zapytanie';}
+ const preview=$('#quote-preview');if(preview)preview.textContent=configurationText(state);
+ intagoQuoteOpenedAt=Date.now();
+}
+
+function updateQuotePreview(){
+ const preview=$('#quote-preview');if(!preview)return;
+ preview.textContent=quoteDraft(store.get(),($('#quote-note')?.value||'').trim()).body;
+}
+
+function validateQuoteContact(){
+ const values=quoteContactValues(),error=$('#quote-error');
+ if(error)error.textContent='';
+
+ const name=$('#quote-name'),email=$('#quote-email'),consent=$('#quote-consent');
+ if(!values.name){
+  if(error)error.textContent='Podaj imię i nazwisko.';
+  name?.focus();return null;
+ }
+ if(!email?.checkValidity()||!values.email){
+  if(error)error.textContent='Podaj prawidłowy adres e-mail.';
+  email?.focus();return null;
+ }
+ if(!values.consent){
+  if(error)error.textContent='Zaznacz zgodę na przetwarzanie danych w celu odpowiedzi na zapytanie.';
+  consent?.focus();return null;
+ }
+ return values;
+}
+
+function quoteSentRecently(){
+ try{
+  const ts=Number(localStorage.getItem(INTAGO_QUOTE_LAST_SENT_KEY)||0);
+  return Number.isFinite(ts)&&Date.now()-ts<INTAGO_QUOTE_COOLDOWN;
+ }catch{return false;}
+}
+function rememberQuoteSent(){
+ try{localStorage.setItem(INTAGO_QUOTE_LAST_SENT_KEY,String(Date.now()));}catch{}
+}
+
+async function sendQuoteRequest(state,button){
+ const values=validateQuoteContact();if(!values)return;
+
+ // Honeypot: bot dostaje pozorny sukces, ale niczego nie wysyłamy.
+ if(values.honey){
+  $('#quote-form').hidden=true;$('#quote-success').hidden=false;
+  return;
+ }
+
+ // Bardzo szybkie automatyczne wysłanie po otwarciu modala traktujemy jak spam.
+ if(Date.now()-intagoQuoteOpenedAt<900){
+  const error=$('#quote-error');
+  if(error)error.textContent='Odczekaj chwilę i spróbuj ponownie.';
+  return;
+ }
+
+ if(quoteSentRecently()){
+  const error=$('#quote-error');
+  if(error)error.textContent='Zapytanie zostało już przed chwilą wysłane. Poczekaj moment przed kolejną próbą.';
+  return;
+ }
+
+ const draft=quoteDraft(state,values.note);
+ const payload={
+  '_subject':draft.subject,
+  '_template':'table',
+  '_captcha':'false',
+  '_honey':values.honey,
+  '_replyto':values.email,
+  'Źródło':'Konfigurator rolet INTAGO',
+  'Imię i nazwisko':values.name,
+  'email':values.email,
+  'Telefon':values.phone||'—',
+  'ID konfiguracji':configurationId(state),
+  'Adres strony':location.href,
+  'Konfiguracja':draft.body
+ };
+
+ const original=button?.textContent||'Wyślij zapytanie';
+ if(button){
+  button.disabled=true;
+  button.classList.add('is-sending');
+  button.textContent='Wysyłam…';
+ }
+ const error=$('#quote-error');if(error)error.textContent='';
+
+ try{
+  const response=await fetch(INTAGO_QUOTE_ENDPOINT,{
+   method:'POST',
+   headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify(payload)
+  });
+  let result={};
+  try{result=await response.json();}catch{}
+  if(!response.ok||result?.success===false){
+   throw new Error(result?.message||('HTTP '+response.status));
+  }
+
+  rememberQuoteSent();
+  $('#quote-form').hidden=true;
+  $('#quote-success').hidden=false;
+  announce('Zapytanie zostało wysłane.');
+ }catch(err){
+  console.error('INTAGO quote send:',err);
+  if(error)error.textContent='Nie udało się wysłać zapytania. Spróbuj ponownie za chwilę lub pobierz kopię zapytania.';
+  if(button){
+   button.disabled=false;
+   button.classList.remove('is-sending');
+   button.textContent=original;
+  }
+ }
+}
 
 
 /* src/geometry.js */
@@ -3044,7 +3216,7 @@ document.addEventListener('input',e=>{
  if(n.id==='open-range'){beginInteraction();previewOpen(n.value);return;}
  if(n.dataset.dimension){store.update({dimensions:{[n.dataset.dimension]:n.value===''?null:Number(n.value)}});return;}
  if(n.id==='measure-value'){measureDraft[['width','height','depth'][measureStep]]=n.value===''?null:Number(n.value);validateMeasure();measureRenderer.update({...store.get(),scene:'dimensions',dimensions:measureDraft},{measure:['width','height','depth'][measureStep]});return;}
- if(n.id==='quote-note')$('#quote-mail').href=mailto(quoteDraft(store.get(),n.value));
+ if(n.id==='quote-note'){updateQuotePreview();return;}
 });
 openRange.addEventListener('change',()=>commitOpen());
 document.addEventListener('click',async e=>{
@@ -3103,7 +3275,8 @@ document.addEventListener('click',async e=>{
  case 'measure-next':if(validateMeasure())advanceMeasure();break;
  case 'add-cart':await addConfiguredProductToCart(s,b);break;
  case 'go-cart':window.location.assign(INTAGO_CART_PAGE);break;
- case 'quote':$('#quote-note').value='';$('#quote-preview').textContent=configurationText(s);$('#quote-mail').href=mailto(quoteDraft(s));$('#quote-dialog').showModal();break;
+ case 'quote':resetQuoteDialog(s);$('#quote-dialog').showModal();requestAnimationFrame(()=>$('#quote-name')?.focus());break;
+ case 'send-quote':await sendQuoteRequest(s,b);break;
  case 'close-quote':$('#quote-dialog').close();break;
  case 'close-copy':$('#copy-dialog').close();break;
  case 'copy':try{await navigator.clipboard.writeText(configurationText(s));announce('Konfiguracja skopiowana.');}catch{$('#copy-text').value=configurationText(s);$('#copy-dialog').showModal();$('#copy-text').select();}break;
