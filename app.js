@@ -6,6 +6,8 @@ import {getProduct,getVariant,mountings,mechanisms} from './systems-data.js';
 import {validateDimension,dimensionLabels,visualSpec,mechanismEnvelope} from './src/engine.js';
 import {configurationText,configurationId,quoteDraft,mailto} from './src/quote.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const appCommerce=()=>globalThis.INTAGO_COMMERCE;
+document.title='Rolety meblowe na wymiar – konfigurator | REHAU';
 let storage;try{storage=window.localStorage;}catch{}
 const store=createStore(restore(storage)||createState());
 let compare=false,measureStep=0,measureDraft={},measureRenderer,previousKey='',previousStep=0,frame=0,animation=0,toastTimer,showEnvelope=true;
@@ -44,6 +46,7 @@ function render(s){
  $('.expert-toggle').setAttribute('aria-pressed',s.mode==='expert');
  $$('[data-scene]').forEach(n=>{n.hidden=s.step<=3?n.dataset.scene!=='front':s.step===4?!['front','dimensions'].includes(n.dataset.scene):false;n.setAttribute('aria-pressed',n.dataset.scene===s.scene);});
  if(!animation&&!model.drag)liveOpen=s.open;
+ const directionButton=$('#direction-toggle');if(directionButton){directionButton.hidden=s.orientation!=='horizontal'||s.scene==='gallery';directionButton.textContent=(s.horizontalDirection==='left'?'← Otwieranie w lewo':'Otwieranie w prawo →')+' · Zmień kierunek';directionButton.setAttribute('aria-label','Zmień kierunek otwierania na '+(s.horizontalDirection==='left'?'prawy':'lewy'));}
  openRange.value=liveOpen;openValue.textContent=Math.round(liveOpen)+'%';
  const shape=JSON.stringify({...s,open:0,step:0,mode:''})+compare;
  if(model.shape!==shape){model.shape=shape;model.update({...s,open:liveOpen},{compare,showEnvelope});}else model.setOpen(liveOpen);
@@ -71,14 +74,15 @@ function render(s){
  const dims=['width','height','depth'].map(k=>s.dimensions[k]??'?');
  $('#dimensions-caption').textContent=(dims.every(x=>x==='?')?'Przykładowy mebel • podaj własne wymiary':dims.join(' × ')+' mm / S × W × G'+(dims.includes('?')?' • brakujące proporcje poglądowe':''))+(s.scene==='dimensions'?' • wymiary wewnętrzne, bez grubości płyt':'');
  if(!save(s,storage)&&$('#save-note'))$('#save-note').textContent='Zapis na urządzeniu niedostępny — pobierz kartę na końcu.';
- if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML='<p><strong>Zakresy dla wybranego kierunku i montażu</strong></p>'+dimensionRangeFeedback(s);
+ if(s.step===4&&$('#range-feedback'))$('#range-feedback').innerHTML=''+dimensionRangeFeedback(s);
  if(editing){const k=oldFocus.dataset.dimension,error=validateDimension(s.dimensions[k]);$('#error-'+k).textContent=error||'';oldFocus.setAttribute('aria-invalid',Boolean(error));const next=$('[data-action="next"]');if(next)next.disabled=Object.values(s.dimensions).some(v=>validateDimension(v));}
+ appCommerce()?.ensureLivePriceForState(s);
 }
 store.subscribe(s=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>render(s));});render(store.get());
 function go(step){
  if(step>store.get().step&&(!canNext(store.get())||Object.values(store.get().dimensions).some(v=>validateDimension(v))))return;
  const patch={step:Math.max(1,Math.min(7,step)),mode:'guided'};
- if(step===4)patch.scene='dimensions';if(step===5||step===6||step===7)patch.scene='front';
+ if(step===4)patch.scene='dimensions';if(step===5)patch.scene='mechanism';if(step===6||step===7)patch.scene='front';
  compare=false;previousKey='';store.update(patch);
 }
 function download(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -113,6 +117,8 @@ document.addEventListener('click',async e=>{
  case 'unknown-finish':store.update({finish:null});break;
  case 'expert':store.update({mode:s.mode==='expert'?'guided':'expert'});break;
  case 'demo':store.update({scene:'mechanism'});animateTo(s.open>50?15:85);$('.visual-panel').scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});break;
+ case 'toggle-direction':store.update({horizontalDirection:s.horizontalDirection==='left'?'right':'left'});break;
+ case 'add-cart':await appCommerce()?.addConfiguredProductToCart(s,b);break;
  case 'animate':animateTo(s.open>50?0:100);break;
  case 'open':animateTo(100);break;
  case 'close':animateTo(0);break;
@@ -143,7 +149,7 @@ function advanceMeasure(){if(measureStep<2){measureStep++;renderMeasure();}else{
 function renderMeasure(){
  const key=['width','height','depth'][measureStep],s=store.get();
  const instructions={width:'Przyłóż miarkę do lewej wewnętrznej ścianki. Zmierz odległość do prawej wewnętrznej ścianki.',height:s.furniture==='without-bottom'?'Mierz od spodu górnej płyty do planowanej dolnej krawędzi zamknięcia rolety.':'Mierz wewnątrz: od spodu górnej płyty do górnej powierzchni dolnej płyty.',depth:'Mierz od wewnętrznej krawędzi frontu w głąb szafki, do przedniej powierzchni pleców.'};
- $('#measure-content').innerHTML='<span class="eyebrow">POMÓŻ MI ZMIERZYĆ / 0'+(measureStep+1)+' Z 03</span><h2 id="measure-title" tabindex="-1">Zmierz '+({width:'szerokość.',height:'wysokość.',depth:'głębokość.'}[key])+'</h2><div class="measurement-progress">'+[0,1,2].map(i=>'<i class="'+(i<=measureStep?'active':'')+'"></i>').join('')+'</div><div class="measurement-drawing" id="measure-model"></div><p class="measurement-hint">'+instructions[key]+'</p><label for="measure-value">'+dimensionLabels[key]+' wnętrza korpusu</label><div class="input-wrap"><input type="number" id="measure-value" min="1" max="10000" step="1" inputmode="numeric" placeholder="Wpisz wymiar" value="'+(measureDraft[key]??'')+'" aria-describedby="measure-error"><span>mm</span></div><p class="field-error" id="measure-error"></p><div class="measure-actions"><button data-action="measure-back" '+(measureStep===0?'disabled':'')+'>← Wstecz</button><button class="btn primary" data-action="measure-next">'+(measureStep===2?'Zapisz wymiary':'Dalej')+' →</button></div><button class="text-button" data-action="measure-unknown">Nie znam tego wymiaru</button><p class="micro muted">Pomiar do zapytania. Odliczenia na mechanizm i prowadnice potwierdzi INTAGO.</p>';
+ $('#measure-content').innerHTML='<span class="eyebrow">POMÓŻ MI ZMIERZYĆ / 0'+(measureStep+1)+' Z 03</span><h2 id="measure-title" tabindex="-1">Zmierz '+({width:'szerokość.',height:'wysokość.',depth:'głębokość.'}[key])+'</h2><div class="measurement-progress">'+[0,1,2].map(i=>'<i class="'+(i<=measureStep?'active':'')+'"></i>').join('')+'</div><div class="measurement-drawing" id="measure-model"></div><p class="measurement-hint">'+instructions[key]+'</p><label for="measure-value">'+dimensionLabels[key]+' wnętrza korpusu</label><div class="input-wrap"><input type="number" id="measure-value" min="1" max="10000" step="1" inputmode="numeric" placeholder="Wpisz wymiar" value="'+(measureDraft[key]??'')+'" aria-describedby="measure-error"><span>mm</span></div><p class="field-error" id="measure-error"></p><div class="measure-actions"><button data-action="measure-back" '+(measureStep===0?'disabled':'')+'>← Wstecz</button><button class="btn primary" data-action="measure-next">'+(measureStep===2?'Zapisz wymiary':'Dalej')+' →</button></div>';
  measureRenderer?.dispose();measureRenderer=new CabinetRenderer($('#measure-model'),{interactive:false});measureRenderer.update({...s,scene:'dimensions',dimensions:measureDraft,open:100},{measure:key});validateMeasure();$('#measure-title').focus({preventScroll:true});
 }
 window.addEventListener('offline',()=>announce('Jesteś offline. Możesz nadal konfigurować; wiadomość wyślesz po połączeniu.'));

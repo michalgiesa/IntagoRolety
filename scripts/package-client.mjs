@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 
 const root = resolve(import.meta.dirname, '..');
 const output = resolve(root, 'client-package');
+const htmlPath = resolve(output, 'INTAGO-Rolety-Demo.html');
 const sourceFiles = [
   'systems-data.js',
   'src/engine.js',
@@ -15,6 +16,16 @@ const sourceFiles = [
   'src/wizard.js',
   'app.js'
 ];
+
+// Integracja Selly (mapa wariantów, ceny live, koszyk i materiały) jest utrzymywana
+// w osadzanym artefakcie. Zachowaj ją podczas przebudowy z modułowych źródeł.
+const existingStandalone = await readFile(htmlPath, 'utf8');
+const embeddedStart = existingStandalone.indexOf('/* pricing-data.js');
+const embeddedEnd = existingStandalone.indexOf('/* src/engine.js */', embeddedStart);
+if (embeddedStart < 0 || embeddedEnd < 0) {
+  throw new Error('Nie znaleziono bloku integracji Selly w istniejącym pliku klienckim.');
+}
+const embeddedCommerce = existingStandalone.slice(embeddedStart, embeddedEnd).trim();
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
@@ -33,6 +44,7 @@ for (const filename of sourceFiles) {
   source = source.replace(/^import\s+[^;]+;\s*$/gm, '');
   source = source.replace(/\bexport\s+(?=(const|let|var|function|class)\b)/g, '');
   scripts.push(`/* ${filename} */\n${source}`);
+  if (filename === 'systems-data.js') scripts.push(embeddedCommerce);
 }
 
 // The standalone build shares one script scope, so validate it before packaging.
@@ -45,7 +57,6 @@ const standalone = template
   .replace('<script type="module" src="app.js"></script>', '')
   .replace('</body>', () => `<script>\n${scripts.join('\n\n')}\n</script>\n</body>`);
 
-const htmlPath = resolve(output, 'INTAGO-Rolety-Demo.html');
 await writeFile(htmlPath, standalone, 'utf8');
 await cp(resolve(root, 'client', 'README.txt'), resolve(output, 'PRZECZYTAJ-MNIE.txt'));
 

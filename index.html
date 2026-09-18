@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roleta dopasowana do Twojego mebla. | INTAGO</title>
+<title>Rolety meblowe na wymiar – konfigurator | REHAU</title>
 <meta name="description" content="Zobacz, jak działa roleta meblowa INTAGO. Dobierz kierunek, montaż i wykończenie, zmierz szafkę i przygotuj zapytanie o wycenę.">
 <meta name="theme-color" content="#32373c">
 <link rel="icon" type="image/webp" href="assets/intago-favicon.webp">
@@ -30,6 +30,7 @@
     <button data-scene="front" aria-pressed="true">Front</button><button data-scene="interior" aria-pressed="false">Wnętrze</button><button data-scene="mechanism" aria-pressed="false">Mechanizm</button><button data-scene="dimensions" aria-pressed="false">Wymiary</button><button data-scene="section" aria-pressed="false">Przekrój</button><button data-scene="exploded" aria-pressed="false">Elementy</button>
    </div>
    <div class="model-stage"><div id="model"></div><span id="stage-label" class="stage-label">PRZECIĄGNIJ LISTWĘ UCHWYTOWĄ</span><button id="envelope-toggle" class="envelope-button" data-action="toggle-envelope" aria-pressed="true" hidden>Ukryj zajęte miejsce</button><button class="animate-button" data-action="animate" aria-label="Odtwórz ruch rolety"><span aria-hidden="true">▷</span> Zobacz ruch</button></div>
+   <button class="direction-toggle" id="direction-toggle" data-action="toggle-direction" hidden>Otwieranie w prawo → · Zmień kierunek</button>
    <div class="open-control"><button data-action="close" aria-label="Zamknij roletę">Zamknięta</button><input id="open-range" type="range" min="0" max="100" value="35" aria-label="Otwarcie rolety"><button data-action="open" aria-label="Otwórz roletę">Otwarta</button><output id="open-value" for="open-range">35%</output></div>
    <div id="model-context" class="model-context"></div>
    <div class="visual-foot"><span id="dimensions-caption">Przykładowy mebel • podaj własne wymiary</span><span>Wizualizacja poglądowa</span></div>

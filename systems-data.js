@@ -47,20 +47,20 @@ const variant=(source,mechanism,profile,limits,colors,extra={})=>({
 });
 const unset=()=>variant('business',null,null,ranges(null,null,null,'business'),null);
 export const products=[
- {id:'top-basic',name:'TOP BASIC',short:'Dyskretnie wewnątrz',description:'Prowadnice we wnętrzu mebla. W poziomie płaszcz chowa się na tył.',guideId:'basic',orientations:fact(['vertical','horizontal'],'business'),mounting:fact('inside','horizontal'),variants:{
+ {id:'top-basic',name:'TOP BASIC',short:'Płaszcz prowadzony na plecy szafki',description:'Prowadnice we wnętrzu mebla. W poziomie płaszcz chowa się na tył.',guideId:'basic',orientations:fact(['vertical','horizontal'],'business'),mounting:fact('inside','horizontal'),variants:{
  vertical:variant('horizontal','c6','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['silver','white'],{rangeProfile:'c6'}),
  horizontal:variant('horizontal','rear','e23',ranges({min:200,max:1200},{min:350,max:1050},null,'horizontal'),['silver','white'],{rangeProfile:'c6',profile:fact('e23','horizontal','inferred','Profil do potwierdzenia w karcie technicznej.')})
  }},
  {id:'frame',name:'FRAME',short:'Wyraźna aluminiowa rama',description:'Prowadnice nakładane na krawędzie korpusu. Pionowy wariant z mechanizmem C3.',guideId:'frame',orientations:fact(['vertical','horizontal'],'business'),mounting:fact('outside','frame'),variants:{
  vertical:variant('frame','c3','ml25',ranges({max:1200},{max:2200},null,'frame'),['aluminium']),horizontal:unset()
  }},
- {id:'top-basic-c3',name:'TOP BASIC + C3',short:'Zwijanie pod górą szafki',description:'Płaszcz nawija się u góry. Prowadnice pozostają wewnątrz korpusu.',guideId:'basic',orientations:fact(['vertical'],'business'),mounting:fact('inside','c3'),variants:{
+ {id:'top-basic-c3',name:'TOP BASIC + C3',short:'Płaszcz zwijany na bęben C3',description:'Płaszcz nawija się u góry. Prowadnice pozostają wewnątrz korpusu.',guideId:'basic',orientations:fact(['vertical'],'business'),mounting:fact('inside','c3'),variants:{
  vertical:variant('c3','c3','e23',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'c3'),['silver','white'],{rangeProfile:'c3'})
  }},
- {id:'noble-wew',name:'NOBLE',short:'Matowy front, dyskretny montaż',description:'Matowe szczeble E9. W pionie prowadnice TOP i mechanizm wspomagający C6.',guideId:'top',orientations:fact(['vertical'],'business'),mounting:fact('inside','nobleIn'),variants:{
+ {id:'noble-wew',name:'NOBLE',short:'Matowy płaszcz prowadzony na plecy szafki',description:'Matowe szczeble E9. W pionie prowadnice TOP i mechanizm wspomagający C6.',guideId:'top',orientations:fact(['vertical'],'business'),mounting:fact('inside','nobleIn'),variants:{
  vertical:variant('nobleIn','c6','e9',ranges({min:200,max:1200},{min:350,max:1050},null,'nobleIn'),['blonde','casa','dark'],{rangeProfile:'c6'})
  }},
- {id:'noble-zewn',name:'NOBLE',short:'Matowa powierzchnia na froncie',description:'Prowadnice na krawędziach korpusu. W pionie płaszcz zwija się na C3.',guideId:'noble',orientations:fact(['vertical'],'business'),mounting:fact('outside','nobleOut'),variants:{
+ {id:'noble-zewn',name:'NOBLE',short:'Matowy płaszcz zwijany na bęben C3',description:'Prowadnice na krawędziach korpusu. W pionie płaszcz zwija się na C3.',guideId:'noble',orientations:fact(['vertical'],'business'),mounting:fact('outside','nobleOut'),variants:{
  vertical:variant('nobleOut','c3','e9',ranges({min:400,max:1200},{min:650,max:2200},{min:300},'nobleOut'),['blonde','casa','dark'],{rangeProfile:'c3'})
  }}
 ];

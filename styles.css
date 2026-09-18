@@ -71,3 +71,12 @@ dialog{border:1px solid var(--line);border-radius:14px;padding:32px;max-width:62
 
 .scene-tabs button[hidden]{display:none!important}.range-option{padding:12px 14px;margin:8px 0;border:1px solid #dce0e2;border-radius:6px;font-size:13px}.range-option p{margin:5px 0;line-height:1.5}.range-outside{border-color:#d2071d;background:#fff4f5}.range-error{color:#b00018;font-weight:600}.model-stage:has([data-scene-unused]){position:relative}
 .stage-label{max-width:calc(100% - 180px);line-height:1.4}
+/* Compact dimension compatibility and horizontal direction control. */
+.direction-toggle{margin:10px 20px;padding:9px 12px;border:1px solid #d8dcde;border-radius:6px;background:#fff}
+.direction-toggle[hidden]{display:none}
+.color-disclaimer{font-size:12px;line-height:1.5;color:#62686c;margin:12px 0 0}
+#range-feedback{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+#range-feedback .range-option{margin:0;padding:14px;border:1px solid #dce0e2;border-radius:8px;background:#fff;font-size:14px;line-height:1.5}
+#range-feedback .range-outside{border-color:#d2071d;background:#fff5f6}
+.range-status{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#b00018}
+#range-feedback .range-error{font-size:13px;line-height:1.5;margin:6px 0 0}
